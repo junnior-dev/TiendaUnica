@@ -1,5 +1,33 @@
 # CHANGES · Correcciones aplicadas tras la auditoría (15 de noviembre de 2026)
 
+## Dependabot security-only · verificado empíricamente (16 de noviembre de 2026)
+
+El `.github/dependabot.yml` quedó en modo quirúrgico: composer + npm +
+github-actions, schedule lunes 06:00 UTC (02:00 Caracas) y
+`open-pull-requests-limit: 0` — versiones OFF, solo seguridad. Los toggles del
+repo (`vulnerability_alerts`, `dependabot_security_updates`) se activaron por
+API.
+
+La doc de GitHub afirma que limit 0 no afecta a los security updates, pero
+hubo reportes de lo contrario. **Se verificó con un repo de test privado
+(`dependabot-lim0-test`, archivado tras la prueba):** misma config quirúrgica,
+`lodash 4.17.20` (CVE-2021-23337) y `minimist 1.2.0` (CVE-2021-44906) fijados,
+ambos con parche publicado. Resultado en 3 minutos, sin intervención humana:
+
+- **45 s:** 6 alertas abiertas (el toggle de alertas funciona).
+- **180 s:** PR de seguridad abierto **por la app dependabot[bot] sola** — el
+  intento de disparo manual por API devolvió 404 (el endpoint no existe como
+  API pública), así que lo verificado fue el camino AUTOMÁTICO, el que importa
+  en producción («funciona solo», no «funciona cuando lo pido»).
+- El PR agrupó los DOS fixes en uno solo («bump the parches-menores group
+  across 1 directory with 2 updates»: `4.17.20 → 4.18.1`, `1.2.0 → 1.2.6`) —
+  el `groups` con `applies-to: security-updates` funciona.
+- Cero PRs de versión: `limit: 0` cumple lo prometido.
+
+**Plan B si GitHub cambiara este comportamiento:** `open-pull-requests-limit: 3`
+(2–3 PRs de versión por semana, cerrables sin mergear) o crear los security
+PRs a mano desde Security tab cuando llegue una alerta.
+
 ## CI/CD · El run_all.sh ya NO es el único guardián (16 de noviembre de 2026)
 
 Hasta hoy la cadena completa de pruebas solo existía si alguien ejecutaba

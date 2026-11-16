@@ -5,9 +5,11 @@
 # (lucide-react 1.67.0, jspdf 4.2.1, dompurify 3.4.18 vía overrides) y un bump
 # casual rompería el pin sin razón.
 #
-# El truco documentado (docs de GitHub): open-pull-requests-limit: 0 desactiva
-# las actualizaciones de VERSIÓN; los security updates siguen funcionando y
-# respetan los groups con applies-to: security-updates.
+# El truco VERIFICADO EMPÍRICAMENTE (16-nov-2026, repo de test privado con
+# lodash 4.17.20 y minimist 1.2.0 vulnerables conocidos — evidencia en
+# CHANGES.md): limit 0 desactiva las actualizaciones de VERSIÓN; los security
+# updates siguen vivos, abren SOLOS al detectar el CVE y respetan los groups
+# con applies-to: security-updates (2 fixes agrupados en 1 PR en la prueba).
 #
 # Cuando quieras habilitar versiones por semana: cambia los tres límites a 3
 # y el schedule lunes 06:00 UTC (02:00 Caracas) entra en acción tal cual.
