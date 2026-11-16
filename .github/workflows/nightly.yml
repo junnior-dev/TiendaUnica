@@ -13,6 +13,13 @@ on:
     - cron: '30 8 * * *'   # 08:30 UTC = 04:30 Caracas
   workflow_dispatch:        # botón de "correr ahora" en Actions
 
+# Un solo nightly a la vez. A diferencia del CI de push, NO se cancela el
+# que corre: cancelar 45 min de validación por un solape accidental es peor
+# que dejarlo terminar.
+concurrency:
+  group: nightly-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
 
