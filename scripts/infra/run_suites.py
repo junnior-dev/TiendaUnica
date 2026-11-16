@@ -29,13 +29,15 @@ RUNNERS = [
 
 def reset_clon(nombre: str, desde_template: bool) -> bool:
     """Reinicia un clon de pruebas (con reintentos por locks)."""
-    host = os.environ.get('PGHOST', '/tmp')
-    puerto = os.environ.get('PGPORT', '5433')
+    host = os.environ.get('PGHOST_PRUEBAS', os.environ.get('PGHOST', '/tmp'))
+    puerto = os.environ.get('PGPORT_PRUEBAS', os.environ.get('PGPORT', '5433'))
+    usuario = os.environ.get('PGUSER_PRUEBAS', 'postgres')
+    tpl = os.environ.get('PGTEMPLATE', 'tiendaunica')
     for _ in range(4):
         cmds = ['-c', f'DROP DATABASE IF EXISTS {nombre}']
         if desde_template:
-            cmds += ['-c', f'CREATE DATABASE {nombre} TEMPLATE tienda']
-        r = subprocess.run([PGSQL, '-h', host, '-p', puerto, '-U', 'postgres', '-d', 'postgres', '-tA'] + cmds,
+            cmds += ['-c', f'CREATE DATABASE {nombre} TEMPLATE {tpl}']
+        r = subprocess.run([PGSQL, '-h', host, '-p', puerto, '-U', usuario, '-d', 'postgres', '-tA'] + cmds,
                            capture_output=True, text=True)
         if 'ERROR' not in (r.stderr or ''):
             return True

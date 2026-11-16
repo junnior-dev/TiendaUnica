@@ -15,7 +15,7 @@ from faker import Faker
 # La conexión sale de PGHOST/PGPORT (defaults del sandbox: socket /tmp, 5433).
 DSN = dict(host=os.environ.get('PGHOST_PRUEBAS', '/tmp'),
            port=int(os.environ.get('PGPORT_PRUEBAS', '5433')),
-           dbname='tienda_e2e', user='postgres',
+           dbname='tienda_e2e', user=os.environ.get('PGUSER_PRUEBAS', 'postgres'),
            options='-c search_path=tienda,public -c TimeZone=America/Caracas')
 conn = None
 CONTEO = {}          # suite -> [ok, fail]

@@ -24,17 +24,19 @@ LINEA_TOTAL = re.compile(r'TOTAL\s+(\d+)\s+OK\s+(\d+)\s+FAIL')
 PGSQL = os.environ.get('PSQL', 'psql')
 PGHOST = os.environ.get('PGHOST_PRUEBAS', '/tmp')
 PGPORT = os.environ.get('PGPORT_PRUEBAS', '5433')
+PGUSER = os.environ.get('PGUSER_PRUEBAS', 'postgres')
+PGTEMPLATE = os.environ.get('PGTEMPLATE', 'tiendaunica')
 
 
 def reset_clon(nombre):
-    """Reinicia un clon de pruebas desde TEMPLATE tienda (con reintentos por lock)."""
+    """Reinicia un clon de pruebas desde PGTEMPLATE (con reintentos por lock)."""
     for intento in range(3):
-        r = subprocess.run([PGSQL, '-h', PGHOST, '-p', PGPORT, '-U', 'postgres', '-d', 'postgres', '-tA',
+        r = subprocess.run([PGSQL, '-h', PGHOST, '-p', PGPORT, '-U', PGUSER, '-d', 'postgres', '-tA',
                             '-c', f'DROP DATABASE IF EXISTS {nombre}',
-                            '-c', f'CREATE DATABASE {nombre} TEMPLATE tienda'],
+                            '-c', f'CREATE DATABASE {nombre} TEMPLATE {PGTEMPLATE}'],
                            capture_output=True, text=True)
         if 'CREATE DATABASE' in (r.stdout + r.stderr):
-            print(f'  clon {nombre} reiniciado desde TEMPLATE tienda')
+            print(f'  clon {nombre} reiniciado desde TEMPLATE {PGTEMPLATE}')
             return True
         time.sleep(2)
     print(f'  ERROR: no se pudo reiniciar el clon {nombre}: {(r.stderr or r.stdout)[:150]}')

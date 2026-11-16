@@ -131,6 +131,19 @@ BEGIN
         EXECUTE format('ALTER TABLE tienda.%I ALTER COLUMN negocio_id SET DEFAULT 1', t);
     END LOOP;
 
+    -- PKs compuestas de catálogos/calendario (necesarias para ON CONFLICT (negocio_id, ...))
+    ALTER TABLE tienda.unidades_medida       DROP CONSTRAINT IF EXISTS unidades_medida_pkey;
+    ALTER TABLE tienda.contab_parametros     DROP CONSTRAINT IF EXISTS contab_parametros_pkey;
+    ALTER TABLE tienda.contab_metodo_cuenta  DROP CONSTRAINT IF EXISTS contab_metodo_cuenta_pkey;
+    ALTER TABLE tienda.calendario_fiscal     DROP CONSTRAINT IF EXISTS calendario_fiscal_pkey;
+    ALTER TABLE tienda.calendario_presentada DROP CONSTRAINT IF EXISTS calendario_presentada_pkey;
+
+    ALTER TABLE tienda.unidades_medida       ADD PRIMARY KEY (negocio_id, codigo);
+    ALTER TABLE tienda.contab_parametros     ADD PRIMARY KEY (negocio_id, clave);
+    ALTER TABLE tienda.contab_metodo_cuenta  ADD PRIMARY KEY (negocio_id, metodo_pago_id);
+    ALTER TABLE tienda.calendario_fiscal     ADD PRIMARY KEY (negocio_id, regimen, obligacion, digito, periodo_desde);
+    ALTER TABLE tienda.calendario_presentada ADD PRIMARY KEY (negocio_id, obligacion, periodo_desde);
+
     RAISE NOTICE 'Columna negocio_id (DEFAULT 1) y trg_sello_negocio configurados en todas las tablas';
 END $$;
 

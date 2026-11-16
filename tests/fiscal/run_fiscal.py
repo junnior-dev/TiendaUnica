@@ -35,8 +35,10 @@ def reset_clon():
     pg = os.environ.get('PSQL', 'psql')
     host = os.environ.get('PGHOST_PRUEBAS', '/tmp')
     puerto = os.environ.get('PGPORT_PRUEBAS', '5433')
-    cmd = [pg, '-h', host, '-p', puerto, '-U', 'postgres', '-d', 'postgres', '-tA',
-           '-c', 'DROP DATABASE IF EXISTS tienda_fiscal', '-c', 'CREATE DATABASE tienda_fiscal TEMPLATE tienda']
+    usuario = os.environ.get('PGUSER_PRUEBAS', 'postgres')
+    tpl = os.environ.get('PGTEMPLATE', 'tiendaunica')
+    cmd = [pg, '-h', host, '-p', puerto, '-U', usuario, '-d', 'postgres', '-tA',
+           '-c', 'DROP DATABASE IF EXISTS tienda_fiscal', '-c', f'CREATE DATABASE tienda_fiscal TEMPLATE {tpl}']
     r = subprocess.run(cmd, capture_output=True, text=True)
     if 'CREATE DATABASE' not in (r.stdout + r.stderr):
         raise RuntimeError('no se pudo reiniciar el clon tienda_fiscal: ' + (r.stderr or r.stdout)[:200])
