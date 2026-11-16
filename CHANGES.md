@@ -2,7 +2,7 @@
 
 ## Suite de Integración Hostil en Pest (16 de noviembre de 2026)
 
-Cinco archivos nuevos en `tests/Feature/` (+191 pruebas: 779 → 970, 101 → 106
+Cinco archivos nuevos en `tests/Feature/` (+192 pruebas: 110 → 302, 12 → 17
 archivos) que ponen la aplicación al límite por HTTP real, con el paquete
 oficial de Inertia y contra PostgreSQL (`tienda_pest`):
 
@@ -41,6 +41,40 @@ oficial de Inertia y contra PostgreSQL (`tienda_pest`):
 El baseline de PHPStan congela las llamadas HTTP de los 5 archivos con su
 conteo (mismo convenio del resto del suite). Los hallazgos que la suite
 destape quedan registrados en el log del CI.
+
+### Primera corrida en CI · hallazgos y ajustes (16 de noviembre de 2026)
+
+La primera corrida (run `43919378791`) destapó un agujero real, un
+comportamiento correcto que el test redactaba como fallo y una deuda menor:
+
+- **Agujero real corregido · `/ordenes-compra` respondía 500.**
+  `OrdenesCompraController::datos()` ordenaba por `created_at`, columna que la
+  vista `v_ordenes_compra` no expone (su columna es `fecha`): CUALQUIER GET a
+  la pantalla moría con `QueryException` sin capturar, incluido el smoke del
+  administrador de `TodasLasRutasTest`. Ahora ordena por `fecha DESC, id DESC`.
+- **Comportamiento correcto documentado · la inyección SQL en
+  `/movimientos-caja` se guarda COMO DATO.** El payload de inyección pasa la
+  validación (concepto dentro de min:3/max:200) y la consulta es
+  parametrizada: la cadena queda almacenada en la fila y la respuesta es 200.
+  Eso es lo correcto — nada se ejecutó, el `DROP TABLE` es texto en una
+  columna — y el test de inyección quedó reescrito para exigir `<500` y que
+  las tablas sigan vivas, con limpieza de las filas exactas creadas al final
+  (el DELETE en `movimientos_caja` exige desactivar `trg_mov_caja_guardia`,
+  que prohíbe borrar registros).
+- **Menor · sin límite de longitud de la contraseña temporal en
+  `UsuariosController`** (`crear()`/`nuevaClave()`): solo exige un mínimo de
+  8; no hay máximo y bcrypt trunca a 72 bytes. Documentado; el controlador no
+  se tocó en esta ronda.
+
+Ajustes de los tests que la propia corrida mostró: el GUC transaction-local
+de `cajeroConClave()` ahora vive dentro de `DB::transaction` (suelto, moría
+antes del UPDATE y el trigger TV005 rechazaba fijar la clave del cajero); el
+RIF del proveedor del inquilino B sale de `rifValidoPest()` porque el CHECK
+`ck_proveedores_rif` valida el dígito verificador; el test CSRF declara
+entorno `production` solo mientras dura la prueba (Laravel 12 OMITE el filtro
+con `env=testing`, por lo que el 419 jamás salía); y el fuzzing de los 10
+endpoints acumula los combos que violan el contrato en una única aserción —
+si vuelve a fallar, el diff lista los combos exactos.
 
 ## Dependabot security-only · verificado empíricamente (16 de noviembre de 2026)
 
