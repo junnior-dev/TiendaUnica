@@ -98,8 +98,16 @@ class MetricsController extends Controller
             );
             $maxRow = (array) $conexion->selectOne('SHOW max_connections');
             $max = (int) ($maxRow['max_connections'] ?? 0);
-        } catch (Throwable) {
-            return [];   // sin Postgres visible: el /health/db ya lo grita
+        } catch (Throwable $e) {
+            // NUNCA silencioso: el scrape es la única ventana que tiene el
+            // operador para ver por qué no hay gauges (credenciales, privilegios
+            // de pg_stat_activity, conexión). Línea de comentario válida del
+            // formato de exposición — el resto de métricas sigue sirviendo.
+            return [
+                'diag' => [
+                    '# pg_gauges_indisponibles: '.str_replace(["\n", "\r"], ' ', substr($e->getMessage(), 0, 140)),
+                ],
+            ];
         }
 
         $usadas = array_sum(array_column($filas, 'n'));

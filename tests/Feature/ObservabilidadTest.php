@@ -100,7 +100,8 @@ it('Metricas acumula por etiqueta y snapshot desglosa negocio, ruta y estado', f
     $ms = collect($snapshot['ms'])->first(
         fn (array $s) => $s['etiquetas']['ruta'] === 'productos/{producto}'
     );
-    expect((float) $ms['valor'])->toBe(100.0);   // 55 + 45
+    // El acumulador de ms es por RUTA (todos los estados): 55 + 45 + 30.
+    expect((float) $ms['valor'])->toBe(130.0);
 
     $n = collect($snapshot['n'])->first(
         fn (array $s) => $s['etiquetas']['ruta'] === 'productos/{producto}'

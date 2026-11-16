@@ -3849,7 +3849,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
 			identifier: method.notFound
-			count: 12
+			count: 11
 			path: tests/Feature/ObservabilidadTest.php
 
 		-

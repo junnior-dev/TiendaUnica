@@ -69,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
         // del evento — llamar $e->guard() rompería cada petición autenticada).
         Event::listen(\Illuminate\Auth\Events\Authenticated::class, function (\Illuminate\Auth\Events\Authenticated $e) {
             \Illuminate\Support\Facades\Log::shareContext([
-                'usuario_id' => $e->user?->getAuthIdentifier(),
+                'usuario_id' => $e->user->getAuthIdentifier(),   // el evento garantiza user no nulo
             ]);
         });
     }
