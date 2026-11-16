@@ -71,10 +71,15 @@ function cajeroConClave(): \App\Models\Usuario
 {
     $usuario = \App\Models\Usuario::find(cajeroActivoId());
     if ($usuario->password_hash === 'PENDIENTE') {
-        DB::statement("SELECT set_config('tienda.cambiando_password', '1', true)");
-        DB::table('usuarios')->where('id', $usuario->id)
-            ->update(['password_hash' => \Illuminate\Support\Facades\Hash::make('ClaveCajero2026')]);
-        DB::statement("SELECT set_config('tienda.cambiando_password', '', true)");
+        // El GUC tienda.cambiando_password es TRANSACTION-LOCAL: con set_config
+        // suelto muere al terminar la sentencia y el UPDATE siguiente choca con
+        // el trigger TV005 («solo con la guardia activa»). set_config + UPDATE
+        // deben vivir DENTRO de la misma transacción; el COMMIT la apaga.
+        DB::transaction(function () use ($usuario) {
+            DB::statement("SELECT set_config('tienda.cambiando_password', '1', true)");
+            DB::table('usuarios')->where('id', $usuario->id)
+                ->update(['password_hash' => \Illuminate\Support\Facades\Hash::make('ClaveCajero2026')]);
+        });
         $usuario->refresh();
     }
 
