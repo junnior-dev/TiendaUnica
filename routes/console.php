@@ -40,7 +40,7 @@ Artisan::command('sistema:monitoreo', function () {
     $salud = \App\Support\SaludSistema::verificar();
 
     if ($salud['alertas'] === []) {
-        $this->info('Sistema OK (disco, queue, conexiones PG y locks dentro de umbral).');
+        $this->info('Sistema OK (disco, queue, conexiones PG, locks, HTTP y negocio dentro de umbral).');
 
         return 0;
     }
@@ -49,14 +49,14 @@ Artisan::command('sistema:monitoreo', function () {
         $linea = '['.strtoupper($alerta['nivel']).' · '.$alerta['componente'].'] '.$alerta['mensaje'];
         if ($alerta['nivel'] === 'critical') {
             $this->error($linea);
-            Log::critical($linea, $alerta);
         } else {
             $this->warn($linea);
-            Log::warning($linea, $alerta);
         }
     }
 
+    \App\Support\NotificadorAlertas::despachar($salud['alertas']);
+
     return 1;
-})->purpose('Verifica disco, cola de jobs, conexiones PostgreSQL y esperas de locks');
+})->purpose('Verifica disco, cola, PostgreSQL (conexiones/locks), HTTP y negocio, y notifica alertas');
 
 Schedule::command('sistema:monitoreo')->everyFiveMinutes();

@@ -116,7 +116,7 @@ it('Metricas sobrevive a un caché roto sin lanzar excepción', function () {
     expect(Metricas::snapshot()['total'])->toBe([]);
 });
 
-it('health/sistema reporta disco, cola, conexiones PG y esperas de locks', function () {
+it('health/sistema reporta disco, cola, conexiones PG, esperas de locks, HTTP y negocio', function () {
     $respuesta = $this->get('/health/sistema');
     $respuesta->assertOk()->assertJsonStructure([
         'estado',
@@ -124,9 +124,48 @@ it('health/sistema reporta disco, cola, conexiones PG y esperas de locks', funct
         'disco' => ['ok', 'usado_pct', 'libre_gb', 'total_gb'],
         'cola' => ['ok', 'driver'],
         'postgres' => ['ok', 'conexiones_activas', 'max_connections', 'conexiones_pct', 'sesiones_esperando_lock', 'locks_no_otorgados'],
+        'http' => ['ok', 'total_peticiones', 'errores_5xx', 'tasa_5xx_pct', 'caja_media_ms'],
+        'negocio' => ['ok', 'en_horario', 'cajas_abiertas', 'ventas_ultima_hora'],
     ]);
 
     $this->artisan('sistema:monitoreo')->assertExitCode(0);
+});
+
+it('NotificadorAlertas despacha a webhook con cooldown y hace fallback si Log falla', function () {
+    \Illuminate\Support\Facades\Http::fake();
+    putenv('OBS_ALERTA_WEBHOOK_URL=https://hooks.test/alerta');
+    putenv('OBS_ALERTA_COOLDOWN_S=600');
+    Cache::flush();
+
+    try {
+        $alerta = [['componente' => 'pg_locks', 'nivel' => 'critical', 'mensaje' => 'Lock > 5s']];
+        expect(\App\Support\NotificadorAlertas::despachar($alerta))->toBe(1);
+        expect(\App\Support\NotificadorAlertas::despachar($alerta))->toBe(0); // cooldown activo
+
+        \Illuminate\Support\Facades\Http::assertSentCount(1);
+
+        // Simula fallo del disco al escribir en el log (fallback a STDERR sin lanzar excepción)
+        Cache::flush();
+        \Illuminate\Support\Facades\Log::shouldReceive('critical')->once()->andThrow(new \RuntimeException('Disk full'));
+        expect(\App\Support\NotificadorAlertas::despachar($alerta))->toBe(1);
+    } finally {
+        putenv('OBS_ALERTA_WEBHOOK_URL');
+        putenv('OBS_ALERTA_COOLDOWN_S');
+    }
+});
+
+it('SaludSistema detecta tasa alta de 5xx y latencia alta en /caja', function () {
+    Cache::flush();
+    for ($i = 0; $i < 20; $i++) {
+        Metricas::registrar('caja', $i < 3 ? 500 : 200, 1800, 1);
+    }
+
+    $salud = \App\Support\SaludSistema::verificar();
+    $componentes = collect($salud['alertas'])->pluck('componente')->all();
+
+    expect($salud['estado'])->toBe('alerta');
+    expect($componentes)->toContain('http_5xx');
+    expect($componentes)->toContain('http_caja_latencia');
 });
 
 it('csp-report sanitiza, limita tamaño y aplica rate limiting', function () {

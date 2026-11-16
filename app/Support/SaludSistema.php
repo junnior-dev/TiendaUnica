@@ -21,6 +21,8 @@ class SaludSistema
         $disco = self::disco($alertas);
         $cola = self::cola($alertas);
         $postgres = self::postgres($alertas);
+        $http = self::http($alertas);
+        $negocio = self::negocio($alertas);
 
         return [
             'estado' => $alertas === [] ? 'ok' : 'alerta',
@@ -28,6 +30,8 @@ class SaludSistema
             'disco' => $disco,
             'cola' => $cola,
             'postgres' => $postgres,
+            'http' => $http,
+            'negocio' => $negocio,
             'verificado_en' => now()->toIso8601String(),
         ];
     }
@@ -80,8 +84,12 @@ class SaludSistema
             $antiguedad = $masViejo !== null ? max(0, time() - (int) $masViejo) : 0;
             $umbralEdad = (int) env('OBS_QUEUE_MAX_AGE_S', 300);
 
+            $fallidos1h = 0;
             $fallidos24h = 0;
             if (DB::getSchemaBuilder()->hasTable('failed_jobs')) {
+                $fallidos1h = (int) DB::table('failed_jobs')
+                    ->where('failed_at', '>=', now()->subHour())
+                    ->count();
                 $fallidos24h = (int) DB::table('failed_jobs')
                     ->where('failed_at', '>=', now()->subDay())
                     ->count();
@@ -95,19 +103,21 @@ class SaludSistema
                 ];
             }
 
-            if ($fallidos24h > 0) {
+            $umbralFallidos = (int) env('OBS_FAILED_JOBS_MAX', 10);
+            if ($fallidos1h >= $umbralFallidos) {
                 $alertas[] = [
-                    'componente' => 'queue',
-                    'nivel' => 'warning',
-                    'mensaje' => "{$fallidos24h} job(s) fallidos en las últimas 24h",
+                    'componente' => 'queue_failed',
+                    'nivel' => 'critical',
+                    'mensaje' => "Pico de jobs fallidos: {$fallidos1h} en la última hora (umbral {$umbralFallidos})",
                 ];
             }
 
             return [
-                'ok' => ! ($pendientes > 0 && $antiguedad >= $umbralEdad),
+                'ok' => ! ($pendientes > 0 && $antiguedad >= $umbralEdad) && $fallidos1h < $umbralFallidos,
                 'driver' => $driver,
                 'pendientes' => $pendientes,
                 'antiguedad_maxima_s' => $antiguedad,
+                'fallidos_1h' => $fallidos1h,
                 'fallidos_24h' => $fallidos24h,
             ];
         } catch (Throwable $e) {
@@ -188,6 +198,104 @@ class SaludSistema
             ];
 
             return ['ok' => false];
+        }
+    }
+
+    private static function http(array &$alertas): array
+    {
+        try {
+            $snap = Metricas::snapshot();
+            $total = 0;
+            $errores5xx = 0;
+            foreach ($snap['total'] ?? [] as $s) {
+                $v = (int) ($s['valor'] ?? 0);
+                $total += $v;
+                $estado = (int) ($s['etiquetas']['estado'] ?? 0);
+                if ($estado >= 500) {
+                    $errores5xx += $v;
+                }
+            }
+
+            $tasa5xx = $total > 0 ? round(($errores5xx / $total) * 100, 2) : 0.0;
+            $umbral5xxPct = (float) env('OBS_HTTP_5XX_MAX_PCT', 5.0);
+            $umbral5xxMin = (int) env('OBS_HTTP_5XX_MIN_REQS', 20);
+
+            if ($total >= $umbral5xxMin && $tasa5xx >= $umbral5xxPct) {
+                $alertas[] = [
+                    'componente' => 'http_5xx',
+                    'nivel' => 'critical',
+                    'mensaje' => "Tasa de errores HTTP 5xx al {$tasa5xx}% ({$errores5xx}/{$total})",
+                ];
+            }
+
+            $cajaN = 0;
+            $cajaMs = 0.0;
+            foreach ($snap['n'] ?? [] as $s) {
+                $ruta = (string) ($s['etiquetas']['ruta'] ?? '');
+                if ($ruta === 'caja' || str_starts_with($ruta, 'caja/')) {
+                    $cajaN += (int) ($s['valor'] ?? 0);
+                }
+            }
+            foreach ($snap['ms'] ?? [] as $s) {
+                $ruta = (string) ($s['etiquetas']['ruta'] ?? '');
+                if ($ruta === 'caja' || str_starts_with($ruta, 'caja/')) {
+                    $cajaMs += (float) ($s['valor'] ?? 0);
+                }
+            }
+
+            $cajaMediaMs = $cajaN > 0 ? round($cajaMs / $cajaN, 1) : 0.0;
+            $umbralCajaMs = (float) env('OBS_CAJA_MAX_MS', 1500.0);
+            if ($cajaN >= 5 && $cajaMediaMs >= $umbralCajaMs) {
+                $alertas[] = [
+                    'componente' => 'http_caja_latencia',
+                    'nivel' => 'warning',
+                    'mensaje' => "Latencia media en /caja alta: {$cajaMediaMs} ms (umbral {$umbralCajaMs} ms)",
+                ];
+            }
+
+            return [
+                'ok' => ! ($total >= $umbral5xxMin && $tasa5xx >= $umbral5xxPct) && ! ($cajaN >= 5 && $cajaMediaMs >= $umbralCajaMs),
+                'total_peticiones' => $total,
+                'errores_5xx' => $errores5xx,
+                'tasa_5xx_pct' => $tasa5xx,
+                'caja_media_ms' => $cajaMediaMs,
+            ];
+        } catch (Throwable) {
+            return ['ok' => true, 'total_peticiones' => 0, 'errores_5xx' => 0, 'tasa_5xx_pct' => 0.0, 'caja_media_ms' => 0.0];
+        }
+    }
+
+    private static function negocio(array &$alertas): array
+    {
+        try {
+            $horaInicio = (int) env('OBS_NEGOCIO_HORA_INICIO', 8);
+            $horaFin = (int) env('OBS_NEGOCIO_HORA_FIN', 18);
+            $horaActual = (int) now('America/Caracas')->format('G');
+            $enHorario = $horaActual >= $horaInicio && $horaActual < $horaFin;
+
+            $cajasAbiertas = (int) DB::table('aperturas_caja')->where('estado', 'ABIERTA')->count();
+            $ventasUltimaHora = (int) DB::table('ventas')
+                ->where('estado', 'COMPLETADA')
+                ->where('fecha_hora', '>=', now()->subHour())
+                ->count();
+
+            $vigilar = filter_var((string) env('OBS_NEGOCIO_SIN_VENTAS_ALERTA', true), FILTER_VALIDATE_BOOLEAN);
+            if ($vigilar && $enHorario && $cajasAbiertas > 0 && $ventasUltimaHora === 0) {
+                $alertas[] = [
+                    'componente' => 'negocio',
+                    'nivel' => 'warning',
+                    'mensaje' => "0 ventas completadas en la última hora con {$cajasAbiertas} caja(s) abierta(s)",
+                ];
+            }
+
+            return [
+                'ok' => ! ($vigilar && $enHorario && $cajasAbiertas > 0 && $ventasUltimaHora === 0),
+                'en_horario' => $enHorario,
+                'cajas_abiertas' => $cajasAbiertas,
+                'ventas_ultima_hora' => $ventasUltimaHora,
+            ];
+        } catch (Throwable $e) {
+            return ['ok' => false, 'detalle' => substr($e->getMessage(), 0, 120)];
         }
     }
 }
