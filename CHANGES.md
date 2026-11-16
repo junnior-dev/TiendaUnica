@@ -579,3 +579,33 @@ real o un supuesto caducado del propio suite. Correcciones aplicadas:
 Queda como deuda menor documentada: la contraseña temporal de /usuarios no
 tiene máximo (bcrypt trunca a 72 bytes) y `cambiar()`/`nuevaClave()`
 conservan los casts latentes.
+
+## Suite Hostil · corridas 3 y 4 · CI VERDE (16 de noviembre de 2026)
+
+La tercera corrida (`43930358964`) dejó PHPStan en verde (la regex corregida
+del baseline casó) y bajó Pest a 2 fallos; la acumulación reveló el agujero
+que faltaba y la cuarta (`43931362082`) quedó COMPLETAMENTE verde:
+calidad ✓ · phpstan ✓ · **Pest 302 pruebas ✓ (1.375 aserciones)** · t19 ✓.
+
+- **Agujero real · /reportes/rentabilidad respondía 500 SIEMPRE.** La query
+  de notas de crédito con productos devueltos anidaba una función de
+  ventana (`sum(dev.valor) OVER (PARTITION BY dev.nota_id)`) DENTRO de otro
+  agregado `sum(...)`: PostgreSQL la rechaza al parsear («aggregate
+  function calls cannot contain window function calls») — cualquier
+  administrador que abriera el reporte moría con QueryException sin
+  capturar. El total por nota se precalcula ahora en un CTE `porNota` unido
+  por nota_id (misma matemática). La ruta es solo-admin, por eso el smoke
+  del cajero nunca la ejercitó y el «false is true» del run 2 no decía cuál
+  era; la acumulación del smoke la señaló con ruta y status exactos.
+- **Contrato de escritura BOLA reencuadrado.** El test de modificaciones
+  cross-tenant exigía 403/404/422, pero los formularios Inertia de la app
+  responden 302 (back de validación) o 200 con UPDATE no-op: RLS filtra la
+  fila del otro negocio y el controller no mira el rowCount
+  (`ClientesController::update` devuelve `ok: true` sobre 0 filas;
+  `MetodosPagoController::estado` hace `back()`). El aislamiento REAL lo
+  garantiza RLS y lo PRUEBA el bloque de integridad (las filas de B se
+  comparan tras los 8 ataques); el contrato HTTP queda por excepción:
+  nunca un 5xx. Verificado en la BD: `sp_anular_venta` es INVOKER — la
+  venta ajena «no existe» y responde 422.
+- El test de LECTURAS cross-tenant (nunca 200) y el de LISTAS (sin una sola
+  fila ajena filtrada) pasan íntegros.
