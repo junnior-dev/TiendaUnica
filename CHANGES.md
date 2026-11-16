@@ -1,5 +1,47 @@
 # CHANGES · Correcciones aplicadas tras la auditoría (15 de noviembre de 2026)
 
+## Suite de Integración Hostil en Pest (16 de noviembre de 2026)
+
+Cinco archivos nuevos en `tests/Feature/` (+191 pruebas: 779 → 970, 101 → 106
+archivos) que ponen la aplicación al límite por HTTP real, con el paquete
+oficial de Inertia y contra PostgreSQL (`tienda_pest`):
+
+- **`TodasLasRutasTest`** — smoke sobre la TABLA DE RUTAS REAL
+  (`Route::getRoutes()`), no una lista a mano: 3 pases (invitado, cajero,
+  administrador) por TODAS las rutas GET. Nada puede responder 500; el
+  invitado solo recibe 302 a `/login`; el cajero autenticado nunca puede ser
+  expulsado a `/login`; y toda página Inertia 200 declara un componente que
+  EXISTE en `resources/js/Pages`. Las rutas con parámetro se piden con un id
+  inexistente (el camino correcto es 404/422).
+- **`AislamientoMultiTenantHttpTest`** — BOLA/IDOR cross-tenant: el inquilino
+  A ataca los ids del inquilino B por GET/PUT/PATCH/DELETE y las listas no
+  deben filtrar ni una fila ajena. El aislamiento probado es el de
+  PRODUCCIÓN: la sesión corre como `saas_app` (`SET ROLE`) para que RLS
+  decida — con la conexión superusuario de las pruebas un 200 sería falso
+  positivo del ambiente. Integridad de las filas de B verificada por SQL
+  directo tras cada intento. El negocio 2 es permanente (trigger); su
+  `estado_tenants` se retira en `afterEach` para devolver la base al modo
+  tienda-única.
+- **`ControladoresValidacionHostilTest`** — fuzzing de los 10 endpoints de
+  escritura críticos (productos, clientes, proveedores, usuarios, métodos de
+  pago, categorías, apertura de caja, movimientos, encargos, cobros): payloads
+  vacíos, tipos equivocados, cadenas de 5000 caracteres, nulos, valores
+  anidados, ids inexistentes y **inyección SQL** en los campos. Nunca 500;
+  la basura no altera los conteos; la inyección es dato, no código.
+- **`AutorizacionPorRolEstrictaTest`** — matriz de autorización con estado
+  EXACTO por celda (96 GET + 75 escrituras): invitado → 302 `/login`;
+  cajero → 302 `/caja` y 403 exacto en lo suyo no; admin → 200 y nunca
+  403/405. El portal va aparte: la sesión de la tienda NO abre el panel y la
+  contraseña del operador (`PORTAL_ADMIN_PASSWORD`) es la única llave.
+- **`SesionYCsrfTest`** — CSRF (token falsificado → 419; token correcto →
+  pasa), regeneración de id de sesión en el login (fijación), 429 en el
+  sexto intento de login (`throttle:5,1`), usuario desactivado desloqueado
+  al navegar, y logout que cierra de verdad.
+
+El baseline de PHPStan congela las llamadas HTTP de los 5 archivos con su
+conteo (mismo convenio del resto del suite). Los hallazgos que la suite
+destape quedan registrados en el log del CI.
+
 ## Dependabot security-only · verificado empíricamente (16 de noviembre de 2026)
 
 El `.github/dependabot.yml` quedó en modo quirúrgico: composer + npm +
