@@ -24,19 +24,16 @@
 
 use Illuminate\Support\Facades\DB;
 
-/** Host HTTP del inquilino 1 (subdominio sembrado sobre SAAS_BASE_DOMAIN=localhost). */
+/** Host HTTP de la tienda única. */
 function forenseHostA(): string
 {
-    $subdominio = (string) DB::table('estado_tenants')->where('negocio_id', 1)->value('subdominio');
-
-    return $subdominio !== '' ? "{$subdominio}.localhost" : 'localhost';
+    return 'localhost';
 }
 
 /** ¿Es una página Inertia SIN el layout del ERP (pública o transicional)? */
 function forensePaginaSinLayout(string $uri): bool
 {
-    // /portal/login: login público del portal SaaS, layout propio sin tenant.
-    return in_array($uri, ['/precios', '/cuenta/contrasena', '/portal/login'], true);
+    return in_array($uri, ['/cuenta/contrasena'], true);
 }
 
 /**

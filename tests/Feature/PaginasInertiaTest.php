@@ -30,9 +30,6 @@ it('muestra las páginas públicas al invitado (componente + props)', function (
     paginaInertia($this->get($ruta), $componente, $props);
 })->with([
     'login' => ['/login', 'Auth/Login', 3],
-    'crear cuenta' => ['/crear-cuenta', 'Auth/CrearCuenta', 4],
-    'precios' => ['/precios', 'Precios', 3],
-    'portal login' => ['/portal/login', 'Portal/Login', 3],
 ]);
 
 it('protege el dashboard del invitado (redirige al login)', function () {
@@ -55,7 +52,6 @@ it('muestra las pantallas del administrador con sus props certificadas', functio
     'tasas' => ['/tasas', 'Tasas/Index', 13],
     'metodos de pago' => ['/metodos-pago', 'MetodosPago/Index', 13],
     'configuracion' => ['/configuracion', 'Configuracion/Index', 18],
-    'suscripcion' => ['/suscripcion', 'Suscripcion/Index', 14],
     'reportes' => ['/reportes', 'Reportes/Index', 12],
     'conciliacion' => ['/conciliacion', 'Conciliacion/Index', 21],
     'cierre de caja' => ['/cierre-caja', 'CierreCaja/Index', 23],

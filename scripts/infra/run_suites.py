@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Orquestador de TODAS las suites de pruebas del proyecto (DB-level):
-e2e (t01..t15), fiscal (f01..f17), multiinquilino (m01..m13), portal (p01..p03).
+e2e (t01..t15), fiscal (f01..f17).
 Reinicia cada clon desde TEMPLATE tienda antes de cada suite. Uso:
   python3 run_suites.py [salida.log]
 """
@@ -24,8 +24,6 @@ PGSQL = os.environ.get('PSQL') or shutil.which('psql') or next(
 RUNNERS = [
     ('e2e/run_all.py',        'tienda_e2e',   'OPERATIVAS (t01..t15)'),
     ('fiscal/run_fiscal.py',  'tienda_fiscal','FISCALES (f01..f17)'),
-    ('multiinquilino/run_multi.py', 'tienda_multi', 'MULTIINQUILINO (m01..m13)'),
-    ('portal/run_portal.py',  'portal_saas',  'PORTAL (p01..p03)'),
 ]
 
 
