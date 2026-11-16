@@ -37,9 +37,11 @@ class OrdenesCompraController extends Controller
 
     public function datos(string $ver): array
     {
+        // La vista v_ordenes_compra expone «fecha», no «created_at»: ordenar por
+        // la columna inexistente rompe la pantalla con 500 (hallazgo 2026-11-16).
         $filas = DB::select($ver === 'todas'
-            ? 'SELECT * FROM v_ordenes_compra ORDER BY created_at DESC LIMIT 100'
-            : 'SELECT * FROM v_ordenes_compra WHERE estado IN (\'BORRADOR\',\'ENVIADA\',\'PARCIAL\') ORDER BY created_at DESC LIMIT 100');
+            ? 'SELECT * FROM v_ordenes_compra ORDER BY fecha DESC, id DESC LIMIT 100'
+            : 'SELECT * FROM v_ordenes_compra WHERE estado IN (\'BORRADOR\',\'ENVIADA\',\'PARCIAL\') ORDER BY fecha DESC, id DESC LIMIT 100');
         return array_map(fn ($o) => [
             'id' => (int) $o->id, 'numero' => (int) $o->numero, 'proveedor_id' => (int) $o->proveedor_id, 'proveedor' => $o->proveedor,
             'rif' => $o->rif, 'fecha' => $o->fecha, 'estado' => $o->estado, 'observaciones' => $o->observaciones,
