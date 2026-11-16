@@ -32,3 +32,31 @@ Artisan::command('islr:alertas {--dias=7 : Días de anticipación}', function ()
 })->purpose('Avisa de retenciones de ISLR por enterar y de vencimientos de ISLR cercanos');
 
 Schedule::command('islr:alertas')->dailyAt('07:00')->timezone('America/Caracas');
+
+/*
+ * Monitoreo operativo mínimo: disco, queue worker, conexiones PG y esperas de locks.
+ */
+Artisan::command('sistema:monitoreo', function () {
+    $salud = \App\Support\SaludSistema::verificar();
+
+    if ($salud['alertas'] === []) {
+        $this->info('Sistema OK (disco, queue, conexiones PG y locks dentro de umbral).');
+
+        return 0;
+    }
+
+    foreach ($salud['alertas'] as $alerta) {
+        $linea = '['.strtoupper($alerta['nivel']).' · '.$alerta['componente'].'] '.$alerta['mensaje'];
+        if ($alerta['nivel'] === 'critical') {
+            $this->error($linea);
+            Log::critical($linea, $alerta);
+        } else {
+            $this->warn($linea);
+            Log::warning($linea, $alerta);
+        }
+    }
+
+    return 1;
+})->purpose('Verifica disco, cola de jobs, conexiones PostgreSQL y esperas de locks');
+
+Schedule::command('sistema:monitoreo')->everyFiveMinutes();

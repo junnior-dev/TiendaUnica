@@ -39,7 +39,10 @@ class SeguridadCabeceras
             "base-uri 'self'; form-action 'self'; report-uri /csp-report";
         $entorno = app()->environment();
         $forzada = filter_var((string) env('CSP_FORCE', false), FILTER_VALIDATE_BOOLEAN);
-        if ($forzada || $entorno === 'production') {
+        $enforceDesde = (string) env('CSP_ENFORCE_FROM', '2026-12-01');
+        $fechaEnforceAlcanzada = $enforceDesde !== '' && now('America/Caracas')->toDateString() >= $enforceDesde;
+
+        if ($forzada || $entorno === 'production' || ($entorno === 'staging' && $fechaEnforceAlcanzada)) {
             $respuesta->headers->set('Content-Security-Policy', $politica);
         } elseif ($entorno === 'staging') {
             $respuesta->headers->set('Content-Security-Policy-Report-Only', $politica);

@@ -115,3 +115,30 @@ it('Metricas sobrevive a un caché roto sin lanzar excepción', function () {
     Metricas::registrar('pruebas/roto', 200, 1, null);   // no debe lanzar
     expect(Metricas::snapshot()['total'])->toBe([]);
 });
+
+it('health/sistema reporta disco, cola, conexiones PG y esperas de locks', function () {
+    $respuesta = $this->get('/health/sistema');
+    $respuesta->assertOk()->assertJsonStructure([
+        'estado',
+        'alertas',
+        'disco' => ['ok', 'usado_pct', 'libre_gb', 'total_gb'],
+        'cola' => ['ok', 'driver'],
+        'postgres' => ['ok', 'conexiones_activas', 'max_connections', 'conexiones_pct', 'sesiones_esperando_lock', 'locks_no_otorgados'],
+    ]);
+
+    $this->artisan('sistema:monitoreo')->assertExitCode(0);
+});
+
+it('csp-report sanitiza, limita tamaño y aplica rate limiting', function () {
+    $gigante = str_repeat('a', 9000);
+    $this->postJson('/csp-report', ['csp-report' => ['blocked-uri' => $gigante]])->assertStatus(413);
+
+    $this->postJson('/csp-report', [
+        'csp-report' => [
+            'document-uri' => "https://tienda.test/caja\r\nFAKE LOG",
+            'violated-directive' => 'script-src',
+            'blocked-uri' => 'https://evil.test/x.js',
+            'campo-extra-no-permitido' => 'ignorado',
+        ],
+    ])->assertNoContent();
+});

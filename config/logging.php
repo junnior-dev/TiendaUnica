@@ -54,8 +54,16 @@ return [
 
         'stack' => [
             'driver' => 'stack',
-            'channels' => explode(',', (string) env('LOG_STACK', 'single')),
+            'channels' => explode(',', (string) env('LOG_STACK', 'daily')),
             'ignore_exceptions' => false,
+        ],
+
+        'csp' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/csp-report.log'),
+            'level' => 'warning',
+            'days' => env('LOG_DAILY_DAYS', 14),
+            'replace_placeholders' => true,
         ],
 
         // Observabilidad N1 · una línea por petición HTTP (LogContexto::terminate).

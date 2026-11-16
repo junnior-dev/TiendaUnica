@@ -368,23 +368,67 @@ Route::get('/health/queue', function () {
     }
 });
 
+Route::get('/health/sistema', function () {
+    $salud = \App\Support\SaludSistema::verificar();
+    $critica = collect($salud['alertas'])->contains(fn ($a) => ($a['nivel'] ?? '') === 'critical');
+
+    return response()->json($salud, $critica ? 503 : 200);
+});
+
 // /metrics · exposición Prometheus (Nivel 1). Token Bearer, falla cerrado.
 // Ruta aparte del grupo web: sin sesión ni cookies; Prometheus puro.
 Route::get('/metrics', \App\Http\Controllers\MetricsController::class);
 
 // ── Reportes de violación de CSP (mejora 7) ──────────────────────────────────
 // El navegador envía aquí cada violación cuando la CSP corre en modo
-// Report-Only (staging) o enforcement (producción). Sin sesión a propósito.
+// Report-Only (staging) o enforcement (producción). Sin sesión a propósito,
+// con rate limit por IP y sanitización estricta de campos.
 Route::post('/csp-report', function (Illuminate\Http\Request $r) {
+    if (strlen($r->getContent()) > 8192) {
+        return response('', 413);
+    }
+
     $cuerpo = $r->json()->all();
-    if ($cuerpo === []) {
+    $bruto = is_array($cuerpo['csp-report'] ?? null) ? $cuerpo['csp-report'] : $cuerpo;
+    if (! is_array($bruto) || $bruto === []) {
         return response('', 204);
     }
-    $linea = now()->toIso8601String().' '.json_encode([
-        'agente' => (string) $r->headers->get('User-Agent'),
-        'report' => $cuerpo['csp-report'] ?? $cuerpo,
-    ], JSON_UNESCAPED_SLASHES).PHP_EOL;
-    file_put_contents(storage_path('logs/csp-report.log'), $linea, FILE_APPEND);
+
+    $limpiar = static function (mixed $v, int $max = 256): string {
+        $s = is_scalar($v) ? (string) $v : '';
+        $s = preg_replace('/[\x00-\x1F\x7F]/u', ' ', $s) ?? '';
+
+        return mb_substr(trim($s), 0, $max);
+    };
+
+    $permitidos = [
+        'document-uri',
+        'violated-directive',
+        'effective-directive',
+        'blocked-uri',
+        'source-file',
+        'line-number',
+        'column-number',
+        'status-code',
+    ];
+    $reporte = [];
+    foreach ($permitidos as $campo) {
+        if (array_key_exists($campo, $bruto)) {
+            $reporte[$campo] = in_array($campo, ['line-number', 'column-number', 'status-code'], true)
+                ? (int) $bruto[$campo]
+                : $limpiar($bruto[$campo]);
+        }
+    }
+
+    if ($reporte === []) {
+        return response('', 204);
+    }
+
+    Illuminate\Support\Facades\Log::channel('csp')->warning('CSP violation', [
+        'ip' => $r->ip(),
+        'agente' => $limpiar($r->headers->get('User-Agent'), 160),
+        'report' => $reporte,
+    ]);
 
     return response('', 204);
 })->middleware('throttle:30,1');
