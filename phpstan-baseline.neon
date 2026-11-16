@@ -4003,25 +4003,25 @@ parameters:
 			path: tests/Feature/TodasLasRutasTest.php
 
 		-
-			message: '#^Function expect\(\)? invoked with 2 parameters, 0\-1 required\.$#'
+			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
 			identifier: arguments.count
 			count: 3
 			path: tests/Feature/AislamientoMultiTenantHttpTest.php
 
 		-
-			message: '#^Function expect\(\)? invoked with 2 parameters, 0\-1 required\.$#'
+			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
 			identifier: arguments.count
 			count: 5
 			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
 
 		-
-			message: '#^Function expect\(\)? invoked with 2 parameters, 0\-1 required\.$#'
+			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
 			identifier: arguments.count
 			count: 6
 			path: tests/Feature/ControladoresValidacionHostilTest.php
 
 		-
-			message: '#^Function expect\(\)? invoked with 2 parameters, 0\-1 required\.$#'
+			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
 			identifier: arguments.count
-			count: 8
+			count: 5
 			path: tests/Feature/TodasLasRutasTest.php
