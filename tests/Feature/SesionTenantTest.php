@@ -86,6 +86,11 @@ it('dos negocios alternando en la misma conexión nunca se ven entre sí', funct
         DB::statement("INSERT INTO tienda.estado_tenants (negocio_id, subdominio, activo, plan, modulos)
             VALUES (2, 'bodega-pest', true, 'BASE', '{\"repuestos\": true}')");
     }
+    // Baseline SUPERUSUARIO de las ventas del negocio 2: el test de Aislamiento
+    // crea ventas legítimas de BOLA en esta base compartida de la corrida (su
+    // afterEach solo retira estado_tenants), así que «cero» no es un supuesto
+    // válido: el conteo es RELATIVO y la fuga real la caza el bool_and de arriba.
+    $ventasNegocio2 = (int) DB::table('ventas')->where('negocio_id', 2)->count();
     DB::statement('SET ROLE saas_app');
 
     try {
@@ -95,12 +100,12 @@ it('dos negocios alternando en la misma conexión nunca se ven entre sí', funct
             expect($row->solo)->toBeTrue();
         }
 
-        // El negocio 1 ve sus ventas; el negocio 2 (nuevo, sin ventas) ve CERO:
-        // si hubiera una fuga de sesión, aquí aparecerían filas ajenas.
+        // El negocio 1 ve sus ventas; el negocio 2 ve EXACTAMENTE su baseline
+        // (ni una fila más: si hubiera una fuga de sesión, aparecerían ajenas).
         DB::statement("SELECT set_config('app.negocio_id', '1', false)");
         expect(DB::selectOne('SELECT count(*) AS n FROM ventas')->n)->toBeGreaterThan(0);
         DB::statement("SELECT set_config('app.negocio_id', '2', false)");
-        expect(DB::selectOne('SELECT count(*) AS n FROM ventas')->n)->toBe(0);
+        expect(DB::selectOne('SELECT count(*) AS n FROM ventas')->n)->toBe($ventasNegocio2);
     } finally {
         // Devuelve la base al modo tienda-única (el middleware exige subdominio
         // cuando hay más de una tienda registrada).
