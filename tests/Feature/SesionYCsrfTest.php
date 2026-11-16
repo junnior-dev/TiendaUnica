@@ -25,16 +25,25 @@ function limpiarCubetaLogin(): void
 }
 
 it('un POST con el token CSRF falsificado no pasa (419)', function () {
-    $this->get('/login');   // arranca la sesión con su cookie
+    // Laravel 12 OMITE el filtro CSRF cuando runningUnitTests() (env=testing):
+    // el middleware ni siquiera evalúa el token y el 419 jamás saldría. Para
+    // probar la defensa de PRODUCCIÓN el entorno se declara production solo
+    // para esta prueba y se restaura testing al salir (try/finally).
+    app()->detectEnvironment(fn (): string => 'production');
+    try {
+        $this->get('/login');   // arranca la sesión con su cookie
 
-    $this->post('/login', ['username' => 'admin', 'password' => 'incorrecta',
-        '_token' => 'token-falsificado-por-el-atacante'])
-        ->assertStatus(419);
+        $this->post('/login', ['username' => 'admin', 'password' => 'incorrecta',
+            '_token' => 'token-falsificado-por-el-atacante'])
+            ->assertStatus(419);
+    } finally {
+        app()->detectEnvironment(fn (): string => 'testing');
+    }
 });
 
 it('un POST con el token CSRF correcto NO recibe 419', function () {
     $this->get('/login');
-    $token = (string) $this->app->make(\Illuminate\Session\Store::class)->token();
+    $token = (string) app(\Illuminate\Session\Store::class)->token();
 
     $this->post('/login', ['username' => 'admin', 'password' => 'incorrecta', '_token' => $token])
         ->assertStatus(302);   // pasa el filtro CSRF y responde el controlador
