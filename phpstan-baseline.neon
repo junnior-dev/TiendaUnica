@@ -3857,3 +3857,147 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: tests/Feature/ObservabilidadTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/AislamientoMultiTenantHttpTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:delete\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/AislamientoMultiTenantHttpTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 8
+			path: tests/Feature/AislamientoMultiTenantHttpTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:patch\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/AislamientoMultiTenantHttpTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/AislamientoMultiTenantHttpTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:put\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/AislamientoMultiTenantHttpTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 7
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:delete\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:from\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 8
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:patch\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 7
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:put\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:delete\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:patch\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:postJson\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:put\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/SesionYCsrfTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/Feature/SesionYCsrfTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/Feature/SesionYCsrfTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/TodasLasRutasTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/TodasLasRutasTest.php
