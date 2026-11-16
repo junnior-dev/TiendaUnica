@@ -4,7 +4,7 @@ name: CI
 #   calidad            · lint PHP + pruebas EAN-13 + build de producción
 #   phpstan            · análisis estático larastan nivel 6 (baseline = deuda
 #                        histórica congelada; CUALQUIER error nuevo rompe)
-#   pest               · 106 archivos / 970 pruebas contra clones DEDICADOS
+#   pest               · 17 archivos / 302 pruebas contra clones DEDICADOS
 #                        frescos (tienda_pest/portal_pest desde TEMPLATE)
 #   t19-regresion      · regresión de hallazgos de auditoría (68) +
 #                        trazabilidad requisitos↔suites (40)
@@ -148,7 +148,7 @@ jobs:
             -c 'CREATE DATABASE tienda_pest TEMPLATE tienda' \
             -c 'CREATE DATABASE portal_pest TEMPLATE portal_saas'
 
-      - name: Pest (106 archivos / 970 pruebas)
+      - name: Pest (17 archivos / 302 pruebas)
         run: vendor/bin/pest --compact
 
   t19-regresion:
