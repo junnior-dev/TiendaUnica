@@ -84,6 +84,11 @@ class ReportesController extends Controller
         }
 
         // Notas de crédito con productos devueltos: ingreso repartido por valor devuelto + costo devuelto + unidades.
+        // PostgreSQL RECHAZA un agregado que contenga una función de ventana
+        // («aggregate function calls cannot contain window function calls»):
+        // el total por nota se precalcula en un CTE y se une por nota_id —
+        // misma matemática, sin el anidado (agujero 2026-11-16: la pantalla
+        // respondía 500 SIEMPRE, para cualquier administrador).
         $devueltos = DB::select("
             WITH linea AS (
                 SELECT d.venta_id, d.producto_id, sum(d.cantidad) AS cant, sum(d.base_usd) AS ing, sum(ROUND(d.cantidad * d.costo_unitario_usd, 2)) AS cos
@@ -95,11 +100,13 @@ class ReportesController extends Controller
                   JOIN notas_ajuste n ON n.id = nd.nota_id AND n.tipo = 'C' AND n.fecha BETWEEN ? AND ?
                   JOIN ventas v ON v.id = n.venta_id AND v.estado = 'COMPLETADA'
                   JOIN linea l ON l.venta_id = n.venta_id AND l.producto_id = nd.producto_id AND l.cant > 0
+            ), porNota AS (
+                SELECT nota_id, COALESCE(sum(valor), 0) AS total_valor FROM dev GROUP BY nota_id
             )
             SELECT dev.producto_id, p.sku, p.nombre, sum(dev.cantidad) AS unidades,
-                   sum((dev.base_ves / dev.tasa_cambio) * dev.valor / NULLIF(sum(dev.valor) OVER (PARTITION BY dev.nota_id), 0)) AS ingreso_usd,
+                   sum((dev.base_ves / dev.tasa_cambio) * dev.valor / NULLIF(porNota.total_valor, 0)) AS ingreso_usd,
                    sum(dev.costo) AS costo_usd
-              FROM dev JOIN productos p ON p.id = dev.producto_id
+              FROM dev JOIN porNota ON porNota.nota_id = dev.nota_id JOIN productos p ON p.id = dev.producto_id
              GROUP BY dev.producto_id, p.sku, p.nombre", [$desde, $hasta]);
         foreach ($devueltos as $d) {
             $id = (int) $d->producto_id;
