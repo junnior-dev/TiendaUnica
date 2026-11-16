@@ -93,10 +93,15 @@ class UsuariosController extends Controller
     /** @return array{0:array,1:int} [cuerpo, código HTTP] */
     public function crear(array $d, int $yo): array
     {
-        $username = strtolower(trim((string) ($d['username'] ?? '')));
-        $nombre = trim((string) ($d['nombre'] ?? ''));
-        $rol = strtoupper((string) ($d['rol'] ?? ''));
-        $clave = (string) ($d['password'] ?? '');
+        // Payload hostil: los campos pueden llegar como ARRAY y el cast
+        // (string) directo emite «Array to string conversion», que el handler
+        // de errores de Laravel convierte en 500. Solo el texto plano es
+        // entrada válida; lo demás cae a '' y lo rechaza la validación.
+        $texto = static fn ($v): string => is_scalar($v) ? (string) $v : '';
+        $username = strtolower(trim($texto($d['username'] ?? '')));
+        $nombre = trim($texto($d['nombre'] ?? ''));
+        $rol = strtoupper($texto($d['rol'] ?? ''));
+        $clave = $texto($d['password'] ?? '');
         if (strlen($nombre) < 3) return $this->falla('Escribe el nombre completo.', 'nombre');
         if (! preg_match('/^[a-z0-9._-]{3,40}$/', $username)) return $this->falla('El usuario lleva de 3 a 40 letras minúsculas, números, punto, guion o guion bajo, sin espacios.', 'username');
         if (! in_array($rol, self::ROLES, true)) return $this->falla('Elige el rol de la persona.', 'rol');
