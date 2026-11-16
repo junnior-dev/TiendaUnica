@@ -40,8 +40,9 @@ class MetricsController extends Controller
                 'total' => 'http_requests_total',
                 'ms' => 'http_request_duration_ms_sum',
                 'n' => 'http_request_duration_ms_count',
+                default => null,   // serie desconocida del snapshot: se omite
             };
-            if ($mediciones === []) {
+            if ($nombre === null || $mediciones === []) {
                 continue;
             }
             $lineas[] = '# HELP '.$nombre.' peticiones HTTP acumuladas del proceso PHP';
@@ -60,7 +61,7 @@ class MetricsController extends Controller
             ->header('Content-Type', 'text/plain; version=0.0.4; charset=utf-8');
     }
 
-    /** Escape del formato de exposición: \\ \" \n. */
+    /** Escape del formato de exposición: \\ \" \n. @param array<string, string> $etiquetas */
     protected function etiquetas(array $etiquetas): string
     {
         $pares = [];
