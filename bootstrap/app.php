@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->web(prepend: [\App\Http\Middleware\IdentificarTenant::class]);
+        // IdentificarTenant PRIMERO (resuelve el negocio); LogContexto después
+        // (ya puede leer Tenant::id() y comparte contexto para TODOS los logs
+        // de la petición: request_id, negocio_id, ruta).
+        $middleware->web(prepend: [\App\Http\Middleware\IdentificarTenant::class, \App\Http\Middleware\LogContexto::class]);
         $middleware->web(append: [\App\Http\Middleware\HandleInertiaRequests::class, \App\Http\Middleware\SeguridadCabeceras::class]);
         $middleware->alias([
             'portal_admin' => \App\Http\Middleware\PortalAdmin::class,

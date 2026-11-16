@@ -58,6 +58,17 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        // Observabilidad N1 · una línea por petición HTTP (LogContexto::terminate).
+        // Diario y separado del laravel.log: el log de app queda legible y el de
+        // acceso alimenta las alertas (p95, 5xx) sin filtrar nada a mano.
+        'acceso' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/acceso.log'),
+            'level' => 'info',
+            'days' => 14,
+            'replace_placeholders' => true,
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),

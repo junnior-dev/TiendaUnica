@@ -60,6 +60,16 @@ class AppServiceProvider extends ServiceProvider
         //                      tasa, cambiar estado de tienda, guardar cuenta).
         RateLimiter::for('auth', fn (Request $r) => Limit::perMinute(600)->by($r->user()?->id ? 'u'.$r->user()->id : 'ip'.$r->ip()));
         RateLimiter::for('portal_escritura', fn (Request $r) => Limit::perMinute(10)->by('portal'.$r->ip().($r->session()?->getId() ?? '')));
+
+        // Observabilidad N1 · usuario_id en el contexto de TODA línea de log
+        // en cuanto Laravel resuelve al usuario (Auth::onceBasic, sesión, token):
+        // LogContexto comparte request_id/negocio_id al entrar, pero el usuario
+        // aún no existe en ese momento — este listener lo añade en cuanto hay.
+        Event::listen(\Illuminate\Auth\Events\Authenticated::class, function (\Illuminate\Auth\Events\Authenticated $e) {
+            \Illuminate\Support\Facades\Log::shareContext([
+                'usuario_id' => $e->guard()->user()?->getAuthIdentifier(),
+            ]);
+        });
     }
 
     /**
