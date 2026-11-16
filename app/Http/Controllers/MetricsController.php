@@ -88,7 +88,13 @@ class MetricsController extends Controller
     protected function postgres(): array
     {
         try {
-            $conexion = config('database.connections.pgsql_admin') !== null
+            // pgsql_admin SOLO si tiene usuario definido. Trampa clásica de env():
+            // .env.example trae DB_ADMIN_USERNAME= (vacío) y env('DB_ADMIN_USERNAME',
+            // $fallback) devuelve '' porque la clave EXISTE en .env — el fallback no
+            // aplica — así que conectaría con usuario vacío y fallaría. Sin DB_ADMIN_*
+            // definido de verdad, se usa la conexión de la app.
+            $admin = config('database.connections.pgsql_admin');
+            $conexion = (is_array($admin) && filled($admin['username'] ?? null))
                 ? DB::connection('pgsql_admin')
                 : DB::connection();
             $filas = array_map(
