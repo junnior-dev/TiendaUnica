@@ -28,6 +28,31 @@ ambos con parche publicado. Resultado en 3 minutos, sin intervención humana:
 (2–3 PRs de versión por semana, cerrables sin mergear) o crear los security
 PRs a mano desde Security tab cuando llegue una alerta.
 
+## Congelación del inventario del esquema (16 de noviembre de 2026)
+
+Inventario verificado contra la instalación limpia de hoy (esquema `tienda`):
+**80 tablas · 33 vistas · 226 rutinas (202 funciones + 24 procedimientos) ·
+154 triggers · 55 secuencias · 248 índices** — 548 objetos de negocio.
+
+- **m01 NO estaba desactualizado:** congela la ESTRUCTURA RLS (68 tablas de
+  negocio con RLS + 69 políticas con `fn_sesion_permitida` + 9 globales fuera),
+  y esa descomposición coincide exactamente con el esquema de hoy — el Nightly
+  de ayer pasó verde con estos mismos scripts. Lo que nadie congelaba eran los
+  TOTALES: `InventarioEsquemaTest` los fija, y una migración que añada o quite
+  objetos sin querer rompe el CI. Al crecer el esquema a propósito, se
+  actualizan esos números con commit (mismo contrato que t19).
+- **Vectores revisados empíricamente (no por doc):** las 6 `SECURITY DEFINER`
+  fijan `search_path` (0 sin él) y las 33 vistas llevan
+  `security_invoker=true` (0 sin él — verificado por `pg_class.reloptions`,
+  no por `pg_views.definition`, que solo contiene el SELECT y nunca las
+  opciones). Ambas guardas quedaron PERMANENTES en el mismo test: cualquier
+  vista nueva sin invoker o DEFINER sin search_path rompe el CI.
+- **Pendiente documentado (runbook de continuidad):** tras cada restore de
+  c1–c5, comparar el conteo de triggers contra 154 — un restore «verde» con
+  menos triggers es un restore roto silencioso. No se tocó `continuidad.py`
+  esta noche para no añadir superficie de fallo antes del primer Nightly
+  programado.
+
 ## CI/CD · El run_all.sh ya NO es el único guardián (16 de noviembre de 2026)
 
 Hasta hoy la cadena completa de pruebas solo existía si alguien ejecutaba
