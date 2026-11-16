@@ -1,24 +1,20 @@
-# Staging de ERP POS · Nivel 4 (observabilidad completa, en orden)
+# Staging de Tienda Única POS (Repuestos de Motos)
 
 PHP-FPM + OPcache + nginx + pgBouncer + PostgreSQL 17 + Prometheus. k6 corre
 contra ESTO — `artisan serve` nunca fue una referencia de rendimiento.
 
-## Decisión de plataforma (por qué PHP-FPM y no Octane)
+## Decisión de plataforma (PHP-FPM)
 
-El aislamiento del negocio depende de `set_config('app.negocio_id', ..., false)`
-(GUC de **sesión**) y de `Tenant::limpiar()` al terminar cada petición: el modelo
-por-proceso de PHP-FPM es el que el código ya garantiza. Octane/RoadRunner
-persisten el proceso entre peticiones y obligarían a re-auditar cada camino de
-estado (sesiones, caché estático, singletons con tenant). Si un día se quiere
-Octane, empieza por re-auditar `IdentificarTenant` y `Tenant::limpiar()` bajo
-el modelo de worker persistente.
+Se usa el modelo por-proceso de PHP-FPM junto con pgBouncer (`DISCARD ALL`) para
+aislar limpiamente el estado de cada petición HTTP.
 
 ## Puesta en marcha (una sola vez)
 
 1. Crea `deploy/.env` (no va a git):
 
    ```
-   DB_PASSWORD=<contraseña fuerte de saas_app>
+   DB_USERNAME=tienda_app
+   DB_PASSWORD=<contraseña fuerte de tienda_app>
    METRICS_TOKEN=<valor aleatorio largo>
    ```
 
@@ -36,9 +32,8 @@ el modelo de worker persistente.
    un `up` nocturno nunca re-instale sobre datos):
 
    ```
-   psql -h 127.0.0.1 -p 5432 -U saas_app -d tienda \
-     -v ON_ERROR_STOP=1 -f database/sql/00_instalar.sql
-   # y después los 01–43 en el orden del LEEME.md (el 00 los encadena)
+   PGHOST=127.0.0.1 PGPORT=5432 PGDATABASE=tiendaunica PGUSER=tienda_app \
+     python3 scripts/infra/setup_db.py
    ```
 
 5. Configura el negocio en `/registro` (primer administrador) o carga una

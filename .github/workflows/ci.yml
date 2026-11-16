@@ -5,7 +5,7 @@ name: CI
 #   phpstan            · análisis estático larastan nivel 6 (baseline = deuda
 #                        histórica congelada; CUALQUIER error nuevo rompe)
 #   pest               · suite completa (Pest + PHPUnit) contra clones
-#                        DEDICADOS frescos (tienda_pest/portal_pest desde
+#                        DEDICADO fresco (tienda_pest desde tiendaunica) sin tocar
 #                        TEMPLATE)
 #   t19-regresion      · regresión de hallazgos de auditoría (68) +
 #                        trazabilidad requisitos↔suites (40)
@@ -134,22 +134,20 @@ jobs:
           cp .env.example .env
           sed -i 's/^APP_KEY=$/APP_KEY=base64:QVIY3sKO1zlz74jPWiLlK8EzSyJugoEZ7kenZi357Js=/' .env
           sed -i 's/^DB_PORT=.*/DB_PORT=5433/' .env
-          sed -i 's/^PORTAL_DB_PORT=.*/PORTAL_DB_PORT=5433/' .env
-          sed -i 's/^PORTAL_ADMIN_PASSWORD=.*/PORTAL_ADMIN_PASSWORD=portal-demo-2026/' .env
-          sed -i 's/^SAAS_BASE_DOMAIN=.*/SAAS_BASE_DOMAIN=localhost/' .env
 
-      - name: Instalación limpia de las bases (scripts 00–43 + semilla)
+      - name: Instalación limpia de la base (scripts 01–41 + semilla)
         env:
           PGHOST: 127.0.0.1
         run: python3 scripts/infra/setup_db.py
 
-      - name: Clones dedicados de Pest desde TEMPLATE
+      - name: Clon dedicado de Pest desde TEMPLATE tiendaunica
         run: |
           psql -h 127.0.0.1 -p 5433 -U postgres -d postgres \
-            -c 'CREATE DATABASE tienda_pest TEMPLATE tienda' \
-            -c 'CREATE DATABASE portal_pest TEMPLATE portal_saas'
+            -c 'CREATE DATABASE tienda_pest TEMPLATE tiendaunica'
 
       - name: Pest (suite completa)
+        env:
+          DB_PORT: 5433
         run: vendor/bin/pest --compact
 
   t19-regresion:
@@ -212,11 +210,8 @@ jobs:
           cp .env.example .env
           sed -i 's/^APP_KEY=$/APP_KEY=base64:QVIY3sKO1zlz74jPWiLlK8EzSyJugoEZ7kenZi357Js=/' .env
           sed -i 's/^DB_PORT=.*/DB_PORT=5433/' .env
-          sed -i 's/^PORTAL_DB_PORT=.*/PORTAL_DB_PORT=5433/' .env
-          sed -i 's/^PORTAL_ADMIN_PASSWORD=.*/PORTAL_ADMIN_PASSWORD=portal-demo-2026/' .env
-          sed -i 's/^SAAS_BASE_DOMAIN=.*/SAAS_BASE_DOMAIN=localhost/' .env
 
-      - name: Instalación limpia de las bases (scripts 00–43 + semilla)
+      - name: Instalación limpia de la base (scripts 01–41 + semilla)
         env:
           PGHOST: 127.0.0.1
         run: python3 scripts/infra/setup_db.py

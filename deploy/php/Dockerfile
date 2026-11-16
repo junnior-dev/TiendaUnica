@@ -35,8 +35,8 @@ RUN composer dump-autoload --optimize && \
     php artisan view:cache && \
     chown -R www-data:www-data storage bootstrap/cache
 
-# La instalación del esquema (scripts 00–43 + semilla) es manual y UNA vez:
-# psql -h 127.0.0.1 -p 5432 -U saas_app -d tienda -f database/sql/00_instalar.sql …
-# (ver deploy/LEEME_STAGING.md). El contenedor NO la ejecuta: evitar que un
-# `docker compose up` de noche re-instale nada encima de datos reales.
+# La instalación del esquema (scripts 01–41 + semilla) es manual y UNA vez:
+# python3 scripts/infra/setup_db.py (ver deploy/LEEME_STAGING.md).
+# El contenedor NO la ejecuta: evitar que un `docker compose up` de noche
+# re-instale nada encima de datos reales.
 CMD ["php-fpm"]

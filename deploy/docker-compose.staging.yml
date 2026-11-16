@@ -1,12 +1,9 @@
-# Staging reproducible de ERP POS (Nivel 4 de la lista de observabilidad).
+# Staging reproducible de Tienda Única POS (Repuestos de Motos).
 #   php-fpm 8.3 + OPcache + nginx + pgBouncer + postgres 17 + Prometheus.
 # Súbelo:  docker compose -f deploy/docker-compose.staging.yml up -d --build
 # Ver:     deploy/LEEME_STAGING.md
 #
-# DECISIÓN: PHP-FPM clásico, NO Octane/RoadRunner. El aislamiento del tenant
-# depende de set_config(..., false) (GUC de sesión) + Tenant::limpiar() al
-# terminar cada petición — el modelo por-proceso de PHP-FPM es el que el código
-# ya garantiza; Octane exigiría re-auditar cada camino de estado.
+# DECISIÓN: PHP-FPM clásico (modelo por-proceso), con pgBouncer en modo transaction/session.
 #
 # k6 corre contra ESTO (php artisan serve no es una referencia válida).
 
@@ -14,18 +11,18 @@ services:
   db:
     image: postgres:17-alpine
     environment:
-      POSTGRES_DB: tienda
-      POSTGRES_USER: saas_app
+      POSTGRES_DB: tiendaunica
+      POSTGRES_USER: ${DB_USERNAME:-tienda_app}
       POSTGRES_PASSWORD: ${DB_PASSWORD:?define DB_PASSWORD en .env de staging}
       POSTGRES_INITDB_ARGS: "--data-checksums"
     volumes:
       - db_datos:/var/lib/postgresql/data
-      # El instalador del esquema corre UNA vez: scripts 00–43 + semilla.
+      # El instalador del esquema corre UNA vez: scripts 01–41 + semilla (ver LEEME_STAGING.md).
       - ../database/sql:/sql:ro
     ports:
       - "127.0.0.1:5432:5432"   # solo para psql de mantenimiento desde el host
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U saas_app -d tienda"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-tienda_app} -d tiendaunica"]
       interval: 5s
       timeout: 3s
       retries: 20
@@ -38,11 +35,11 @@ services:
     environment:
       DB_HOST: db
       DB_PORT: "5432"
-      DB_NAME: tienda
-      DB_USER: saas_app
+      DB_NAME: tiendaunica
+      DB_USER: ${DB_USERNAME:-tienda_app}
       DB_PASSWORD: ${DB_PASSWORD:?define DB_PASSWORD en .env de staging}
       AUTH_TYPE: scram-sha-256
-      POOL_MODE: session        # OBLIGATORIO: app.negocio_id es un GUC de sesión
+      POOL_MODE: session
       DEFAULT_POOL_SIZE: "20"
       MAX_CLIENT_CONN: "200"
       SERVER_RESET_QUERY: "DISCARD ALL"
@@ -62,8 +59,8 @@ services:
       APP_URL: http://localhost:8080
       DB_HOST: pgbouncer
       DB_PORT: "5432"
-      DB_DATABASE: tienda
-      DB_USERNAME: saas_app
+      DB_DATABASE: tiendaunica
+      DB_USERNAME: ${DB_USERNAME:-tienda_app}
       DB_PASSWORD: ${DB_PASSWORD:?define DB_PASSWORD en .env de staging}
       CACHE_STORE: file
       QUEUE_CONNECTION: database
