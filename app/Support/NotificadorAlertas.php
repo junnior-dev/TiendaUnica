@@ -24,7 +24,7 @@ class NotificadorAlertas
             return 0;
         }
 
-        $cooldown = max(0, (int) env('OBS_ALERTA_COOLDOWN_S', 900));
+        $cooldown = max(0, (int) config('observabilidad.alerta_cooldown_s', 900));
         $pendientes = [];
 
         foreach ($alertas as $alerta) {
@@ -87,7 +87,7 @@ class NotificadorAlertas
      */
     private static function enviarWebhook(string $texto, array $alertas): void
     {
-        $url = (string) env('OBS_ALERTA_WEBHOOK_URL', env('LOG_SLACK_WEBHOOK_URL', ''));
+        $url = (string) config('observabilidad.alerta_webhook_url', '');
         if ($url === '') {
             return;
         }
@@ -105,8 +105,8 @@ class NotificadorAlertas
 
     private static function enviarTelegram(string $texto): void
     {
-        $token = (string) env('OBS_TELEGRAM_BOT_TOKEN', '');
-        $chatId = (string) env('OBS_TELEGRAM_CHAT_ID', '');
+        $token = (string) config('observabilidad.telegram_bot_token', '');
+        $chatId = (string) config('observabilidad.telegram_chat_id', '');
         if ($token === '' || $chatId === '') {
             return;
         }
@@ -123,7 +123,7 @@ class NotificadorAlertas
 
     private static function enviarEmail(string $app, string $env, string $texto): void
     {
-        $destino = (string) env('OBS_ALERTA_EMAIL', '');
+        $destino = (string) config('observabilidad.alerta_email', '');
         if ($destino === '') {
             return;
         }

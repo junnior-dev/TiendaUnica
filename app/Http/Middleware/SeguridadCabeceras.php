@@ -38,8 +38,8 @@ class SeguridadCabeceras
             "font-src 'self' data:; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; ".
             "base-uri 'self'; form-action 'self'; report-uri /csp-report";
         $entorno = app()->environment();
-        $forzada = filter_var((string) env('CSP_FORCE', false), FILTER_VALIDATE_BOOLEAN);
-        $enforceDesde = (string) env('CSP_ENFORCE_FROM', '2026-12-01');
+        $forzada = (bool) config('observabilidad.csp_force', false);
+        $enforceDesde = (string) config('observabilidad.csp_enforce_from', '2026-12-01');
         $fechaEnforceAlcanzada = $enforceDesde !== '' && now('America/Caracas')->toDateString() >= $enforceDesde;
 
         if ($forzada || $entorno === 'production' || ($entorno === 'staging' && $fechaEnforceAlcanzada)) {

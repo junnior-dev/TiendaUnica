@@ -49,7 +49,7 @@ class SaludSistema
         }
 
         $usadoPct = round((($total - $libre) / $total) * 100, 1);
-        $umbral = (float) env('OBS_DISCO_MAX_PCT', 85);
+        $umbral = (float) config('observabilidad.disco_max_pct', 85);
 
         if ($usadoPct >= $umbral) {
             $alertas[] = [
@@ -82,7 +82,7 @@ class SaludSistema
             $pendientes = (int) DB::table('jobs')->count();
             $masViejo = DB::table('jobs')->min('created_at');
             $antiguedad = $masViejo !== null ? max(0, time() - (int) $masViejo) : 0;
-            $umbralEdad = (int) env('OBS_QUEUE_MAX_AGE_S', 300);
+            $umbralEdad = (int) config('observabilidad.queue_max_age_s', 300);
 
             $fallidos1h = 0;
             $fallidos24h = 0;
@@ -103,7 +103,7 @@ class SaludSistema
                 ];
             }
 
-            $umbralFallidos = (int) env('OBS_FAILED_JOBS_MAX', 10);
+            $umbralFallidos = (int) config('observabilidad.failed_jobs_max', 10);
             if ($fallidos1h >= $umbralFallidos) {
                 $alertas[] = [
                     'componente' => 'queue_failed',
@@ -139,7 +139,7 @@ class SaludSistema
                 'SELECT count(*) AS n FROM pg_stat_activity WHERE datname = current_database()'
             )->n ?? 0);
             $connPct = $maxConn > 0 ? round(($activas / $maxConn) * 100, 1) : 0.0;
-            $umbralConn = (float) env('OBS_PG_CONN_MAX_PCT', 80);
+            $umbralConn = (float) config('observabilidad.pg_conn_max_pct', 80);
 
             if ($connPct >= $umbralConn) {
                 $alertas[] = [
@@ -149,7 +149,7 @@ class SaludSistema
                 ];
             }
 
-            $umbralLockS = (float) env('OBS_PG_LOCK_WAIT_S', 1.0);
+            $umbralLockS = (float) config('observabilidad.pg_lock_wait_s', 1.0);
             $esperasLock = DB::select(
                 "SELECT a.pid,
                         ROUND(EXTRACT(EPOCH FROM (now() - COALESCE(a.state_change, a.query_start)))::numeric, 2) AS espera_s,
@@ -217,8 +217,8 @@ class SaludSistema
             }
 
             $tasa5xx = $total > 0 ? round(($errores5xx / $total) * 100, 2) : 0.0;
-            $umbral5xxPct = (float) env('OBS_HTTP_5XX_MAX_PCT', 5.0);
-            $umbral5xxMin = (int) env('OBS_HTTP_5XX_MIN_REQS', 20);
+            $umbral5xxPct = (float) config('observabilidad.http_5xx_max_pct', 5.0);
+            $umbral5xxMin = (int) config('observabilidad.http_5xx_min_reqs', 20);
 
             if ($total >= $umbral5xxMin && $tasa5xx >= $umbral5xxPct) {
                 $alertas[] = [
@@ -244,7 +244,7 @@ class SaludSistema
             }
 
             $cajaMediaMs = $cajaN > 0 ? round($cajaMs / $cajaN, 1) : 0.0;
-            $umbralCajaMs = (float) env('OBS_CAJA_MAX_MS', 1500.0);
+            $umbralCajaMs = (float) config('observabilidad.caja_max_ms', 1500.0);
             if ($cajaN >= 5 && $cajaMediaMs >= $umbralCajaMs) {
                 $alertas[] = [
                     'componente' => 'http_caja_latencia',
@@ -268,8 +268,8 @@ class SaludSistema
     private static function negocio(array &$alertas): array
     {
         try {
-            $horaInicio = (int) env('OBS_NEGOCIO_HORA_INICIO', 8);
-            $horaFin = (int) env('OBS_NEGOCIO_HORA_FIN', 18);
+            $horaInicio = (int) config('observabilidad.negocio_hora_inicio', 8);
+            $horaFin = (int) config('observabilidad.negocio_hora_fin', 18);
             $horaActual = (int) now('America/Caracas')->format('G');
             $enHorario = $horaActual >= $horaInicio && $horaActual < $horaFin;
 
@@ -279,7 +279,7 @@ class SaludSistema
                 ->where('fecha_hora', '>=', now()->subHour())
                 ->count();
 
-            $vigilar = filter_var((string) env('OBS_NEGOCIO_SIN_VENTAS_ALERTA', true), FILTER_VALIDATE_BOOLEAN);
+            $vigilar = (bool) config('observabilidad.negocio_sin_ventas_alerta', true);
             if ($vigilar && $enHorario && $cajasAbiertas > 0 && $ventasUltimaHora === 0) {
                 $alertas[] = [
                     'componente' => 'negocio',

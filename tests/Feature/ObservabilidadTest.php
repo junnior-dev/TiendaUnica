@@ -133,8 +133,8 @@ it('health/sistema reporta disco, cola, conexiones PG, esperas de locks, HTTP y 
 
 it('NotificadorAlertas despacha a webhook con cooldown y hace fallback si Log falla', function () {
     \Illuminate\Support\Facades\Http::fake();
-    putenv('OBS_ALERTA_WEBHOOK_URL=https://hooks.test/alerta');
-    putenv('OBS_ALERTA_COOLDOWN_S=600');
+    Config::set('observabilidad.alerta_webhook_url', 'https://hooks.test/alerta');
+    Config::set('observabilidad.alerta_cooldown_s', 600);
     Cache::flush();
 
     try {
@@ -149,8 +149,8 @@ it('NotificadorAlertas despacha a webhook con cooldown y hace fallback si Log fa
         \Illuminate\Support\Facades\Log::shouldReceive('critical')->once()->andThrow(new \RuntimeException('Disk full'));
         expect(\App\Support\NotificadorAlertas::despachar($alerta))->toBe(1);
     } finally {
-        putenv('OBS_ALERTA_WEBHOOK_URL');
-        putenv('OBS_ALERTA_COOLDOWN_S');
+        Config::set('observabilidad.alerta_webhook_url', '');
+        Config::set('observabilidad.alerta_cooldown_s', 900);
     }
 });
 
@@ -161,7 +161,7 @@ it('SaludSistema detecta tasa alta de 5xx y latencia alta en /caja', function ()
     }
 
     $salud = \App\Support\SaludSistema::verificar();
-    $componentes = collect($salud['alertas'])->pluck('componente')->all();
+    $componentes = array_column($salud['alertas'], 'componente');
 
     expect($salud['estado'])->toBe('alerta');
     expect($componentes)->toContain('http_5xx');

@@ -31,24 +31,6 @@ parameters:
 			path: app/Http/Controllers/AperturaCajaController.php
 
 		-
-			message: '#^Dead catch \- Illuminate\\Database\\QueryException is already caught above\.$#'
-			identifier: catch.alreadyCaught
-			count: 1
-			path: app/Http/Controllers/Auth/CrearCuentaController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Auth\\CrearCuentaController\:\:create\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Auth/CrearCuentaController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Auth\\CrearCuentaController\:\:store\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Auth/CrearCuentaController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
 			identifier: property.notFound
 			count: 1
@@ -2473,60 +2455,6 @@ parameters:
 			path: app/Http/Controllers/OrdenesCompraController.php
 
 		-
-			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:autenticar\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Portal/PortalAdminController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:cambiarEstado\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Portal/PortalAdminController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:guardarCuenta\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Portal/PortalAdminController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:index\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Portal/PortalAdminController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:login\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Portal/PortalAdminController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:publicarTasa\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Portal/PortalAdminController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:salir\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Portal/PortalAdminController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:verificarPago\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Portal/PortalAdminController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:volver\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/Portal/PortalAdminController.php
-
-		-
 			message: '#^Anonymous function has an unused use \$r\.$#'
 			identifier: closure.unusedUse
 			count: 1
@@ -3085,36 +3013,6 @@ parameters:
 			path: app/Http/Controllers/RetencionesIslrController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$nombre_completo\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SuscripcionController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SuscripcionController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\SuscripcionController\:\:index\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/SuscripcionController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\SuscripcionController\:\:reportarPago\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: app/Http/Controllers/SuscripcionController.php
-
-		-
-			message: '#^Parameter \#1 \$column of method Illuminate\\Database\\Query\\Builder\:\:value\(\) expects string, Illuminate\\Contracts\\Database\\Query\\Expression given\.$#'
-			identifier: argument.type
-			count: 1
-			path: app/Http/Controllers/SuscripcionController.php
-
-		-
 			message: '#^Method App\\Http\\Controllers\\TasasController\:\:consulta\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -3391,12 +3289,6 @@ parameters:
 			path: app/Http/Middleware/ModuloFiscal.php
 
 		-
-			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
-			identifier: larastan.noEnvCallsOutsideOfConfig
-			count: 1
-			path: app/Http/Middleware/SeguridadCabeceras.php
-
-		-
 			message: '#^Method App\\Jobs\\RecalculoPreciosTenant\:\:handle\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -3413,18 +3305,6 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: app/Models/Usuario.php
-
-		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
-			count: 1
-			path: app/Providers/AppServiceProvider.php
-
-		-
-			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Contracts\\Session\\Session\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: app/Providers/AppServiceProvider.php
 
 		-
 			message: '#^Method App\\Services\\ExchangeRateService\:\:consultar\(\) return type has no value type specified in iterable type array\.$#'
@@ -3457,100 +3337,76 @@ parameters:
 			path: app/Support/Permisos.php
 
 		-
-			message: '#^Method App\\Support\\Portal\:\:llamar\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:cola\(\) has parameter \$alertas with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/Portal.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:cobros\(\) has parameter \$f with no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:cola\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:cobros\(\) return type has no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:disco\(\) has parameter \$alertas with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:conteos\(\) return type has no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:disco\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:historial\(\) has parameter \$f with no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:http\(\) has parameter \$alertas with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:historial\(\) return type has no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:http\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:meta\(\) return type has no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:negocio\(\) has parameter \$alertas with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:pagina\(\) has parameter \$v with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: app/Support/PortalConsultas.php
-
-		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:por\(\) has parameter \$v with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: app/Support/PortalConsultas.php
-
-		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:porVencer\(\) return type has no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:negocio\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:tiendas\(\) has parameter \$f with no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:postgres\(\) has parameter \$alertas with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:tiendas\(\) return type has no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:postgres\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:unir\(\) has parameter \$binds with no value type specified in iterable type array\.$#'
+			message: '#^Method App\\Support\\SaludSistema\:\:verificar\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
-			path: app/Support/PortalConsultas.php
+			path: app/Support/SaludSistema.php
 
 		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:unir\(\) has parameter \$conds with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Support/PortalConsultas.php
-
-		-
-			message: '#^Method App\\Support\\PortalConsultas\:\:unir\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Support/PortalConsultas.php
-
-		-
-			message: '#^Method App\\Support\\Propagador\:\:b\(\) has parameter \$v with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: app/Support/Propagador.php
+			message: '#^Offset ''valor'' on array\{etiquetas\: array\<string, string\>, valor\: float\|int\} on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 3
+			path: app/Support/SaludSistema.php
 
 		-
 			message: '#^Method App\\Support\\Tenant\:\:estado\(\) return type has no value type specified in iterable type array\.$#'
@@ -3560,24 +3416,6 @@ parameters:
 
 		-
 			message: '#^Method App\\Support\\Tenant\:\:fijar\(\) has parameter \$estado with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Support/Tenant.php
-
-		-
-			message: '#^Method App\\Support\\Tenant\:\:normalizar\(\) has parameter \$estado with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Support/Tenant.php
-
-		-
-			message: '#^Method App\\Support\\Tenant\:\:normalizar\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: app/Support/Tenant.php
-
-		-
-			message: '#^Property App\\Support\\Tenant\:\:\$estado type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: app/Support/Tenant.php
@@ -3599,6 +3437,42 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: routes/web.php
+
+		-
+			message: '#^Call to function is_array\(\) with array\<mixed\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: routes/web.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: routes/web.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: routes/web.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/AuditoriaRutasInertiaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/AuditoriaRutasInertiaTest.php
+
+		-
+			message: '#^Function expect invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
+			count: 2
+			path: tests/Feature/AuditoriaRutasInertiaTest.php
 
 		-
 			message: '#^Access to an undefined property Pest\\Mixins\\Expectation\<string\|false\|null\>\:\:\$not\.$#'
@@ -3635,6 +3509,48 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/Feature/AutorizacionEndpointTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:delete\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:patch\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:put\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
+
+		-
+			message: '#^Function expect invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
+			count: 5
+			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$debe_cambiar_password\.$#'
@@ -3709,6 +3625,48 @@ parameters:
 			path: tests/Feature/CombosComponentesTest.php
 
 		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:delete\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:patch\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:postJson\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:put\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
+			message: '#^Function expect invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
+			count: 6
+			path: tests/Feature/ControladoresValidacionHostilTest.php
+
+		-
 			message: '#^Access to an undefined property PHPUnit\\Framework\\TestCase\:\:\$metodoBs\.$#'
 			identifier: property.notFound
 			count: 4
@@ -3757,10 +3715,28 @@ parameters:
 			path: tests/Feature/FlujoVentaTest.php
 
 		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:artisan\(\)\.$#'
+			identifier: method.notFound
 			count: 1
-			path: tests/Feature/JobConTenantTest.php
+			path: tests/Feature/ObservabilidadTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 12
+			path: tests/Feature/ObservabilidadTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:postJson\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/ObservabilidadTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:withHeaders\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ObservabilidadTest.php
 
 		-
 			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
@@ -3771,13 +3747,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
 			identifier: method.notFound
-			count: 12
-			path: tests/Feature/PaginasInertiaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:withSession\(\)\.$#'
-			identifier: method.notFound
-			count: 1
+			count: 10
 			path: tests/Feature/PaginasInertiaTest.php
 
 		-
@@ -3787,28 +3757,58 @@ parameters:
 			path: tests/Feature/PaginasInertiaTest.php
 
 		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/SesionYCsrfTest.php
+
+		-
 			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: tests/Feature/PortalRutasTest.php
+			count: 6
+			path: tests/Feature/SesionYCsrfTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: tests/Feature/SesionYCsrfTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/TodasLasRutasTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/TodasLasRutasTest.php
+
+		-
+			message: '#^Function expect invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
+			count: 5
+			path: tests/Feature/TodasLasRutasTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/ValidacionDePropsPorPaginaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/ValidacionDePropsPorPaginaTest.php
 
 		-
 			message: '#^Function expect invoked with 2 parameters, 0\-1 required\.$#'
 			identifier: arguments.count
 			count: 1
-			path: tests/Feature/PortalRutasTest.php
-
-		-
-			message: '#^Unable to resolve the template type TKey in call to function collect$#'
-			identifier: argument.templateType
-			count: 4
-			path: tests/Feature/PortalRutasTest.php
-
-		-
-			message: '#^Unable to resolve the template type TValue in call to function collect$#'
-			identifier: argument.templateType
-			count: 4
-			path: tests/Feature/PortalRutasTest.php
+			path: tests/Feature/ValidacionDePropsPorPaginaTest.php
 
 		-
 			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
@@ -3845,255 +3845,3 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: tests/Pest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
-			identifier: method.notFound
-			count: 11
-			path: tests/Feature/ObservabilidadTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:withHeaders\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/ObservabilidadTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/Feature/AislamientoMultiTenantHttpTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:delete\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/AislamientoMultiTenantHttpTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
-			identifier: method.notFound
-			count: 7
-			path: tests/Feature/AislamientoMultiTenantHttpTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:patch\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/AislamientoMultiTenantHttpTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/AislamientoMultiTenantHttpTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:put\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/AislamientoMultiTenantHttpTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
-			identifier: method.notFound
-			count: 7
-			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:delete\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:from\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
-			identifier: method.notFound
-			count: 8
-			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:patch\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
-			identifier: method.notFound
-			count: 6
-			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:put\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/ControladoresValidacionHostilTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:delete\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/ControladoresValidacionHostilTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:patch\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/ControladoresValidacionHostilTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/Feature/ControladoresValidacionHostilTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:postJson\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/ControladoresValidacionHostilTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:put\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: tests/Feature/ControladoresValidacionHostilTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/Feature/SesionYCsrfTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
-			identifier: method.notFound
-			count: 6
-			path: tests/Feature/SesionYCsrfTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
-			identifier: method.notFound
-			count: 6
-			path: tests/Feature/SesionYCsrfTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/Feature/TodasLasRutasTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/Feature/TodasLasRutasTest.php
-
-		-
-			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
-			identifier: arguments.count
-			count: 3
-			path: tests/Feature/AislamientoMultiTenantHttpTest.php
-
-		-
-			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
-			identifier: arguments.count
-			count: 5
-			path: tests/Feature/AutorizacionPorRolEstrictaTest.php
-
-		-
-			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
-			identifier: arguments.count
-			count: 6
-			path: tests/Feature/ControladoresValidacionHostilTest.php
-
-		-
-			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
-			identifier: arguments.count
-			count: 5
-			path: tests/Feature/TodasLasRutasTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: tests/Feature/AislamientoFiltrosDashboardTest.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$nombre_completo\.$#'
-			identifier: property.notFound
-			count: 4
-			path: tests/Feature/AislamientoFiltrosDashboardTest.php
-
-		-
-			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: tests/Feature/AislamientoFiltrosDashboardTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/Feature/AtaqueBolaIdsCruzadosTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: tests/Feature/AtaqueBolaIdsCruzadosTest.php
-
-		-
-			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
-			identifier: arguments.count
-			count: 2
-			path: tests/Feature/AtaqueBolaIdsCruzadosTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/Feature/AuditoriaRutasInertiaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/Feature/AuditoriaRutasInertiaTest.php
-
-		-
-			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
-			identifier: arguments.count
-			count: 2
-			path: tests/Feature/AuditoriaRutasInertiaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/Feature/ValidacionDePropsPorPaginaTest.php
-
-		-
-			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: tests/Feature/ValidacionDePropsPorPaginaTest.php
-
-		-
-			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: tests/Feature/ValidacionDePropsPorPaginaTest.php
