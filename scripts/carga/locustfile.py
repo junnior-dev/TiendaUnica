@@ -11,7 +11,7 @@ Uso:
 """
 import re
 import requests
-from locust import HttpUser, between, events, task
+from locust import HttpUser, between, events, tag, task
 
 SHARED_COOKIES = {}
 SHARED_CSRF = ''
@@ -68,6 +68,7 @@ class CajeroPosUser(HttpUser):
         self.client.get('/dashboard', name='GET /dashboard')
         self.client.get('/productos', name='GET /productos')
 
+    @tag('health')
     @task(1)
     def health_sistema(self):
         self.client.get('/health/sistema', name='GET /health/sistema')

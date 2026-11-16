@@ -1,0 +1,53 @@
+name: Deploy VPS (Tienda Única)
+
+on:
+  workflow_dispatch:
+    inputs:
+      entorno:
+        description: 'Entorno destino (staging | production)'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - staging
+          - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Desplegar en VPS vía SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            set -euo pipefail
+            cd "${{ secrets.VPS_APP_PATH }}"
+
+            echo "1) Respaldo previo al despliegue..."
+            mkdir -p /var/backups/tiendaunica
+            pg_dump -Fc -U "${DB_USERNAME:-tienda_app}" -d "${DB_DATABASE:-tiendaunica}" \
+              -f "/var/backups/tiendaunica/predeploy_$(date +%Y%m%d_%H%M%S).dump"
+
+            echo "2) Actualizar código y dependencias..."
+            git fetch origin main
+            git reset --hard origin/main
+            composer install --no-dev --optimize-autoloader --no-interaction
+            npm ci && npm run build
+
+            echo "3) Optimizar cachés y reiniciar workers..."
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan queue:restart || true
+
+            echo "4) Smoke check post-despliegue..."
+            php artisan sistema:monitoreo
+            curl -fsS http://127.0.0.1/health/db
+            curl -fsS http://127.0.0.1/health/sistema
+            echo "Despliegue ${{ inputs.entorno }} completado."

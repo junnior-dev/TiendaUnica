@@ -51,6 +51,17 @@ aislar limpiamente el estado de cada petición HTTP.
 La app **no** publica su puerto: nginx es la única entrada. `/metrics` exige
 Bearer (`METRICS_TOKEN`); sin token responde 403 SIEMPRE.
 
+## Checklist pre-enforce de CSP (antes del 2026-12-01)
+
+`SeguridadCabeceras` aplica `Content-Security-Policy-Report-Only` en `staging`
+y cambia automáticamente a `Content-Security-Policy` (**enforce**) a partir de
+`CSP_ENFORCE_FROM` (por defecto `2026-12-01`) o siempre en `production`.
+
+1. Revisar reportes acumulados en `storage/logs/csp-report-*.log` tras ~15 días de uso en staging.
+2. Confirmar que no existan bloqueos legítimos de scripts, estilos, fuentes, `data:`/`blob:` (PDFs con jsPDF) o `connect-src`.
+3. Probar manualmente en staging con `CSP_FORCE=true`: login, venta en `/caja`, generación/descarga de PDF, `/cierre-caja` y libros fiscales.
+4. Confirmar `CSP_ENFORCE_FROM=2026-12-01` en `.env` de staging/producción antes de la fecha de corte.
+
 ## Verificación (5 minutos)
 
 ```
