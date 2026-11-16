@@ -1,0 +1,3847 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Method App\\Http\\Controllers\\AperturaCajaController\:\:activa\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/AperturaCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\AperturaCajaController\:\:corteX\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/AperturaCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\AperturaCajaController\:\:estadoActual\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/AperturaCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\AperturaCajaController\:\:resumen\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/AperturaCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\AperturaCajaController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/AperturaCajaController.php
+
+		-
+			message: '#^Dead catch \- Illuminate\\Database\\QueryException is already caught above\.$#'
+			identifier: catch.alreadyCaught
+			count: 1
+			path: app/Http/Controllers/Auth/CrearCuentaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Auth\\CrearCuentaController\:\:create\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Auth/CrearCuentaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Auth\\CrearCuentaController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Auth/CrearCuentaController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Auth/LoginController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Auth\\LoginController\:\:create\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Auth/LoginController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Auth\\LoginController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Auth/LoginController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Auth\\LoginController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Auth/LoginController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Auth\\RegisterController\:\:create\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Auth/RegisterController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Auth\\RegisterController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Auth/RegisterController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:buscar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:buscarDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:clienteStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:clientes\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:clientesDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:cotizar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:cotizarDatos\(\) has parameter \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:cotizarDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:creditoVerificar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:datosPagina\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:documento\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:documentoDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:emitir\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:factura\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:items\(\) has parameter \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:items\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:presentacionesDe\(\) has parameter \$ids with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:presentacionesDe\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:recientes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:registrar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:registrarDatos\(\) has parameter \$clienteId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:registrarDatos\(\) has parameter \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:registrarDatos\(\) has parameter \$pagos with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:registrarDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:validarAntes\(\) has parameter \$items with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CajaController\:\:validarAntes\(\) has parameter \$pagos with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CalendarioFiscalController\:\:cargar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CalendarioFiscalController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CalendarioFiscalController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CalendarioFiscalController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CalendarioFiscalController\:\:desmarcar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CalendarioFiscalController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CalendarioFiscalController\:\:eliminar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CalendarioFiscalController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CalendarioFiscalController\:\:guardar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CalendarioFiscalController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CalendarioFiscalController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CalendarioFiscalController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CalendarioFiscalController\:\:marcar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CalendarioFiscalController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CalendarioFiscalController\:\:obligacion\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CalendarioFiscalController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CalendarioFiscalController\:\:proximos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CalendarioFiscalController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CategoriasController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CategoriasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CategoriasController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CategoriasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CategoriasController\:\:estado\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CategoriasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CategoriasController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CategoriasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CategoriasController\:\:recalcular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CategoriasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CategoriasController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CategoriasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CategoriasController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CategoriasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CategoriasController\:\:validar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CategoriasController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$nombre_completo\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CierreCajaController\:\:cerrarTurno\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CierreCajaController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CierreCajaController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CierreCajaController\:\:informe\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CierreCajaController\:\:rango\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CierreCajaController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CierreCajaController\:\:ultimosDias\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/CierreCajaController.php
+
+		-
+			message: '#^Dead catch \- Illuminate\\Database\\QueryException is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:datosPagina\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:datosPagina\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:destroy\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:detalle\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:emisor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:error\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:error\(\) has parameter \$errors with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:estado\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:estado\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:fila\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:update\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ClientesController\:\:validar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ClientesController.php
+
+		-
+			message: '#^Dead catch \- Illuminate\\Database\\QueryException is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:componentes\(\) has parameter \$combo with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:componentes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:cotizar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:estado\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:lista\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CombosController\:\:validar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CombosController.php
+
+		-
+			message: '#^Cannot access property \$marca on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 3
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CompatibilidadController\:\:agregar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CompatibilidadController\:\:anio\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CompatibilidadController\:\:anios\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CompatibilidadController\:\:candidatos\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CompatibilidadController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CompatibilidadController\:\:copiar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CompatibilidadController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CompatibilidadController\:\:quitar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CompatibilidadController\:\:validarAnios\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/CompatibilidadController.php
+
+		-
+			message: '#^Dead catch \- Illuminate\\Database\\QueryException is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:anular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:datosNueva\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:datosPagina\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:datosPagina\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:detalleDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:duplicada\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:emisor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:importacion\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:nueva\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:productos\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:productosDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:proveedorStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:proveedores\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:proveedoresDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:rango\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:rango\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:reporte\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:reporteDatos\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:reporteDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:resumenRegistro\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:retencion\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:retencionAnular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:simular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ComprasController\:\:tasa\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 1
+			path: app/Http/Controllers/ComprasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:acta\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaActa\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaAnterior\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaAuto\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaBorrar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaCerrar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaClasificar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaCruzar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaDescruzar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaImportar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaUpdate\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:bancariaVer\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:borrar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:borrarDeclaracion\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:cerrar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:clasificar\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:clasificar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:compararPeriodo\(\) has parameter \$p with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:compararPeriodo\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:crear\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:crear\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:cruzarAuto\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:cruzarAuto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:cruzarManual\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:cruzarManual\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:cuentaBancos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:datosPagina\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:datosPagina\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:descruzar\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:descruzar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:detalle\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:editar\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:editar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:emisor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:f\(\) has parameter \$v with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:fallo\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:fiscal\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:fiscalBorrar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:fiscalReporte\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:fiscalStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:fiscalVer\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:guardarDeclaracion\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:guardarDeclaracion\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:importar\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:importar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:intentar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:json\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:json\(\) has parameter \$t with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:lista\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:marcarAnterior\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:marcarAnterior\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:peor\(\) has parameter \$filas with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:periodos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:reporteFiscal\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:resumen\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:semaforo\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConciliacionController\:\:sistemaPeriodo\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConciliacionController.php
+
+		-
+			message: '#^Match expression does not handle remaining value\: string$#'
+			identifier: match.unhandled
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:alicuota\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:cancelarAlicuota\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:guardar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:guardarNegocio\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:guardarNumeracion\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:guardarRegimen\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:historialRegimen\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:mensajes\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConfiguracionController\:\:reglas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConfiguracionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:ajusteDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:ajusteStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:ajusteVer\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:aperturaStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:aperturaVer\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:asientoStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:automatica\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:cierreEjercicioDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:cierreEjercicioStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:cierreEjercicioVer\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:cuentaStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:cuentaUpdate\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:cuentaUpdate\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:datos\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:emisor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:error\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:exportar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:exportarFilas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:mayorSinCierre\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:num\(\) has parameter \$v with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:parametroUpdate\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:parametroUpdate\(\) has parameter \$clave with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:periodoCerrar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:periodoReabrir\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:periodos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:periodosVer\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:reporte\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:reporteDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:reporteDiario\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:reporteEstados\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:reporteInventario\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:reporteMayor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaCuentas\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaCuentas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaDiario\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaDiario\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaInventario\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaInventario\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaMayor\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaMayor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaResumen\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ContabilidadController\:\:vistaResumen\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ContabilidadController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConteosController\:\:anular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConteosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConteosController\:\:aplicar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConteosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConteosController\:\:contar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConteosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConteosController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConteosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConteosController\:\:detalle\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ConteosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConteosController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConteosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConteosController\:\:quitar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConteosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ConteosController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ConteosController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$debe_cambiar_password\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/CuentaController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$nombre_completo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/CuentaController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/CuentaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentaController\:\:contrasena\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CuentaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentaController\:\:guardar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CuentaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:anularPago\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:anularPago\(\) has parameter \$pagoId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:comprobante\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:comprobante\(\) has parameter \$pagoId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:estadoCuenta\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:estadoCuenta\(\) has parameter \$clienteId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:fila\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:metodos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:pagar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:pagos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\CuentasPorCobrarController\:\:show\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/CuentasPorCobrarController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$nombre_completo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/DashboardController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DashboardController\:\:__invoke\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DashboardController.php
+
+		-
+			message: '#^Parameter \#1 \$column of method Illuminate\\Database\\Query\\Builder\:\:value\(\) expects string, Illuminate\\Contracts\\Database\\Query\\Expression given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/DashboardController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:alertas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:anticipo\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:anularAnticipo\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:anularSufrida\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:guardarDatos\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:guardarTramos\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:intentar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:intentar\(\) has parameter \$extra with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:liquidar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:pagar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:responder\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:responder\(\) has parameter \$extra with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:revertir\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\DeclaracionIslrController\:\:sufrida\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/DeclaracionIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\EncargosController\:\:anticipo\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/EncargosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\EncargosController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/EncargosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\EncargosController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/EncargosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\EncargosController\:\:entregar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/EncargosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\EncargosController\:\:estado\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/EncargosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\EncargosController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/EncargosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\EncargosController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/EncargosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\EncargosController\:\:ver\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/EncargosController.php
+
+		-
+			message: '#^Match expression does not handle remaining value\: mixed$#'
+			identifier: match.unhandled
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:ajustar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:aplicarAjuste\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:aplicarAjuste\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:buscar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:datosPagina\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:datosPagina\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:emisor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:ficha\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:fichaJson\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:filaExistencia\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:filtroExistencias\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:filtroExistencias\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:filtroMovimientos\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:filtroMovimientos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:movimiento\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:ordenExistencias\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:periodo\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:periodo\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:reporte\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:reporte\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\KardexController\:\:reporteJson\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/KardexController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Call to function is_int\(\) with int\<0, max\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:alicuotaUpdate\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:alicuotas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:asignarFactura\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:buscarVentas\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:cierre\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:cierreFiscal\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:desmarcarEnterada\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:emisor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:enterar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:igtf\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:importacionStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:libroCompras\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:libroVentas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:notaStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:notas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:paquete\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:paqueteDatos\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:quincenal\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:quincenas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:quincenasJson\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:resumen\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:resumenQuincenal\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:retencionAnular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:retencionStore\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\LibrosFiscalesController\:\:retenciones\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/LibrosFiscalesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MarcasController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/MarcasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MarcasController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MarcasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MarcasController\:\:estado\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MarcasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MarcasController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MarcasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MarcasController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MarcasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MarcasController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MarcasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MetodosPagoController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/MetodosPagoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MetodosPagoController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/MetodosPagoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MetodosPagoController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MetodosPagoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MetodosPagoController\:\:estado\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MetodosPagoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MetodosPagoController\:\:fila\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/MetodosPagoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MetodosPagoController\:\:fila\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/MetodosPagoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MetodosPagoController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MetodosPagoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MetodosPagoController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MetodosPagoController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MetodosPagoController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MetodosPagoController.php
+
+		-
+			message: '#^Cannot access property \$id on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ModelosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ModelosController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ModelosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ModelosController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ModelosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ModelosController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ModelosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ModelosController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ModelosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ModelosController\:\:renombrarMarca\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ModelosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ModelosController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ModelosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ModelosController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ModelosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ModelosController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ModelosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MovimientosCajaController\:\:anular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MovimientosCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MovimientosCajaController\:\:anular\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/MovimientosCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MovimientosCajaController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/MovimientosCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MovimientosCajaController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MovimientosCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\MovimientosCajaController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/MovimientosCajaController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\OrdenesCompraController\:\:anular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\OrdenesCompraController\:\:cerrar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\OrdenesCompraController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\OrdenesCompraController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\OrdenesCompraController\:\:enviar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\OrdenesCompraController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\OrdenesCompraController\:\:recibir\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\OrdenesCompraController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\OrdenesCompraController\:\:sugerir\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between mixed and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Http/Controllers/OrdenesCompraController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:autenticar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Portal/PortalAdminController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:cambiarEstado\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Portal/PortalAdminController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:guardarCuenta\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Portal/PortalAdminController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Portal/PortalAdminController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:login\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Portal/PortalAdminController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:publicarTasa\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Portal/PortalAdminController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:salir\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Portal/PortalAdminController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:verificarPago\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Portal/PortalAdminController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Portal\\PortalAdminController\:\:volver\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/Portal/PortalAdminController.php
+
+		-
+			message: '#^Anonymous function has an unused use \$r\.$#'
+			identifier: closure.unusedUse
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$activo on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$categoria_id on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$codigo_barras on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$costo_usd on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$descripcion on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$exento_iva on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$exonerado_iva on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$id on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$marca_id on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$margen_pct on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 4
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$nombre on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$piezas_por_presentacion on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$precio_venta_usd on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 2
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$referencia_fabricante on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$sku on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$stock_actual on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$stock_minimo on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$ubicacion_almacen on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$unidad on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Cannot access property \$unidad_compra on array\<mixed\>\|object\.$#'
+			identifier: property.nonObject
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:ajustar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:aplicarTodas\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:barcodes\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:compatibilidad\(\) has parameter \$lista with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:etiquetas\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:fila\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:fila\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:filaEtiqueta\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:guardarPresentacion\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:idsEtiquetas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:quitarPresentacion\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:resolverAlerta\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProductosController\:\:validar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProductosController.php
+
+		-
+			message: '#^Dead catch \- Illuminate\\Database\\QueryException is never thrown in the try block\.$#'
+			identifier: catch.neverThrown
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:cotizarPago\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:cuenta\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:datosPagina\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:datosPagina\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:destroy\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:destroy\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:detalle\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:emisor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:error\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:error\(\) has parameter \$errors with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:estado\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:estado\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:estadoCuenta\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:expediente\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:expedienteDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:fila\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:pagar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:pagar\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:pagoAnular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:pagoAnular\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:pagoAnular\(\) has parameter \$pago with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:resumenCxp\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:update\(\) has parameter \$id with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ProveedoresController\:\:validar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ProveedoresController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$nombre_completo\.$#'
+			identifier: property.notFound
+			count: 7
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:abc\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:comprasGlobal\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:emisor\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:movimientosCaja\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:rango\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:rentabilidad\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:rentabilidadCategoria\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:rentabilidadCliente\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\ReportesController\:\:rotacion\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/ReportesController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:anular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:comprobante\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:datos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:desmarcarEntero\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:enterar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:guardarConfig\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:guardarUt\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:simular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\RetencionesIslrController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/RetencionesIslrController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$nombre_completo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/SuscripcionController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/SuscripcionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\SuscripcionController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/SuscripcionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\SuscripcionController\:\:reportarPago\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/SuscripcionController.php
+
+		-
+			message: '#^Parameter \#1 \$column of method Illuminate\\Database\\Query\\Builder\:\:value\(\) expects string, Illuminate\\Contracts\\Database\\Query\\Expression given\.$#'
+			identifier: argument.type
+			count: 1
+			path: app/Http/Controllers/SuscripcionController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\TasasController\:\:consulta\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/TasasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\TasasController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/TasasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\TasasController\:\:manual\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/TasasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\TasasController\:\:moneda\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/TasasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\TasasController\:\:monedasActivas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/TasasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\TasasController\:\:numero\(\) has parameter \$v with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Http/Controllers/TasasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\TasasController\:\:par\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/TasasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\TasasController\:\:sincronizar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/TasasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:cambiar\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:cambiar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:cambiarEstado\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:crear\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:crear\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:datosPagina\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:estado\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:falla\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:ficha\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:nuevaClave\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:respuesta\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:respuesta\(\) has parameter \$datos with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:restablecer\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:store\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\UsuariosController\:\:update\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/UsuariosController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:anular\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:contexto\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:datosPagina\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:datosPagina\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:detalleDatos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:devolvibles\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:devolviblesJson\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:index\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:metodosDevolucion\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:nota\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:prepararDevolucion\(\) has parameter \$d with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:prepararDevolucion\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:rango\(\) has parameter \$q with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:rango\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:registrarNota\(\) has parameter \$dinero with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\VentasController\:\:show\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Controllers/VentasController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$activo\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Middleware/AccesoPorRol.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$debe_cambiar_password\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Middleware/AccesoPorRol.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Middleware/AccesoPorRol.php
+
+		-
+			message: '#^Method App\\Http\\Middleware\\ModuloFiscal\:\:esFiscal\(\) has parameter \$consulta with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Http/Middleware/ModuloFiscal.php
+
+		-
+			message: '#^Method App\\Http\\Middleware\\ModuloFiscal\:\:handle\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: app/Http/Middleware/ModuloFiscal.php
+
+		-
+			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
+			identifier: larastan.noEnvCallsOutsideOfConfig
+			count: 1
+			path: app/Http/Middleware/SeguridadCabeceras.php
+
+		-
+			message: '#^Method App\\Jobs\\RecalculoPreciosTenant\:\:handle\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Jobs/RecalculoPreciosTenant.php
+
+		-
+			message: '#^Property App\\Jobs\\RecalculoPreciosTenant\:\:\$resultado type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Jobs/RecalculoPreciosTenant.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$password_hash\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Usuario.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: app/Providers/AppServiceProvider.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Contracts\\Session\\Session\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Providers/AppServiceProvider.php
+
+		-
+			message: '#^Method App\\Services\\ExchangeRateService\:\:consultar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ExchangeRateService.php
+
+		-
+			message: '#^Method App\\Services\\ExchangeRateService\:\:par\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ExchangeRateService.php
+
+		-
+			message: '#^Method App\\Services\\ExchangeRateService\:\:tasasUsd\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Services/ExchangeRateService.php
+
+		-
+			message: '#^Method App\\Support\\Permisos\:\:matriz\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/Permisos.php
+
+		-
+			message: '#^Offset 0 on non\-empty\-list\<string\> on left side of \?\? always exists and is not nullable\.$#'
+			identifier: nullCoalesce.offset
+			count: 1
+			path: app/Support/Permisos.php
+
+		-
+			message: '#^Method App\\Support\\Portal\:\:llamar\(\) has parameter \$params with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/Portal.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:cobros\(\) has parameter \$f with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:cobros\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:conteos\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:historial\(\) has parameter \$f with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:historial\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:meta\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:pagina\(\) has parameter \$v with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:por\(\) has parameter \$v with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:porVencer\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:tiendas\(\) has parameter \$f with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:tiendas\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:unir\(\) has parameter \$binds with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:unir\(\) has parameter \$conds with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\PortalConsultas\:\:unir\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/PortalConsultas.php
+
+		-
+			message: '#^Method App\\Support\\Propagador\:\:b\(\) has parameter \$v with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: app/Support/Propagador.php
+
+		-
+			message: '#^Method App\\Support\\Tenant\:\:estado\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/Tenant.php
+
+		-
+			message: '#^Method App\\Support\\Tenant\:\:fijar\(\) has parameter \$estado with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/Tenant.php
+
+		-
+			message: '#^Method App\\Support\\Tenant\:\:normalizar\(\) has parameter \$estado with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/Tenant.php
+
+		-
+			message: '#^Method App\\Support\\Tenant\:\:normalizar\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/Tenant.php
+
+		-
+			message: '#^Property App\\Support\\Tenant\:\:\$estado type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: app/Support/Tenant.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 2
+			path: database/seeders/ConciliacionDemoSeeder.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 2
+			path: database/seeders/ConciliacionDemoSeeder.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$rol\.$#'
+			identifier: property.notFound
+			count: 1
+			path: routes/web.php
+
+		-
+			message: '#^Access to an undefined property Pest\\Mixins\\Expectation\<string\|false\|null\>\:\:\$not\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Feature/AutorizacionEndpointTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/Feature/AutorizacionEndpointTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/AutorizacionEndpointTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/AutorizacionEndpointTest.php
+
+		-
+			message: '#^Function propsDePest\(\) has parameter \$resp with generic class Illuminate\\Testing\\TestResponse but does not specify its types\: TResponse$#'
+			identifier: missingType.generics
+			count: 1
+			path: tests/Feature/AutorizacionEndpointTest.php
+
+		-
+			message: '#^Function propsDePest\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Feature/AutorizacionEndpointTest.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$debe_cambiar_password\.$#'
+			identifier: property.notFound
+			count: 2
+			path: tests/Feature/CambioPasswordObligatorioTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/CambioPasswordObligatorioTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 7
+			path: tests/Feature/CambioPasswordObligatorioTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/CambioPasswordObligatorioTest.php
+
+		-
+			message: '#^Access to an undefined property PHPUnit\\Framework\\TestCase\:\:\$comboId\.$#'
+			identifier: property.notFound
+			count: 4
+			path: tests/Feature/CombosComponentesTest.php
+
+		-
+			message: '#^Access to an undefined property PHPUnit\\Framework\\TestCase\:\:\$pid\.$#'
+			identifier: property.notFound
+			count: 4
+			path: tests/Feature/CombosComponentesTest.php
+
+		-
+			message: '#^Access to an undefined property PHPUnit\\Framework\\TestCase\:\:\$producto\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Feature/CombosComponentesTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/CombosComponentesTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/CombosComponentesTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/CombosComponentesTest.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 2
+			path: tests/Feature/CombosComponentesTest.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 2
+			path: tests/Feature/CombosComponentesTest.php
+
+		-
+			message: '#^Access to an undefined property PHPUnit\\Framework\\TestCase\:\:\$metodoBs\.$#'
+			identifier: property.notFound
+			count: 4
+			path: tests/Feature/FlujoVentaTest.php
+
+		-
+			message: '#^Access to an undefined property PHPUnit\\Framework\\TestCase\:\:\$metodoUsd\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Feature/FlujoVentaTest.php
+
+		-
+			message: '#^Access to an undefined property PHPUnit\\Framework\\TestCase\:\:\$producto\.$#'
+			identifier: property.notFound
+			count: 10
+			path: tests/Feature/FlujoVentaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/FlujoVentaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:getJson\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/FlujoVentaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/FlujoVentaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:postJson\(\)\.$#'
+			identifier: method.notFound
+			count: 7
+			path: tests/Feature/FlujoVentaTest.php
+
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: tests/Feature/FlujoVentaTest.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: tests/Feature/JobConTenantTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 6
+			path: tests/Feature/PaginasInertiaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 12
+			path: tests/Feature/PaginasInertiaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:withSession\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/PaginasInertiaTest.php
+
+		-
+			message: '#^Function paginaInertia\(\) has parameter \$r with generic class Illuminate\\Testing\\TestResponse but does not specify its types\: TResponse$#'
+			identifier: missingType.generics
+			count: 1
+			path: tests/Feature/PaginasInertiaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/PortalRutasTest.php
+
+		-
+			message: '#^Function expect invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: tests/Feature/PortalRutasTest.php
+
+		-
+			message: '#^Unable to resolve the template type TKey in call to function collect$#'
+			identifier: argument.templateType
+			count: 4
+			path: tests/Feature/PortalRutasTest.php
+
+		-
+			message: '#^Unable to resolve the template type TValue in call to function collect$#'
+			identifier: argument.templateType
+			count: 4
+			path: tests/Feature/PortalRutasTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 5
+			path: tests/Feature/ValidacionesFormularioTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:from\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/ValidacionesFormularioTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:getJson\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/ValidacionesFormularioTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:post\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: tests/Feature/ValidacionesFormularioTest.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$password_hash\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Pest.php
+
+		-
+			message: '#^Function itemsVenta\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: tests/Pest.php

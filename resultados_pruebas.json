@@ -1,0 +1,651 @@
+{
+  "familias": [
+    {
+      "prefijo": "t",
+      "titulo": "Suite operativa (t01–t15)",
+      "log": "pruebas_finales.log",
+      "filas": [
+        {
+          "id": "t01",
+          "nombre": "Configuración e impuestos",
+          "ok": 21,
+          "fail": 0
+        },
+        {
+          "id": "t02",
+          "nombre": "Catálogo, compatibilidad y combos",
+          "ok": 10,
+          "fail": 0
+        },
+        {
+          "id": "t03",
+          "nombre": "Usuarios y sesión",
+          "ok": 8,
+          "fail": 0
+        },
+        {
+          "id": "t04",
+          "nombre": "Compras, proveedores y CxP",
+          "ok": 18,
+          "fail": 0
+        },
+        {
+          "id": "t05",
+          "nombre": "Conteo físico y kardex",
+          "ok": 16,
+          "fail": 0
+        },
+        {
+          "id": "t06",
+          "nombre": "POS: apertura, ventas, IGTF, crédito y anulación",
+          "ok": 29,
+          "fail": 0
+        },
+        {
+          "id": "t07",
+          "nombre": "Cuentas por cobrar (CxC)",
+          "ok": 13,
+          "fail": 0
+        },
+        {
+          "id": "t08",
+          "nombre": "Devoluciones y notas de crédito",
+          "ok": 7,
+          "fail": 0
+        },
+        {
+          "id": "t09",
+          "nombre": "Encargos de piezas (ciclo completo)",
+          "ok": 17,
+          "fail": 0
+        },
+        {
+          "id": "t10",
+          "nombre": "Fiscal: libros, IGTF y calendario",
+          "ok": 13,
+          "fail": 0
+        },
+        {
+          "id": "t11",
+          "nombre": "Retenciones ISLR (Decreto 1808)",
+          "ok": 14,
+          "fail": 0
+        },
+        {
+          "id": "t12",
+          "nombre": "Contabilidad y libros",
+          "ok": 18,
+          "fail": 0
+        },
+        {
+          "id": "t13",
+          "nombre": "Cierre de caja (corte X y Z)",
+          "ok": 15,
+          "fail": 0
+        },
+        {
+          "id": "t14",
+          "nombre": "Límites y errores esperados",
+          "ok": 16,
+          "fail": 0
+        },
+        {
+          "id": "t15",
+          "nombre": "Integridad global (conciliaciones)",
+          "ok": 24,
+          "fail": 0
+        }
+      ],
+      "total_ok": 239,
+      "total_fail": 0,
+      "total_declarado": 239,
+      "num_suites": 15
+    },
+    {
+      "prefijo": "f",
+      "titulo": "Suite fiscal venezolano (f01–f17)",
+      "log": "pruebas_finales.log",
+      "filas": [
+        {
+          "id": "f01",
+          "nombre": "IVA: cambio de alícuota (sp_cambiar_alicuota)",
+          "ok": 17,
+          "fail": 0
+        },
+        {
+          "id": "f02",
+          "nombre": "ISLR: sustraendo, natural/jurídica, UT",
+          "ok": 19,
+          "fail": 0
+        },
+        {
+          "id": "f03",
+          "nombre": "IGTF: cobro, reversión y declaración",
+          "ok": 13,
+          "fail": 0
+        },
+        {
+          "id": "f04",
+          "nombre": "ISLR entero: período completo y contra-asiento",
+          "ok": 15,
+          "fail": 0
+        },
+        {
+          "id": "f05",
+          "nombre": "Libro de ventas: tipos, anuladas y cuadre",
+          "ok": 9,
+          "fail": 0
+        },
+        {
+          "id": "f06",
+          "nombre": "Calendario fiscal: RIF, régimen y presentación",
+          "ok": 13,
+          "fail": 0
+        },
+        {
+          "id": "f07",
+          "nombre": "Cierre de ejercicio (resultados acumulados)",
+          "ok": 15,
+          "fail": 0
+        },
+        {
+          "id": "f08",
+          "nombre": "Ajuste cambiario del inventario",
+          "ok": 10,
+          "fail": 0
+        },
+        {
+          "id": "f09",
+          "nombre": "Notas de crédito sobre venta a crédito",
+          "ok": 14,
+          "fail": 0
+        },
+        {
+          "id": "f10",
+          "nombre": "Retenciones de IVA y entero quincenal",
+          "ok": 14,
+          "fail": 0
+        },
+        {
+          "id": "f11",
+          "nombre": "Conciliación fiscal SENIAT (declaraciones)",
+          "ok": 9,
+          "fail": 0
+        },
+        {
+          "id": "f12",
+          "nombre": "Libro de compras: crédito fiscal e IVA al costo",
+          "ok": 8,
+          "fail": 0
+        },
+        {
+          "id": "f13",
+          "nombre": "Cierre de período contable",
+          "ok": 9,
+          "fail": 0
+        },
+        {
+          "id": "f14",
+          "nombre": "Correlativo de ventas y huecos",
+          "ok": 7,
+          "fail": 0
+        },
+        {
+          "id": "f15",
+          "nombre": "Asientos automáticos: partida doble por origen",
+          "ok": 9,
+          "fail": 0
+        },
+        {
+          "id": "f16",
+          "nombre": "Invariantes globales (capa 2)",
+          "ok": 9,
+          "fail": 0
+        },
+        {
+          "id": "f17",
+          "nombre": "Estados imposibles (capa 3)",
+          "ok": 10,
+          "fail": 0
+        }
+      ],
+      "total_ok": 200,
+      "total_fail": 0,
+      "total_declarado": 200,
+      "num_suites": 17
+    },
+    {
+      "prefijo": "m",
+      "titulo": "Suite multiinquilino (m01–m13)",
+      "log": "pruebas_finales.log",
+      "filas": [
+        {
+          "id": "m01",
+          "nombre": "SESIÓN: GUC app.negocio_id y defaults",
+          "ok": 4,
+          "fail": 0
+        },
+        {
+          "id": "m01",
+          "nombre": "ESTRUCTURA: columnas, políticas RLS, FORCE y vistas",
+          "ok": 8,
+          "fail": 0
+        },
+        {
+          "id": "m02",
+          "nombre": "SELLO: INSERT sin negocio_id hereda la sesión",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "m03",
+          "nombre": "AISLAMIENTO DE LECTURA: nada de otra tienda a la vista",
+          "ok": 11,
+          "fail": 0
+        },
+        {
+          "id": "m04",
+          "nombre": "ESCRITURA CRUZADA: USING filtra y WITH CHECK rechaza",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "m05",
+          "nombre": "FUNCIONES POR NEGOCIO: venta y caja aisladas",
+          "ok": 10,
+          "fail": 0
+        },
+        {
+          "id": "m05",
+          "nombre": "FUNCIONES POR NEGOCIO: factura fiscal del negocio 2",
+          "ok": 3,
+          "fail": 0
+        },
+        {
+          "id": "m06",
+          "nombre": "UNICIDAD POR NEGOCIO: fronteras de clave",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "m07",
+          "nombre": "PORTABILIDAD: el cliente puede llevarse sus datos",
+          "ok": 9,
+          "fail": 0
+        },
+        {
+          "id": "m08",
+          "nombre": "GUARDA DE SESIÓN: sin GUC no se ve ni se escribe",
+          "ok": 8,
+          "fail": 0
+        },
+        {
+          "id": "m08",
+          "nombre": "SUSPENSIÓN POR MORA: el portal corta el grifo",
+          "ok": 6,
+          "fail": 0
+        },
+        {
+          "id": "m08",
+          "nombre": "VERTICALES Y SUBDOMINIO: control del portal por tenant",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "m09",
+          "nombre": "IMPORTAR: exportar n2 → restaurarlo como negocio nuevo",
+          "ok": 10,
+          "fail": 0
+        },
+        {
+          "id": "m09",
+          "nombre": "EL RESTAURADO VIVE: sesión propia y aislamiento",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "m10",
+          "nombre": "ISLR ANUAL: estructura multiinquilino",
+          "ok": 6,
+          "fail": 0
+        },
+        {
+          "id": "m10",
+          "nombre": "ISLR ANUAL: cada negocio escribe y ve lo suyo",
+          "ok": 10,
+          "fail": 0
+        },
+        {
+          "id": "m10",
+          "nombre": "ISLR ANUAL: sello, WITH CHECK y sesión sin negocio",
+          "ok": 4,
+          "fail": 0
+        },
+        {
+          "id": "m10",
+          "nombre": "ISLR ANUAL: borrador de cada negocio",
+          "ok": 7,
+          "fail": 0
+        },
+        {
+          "id": "m10",
+          "nombre": "ISLR ANUAL: portabilidad (exportar el negocio incluye sus tablas de ISLR)",
+          "ok": 2,
+          "fail": 0
+        },
+        {
+          "id": "m11",
+          "nombre": "PRESENTACIONES: estructura multiinquilino",
+          "ok": 1,
+          "fail": 0
+        },
+        {
+          "id": "m11",
+          "nombre": "PRESENTACIONES: caja y pieza en el negocio 2",
+          "ok": 20,
+          "fail": 0
+        },
+        {
+          "id": "m11",
+          "nombre": "VENTA A CRÉDITO: plazo elegido por el cajero y cuenta por cobrar",
+          "ok": 2,
+          "fail": 0
+        },
+        {
+          "id": "m11",
+          "nombre": "PRESENTACIONES: aislamiento entre negocios",
+          "ok": 3,
+          "fail": 0
+        },
+        {
+          "id": "m12",
+          "nombre": "ISLR ASIENTOS: cuentas nuevas en cada negocio",
+          "ok": 3,
+          "fail": 0
+        },
+        {
+          "id": "m12",
+          "nombre": "ISLR ASIENTOS: anticipo y retención sufrida generan su asiento",
+          "ok": 2,
+          "fail": 0
+        },
+        {
+          "id": "m12",
+          "nombre": "ISLR ASIENTOS: liquidación del ejercicio y pago del saldo",
+          "ok": 8,
+          "fail": 0
+        },
+        {
+          "id": "m12",
+          "nombre": "ISLR ASIENTOS: descontabilizar y corregir (ejercicio 2024)",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "m12",
+          "nombre": "ISLR ASIENTOS: aislamiento entre negocios",
+          "ok": 3,
+          "fail": 0
+        },
+        {
+          "id": "m13",
+          "nombre": "PLAN BÁSICO: alta real con el plan SISTEMA",
+          "ok": 3,
+          "fail": 0
+        },
+        {
+          "id": "m13",
+          "nombre": "PLAN BÁSICO: vende y por debajo se guarda todo",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "m13",
+          "nombre": "PLAN COMPLETO: al subir de plan aparece todo, sin regenerar nada",
+          "ok": 3,
+          "fail": 0
+        },
+        {
+          "id": "m13",
+          "nombre": "AISLAMIENTO: la tienda del plan básico no ve datos de otras",
+          "ok": 2,
+          "fail": 0
+        }
+      ],
+      "total_ok": 183,
+      "total_fail": 0,
+      "total_declarado": 183,
+      "num_suites": 32
+    },
+    {
+      "prefijo": "p",
+      "titulo": "Suite portal SaaS (p01–p03)",
+      "log": "pruebas_finales.log",
+      "filas": [
+        {
+          "id": "p01",
+          "nombre": "PORTAL: planes y alta de tenant",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "p01",
+          "nombre": "PORTAL: cobros y vencimientos",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "p01",
+          "nombre": "PORTAL: suspensión, reactivación y métricas",
+          "ok": 7,
+          "fail": 0
+        },
+        {
+          "id": "p02",
+          "nombre": "PANEL: datos de ejemplo (30 tiendas, 12 reportes de pago, 14 cobros)",
+          "ok": 3,
+          "fail": 0
+        },
+        {
+          "id": "p02",
+          "nombre": "TIENDAS: orden por atención, paginación y total",
+          "ok": 4,
+          "fail": 0
+        },
+        {
+          "id": "p02",
+          "nombre": "TIENDAS: filtros y búsqueda",
+          "ok": 8,
+          "fail": 0
+        },
+        {
+          "id": "p02",
+          "nombre": "TIENDAS: orden elegido por el usuario",
+          "ok": 3,
+          "fail": 0
+        },
+        {
+          "id": "p02",
+          "nombre": "SEGURIDAD: lo que llega del navegador no rompe nada",
+          "ok": 5,
+          "fail": 0
+        },
+        {
+          "id": "p02",
+          "nombre": "RESUMEN: por vencer y contadores",
+          "ok": 3,
+          "fail": 0
+        },
+        {
+          "id": "p02",
+          "nombre": "PAGOS: historial y cobros",
+          "ok": 6,
+          "fail": 0
+        },
+        {
+          "id": "p03",
+          "nombre": "COBRO: la demo y los días pagados no se pierden",
+          "ok": 4,
+          "fail": 0
+        },
+        {
+          "id": "p03",
+          "nombre": "BARRIDO DIARIO: mora y suspensión por gracia",
+          "ok": 9,
+          "fail": 0
+        },
+        {
+          "id": "p03",
+          "nombre": "PROPAGACIÓN: lo que se escribe en estado_tenants",
+          "ok": 4,
+          "fail": 0
+        }
+      ],
+      "total_ok": 66,
+      "total_fail": 0,
+      "total_declarado": 66,
+      "num_suites": 13
+    }
+  ],
+  "t16": {
+    "ok": 71,
+    "fail": 0,
+    "secciones": [
+      {
+        "seccion": "Invitado (páginas públicas)",
+        "ok": 6
+      },
+      {
+        "seccion": "Administrador: entrar",
+        "ok": 3
+      },
+      {
+        "seccion": "Administrador: pantallas generales",
+        "ok": 19
+      },
+      {
+        "seccion": "Administrador: módulo fiscal",
+        "ok": 10
+      },
+      {
+        "seccion": "Administrador: crear datos reales (POS, compra, modelo, encargo)",
+        "ok": 8
+      },
+      {
+        "seccion": "Administrador: páginas de detalle con datos reales",
+        "ok": 10
+      },
+      {
+        "seccion": "Portal SaaS (super administrador)",
+        "ok": 2
+      },
+      {
+        "seccion": "Cajero (rol restringido)",
+        "ok": 12
+      },
+      {
+        "seccion": "Petición Inertia parcial (X-Inertia)",
+        "ok": 1
+      }
+    ]
+  },
+  "t17": {
+    "ok": 33,
+    "fail": 0,
+    "secciones": [
+      {
+        "id": "c0",
+        "seccion": "PREPARACIÓN: clon, negocio 2 y usuarios",
+        "ok": 4,
+        "fail": 0
+      },
+      {
+        "id": "c1",
+        "seccion": "DOS TENANTS escribiendo a la vez (8 hilos por negocio)",
+        "ok": 5,
+        "fail": 0
+      },
+      {
+        "id": "c2",
+        "seccion": "DOS CAJAS (mismo negocio) a la vez: correlativo sin huecos",
+        "ok": 3,
+        "fail": 0
+      },
+      {
+        "id": "c3",
+        "seccion": "STOCK sin negativos: 12 hilos compiten por 5 unidades",
+        "ok": 7,
+        "fail": 0
+      },
+      {
+        "id": "c4",
+        "seccion": "FUGAS DE SESIÓN: GUC, pool y fail-closed (como saas_app)",
+        "ok": 7,
+        "fail": 0
+      },
+      {
+        "id": "c5",
+        "seccion": "REHASH controlado en login (D-1): costo viejo → moderno, vía el procedimiento",
+        "ok": 7,
+        "fail": 0
+      }
+    ]
+  },
+  "t18": {
+    "ok": 19,
+    "fail": 0,
+    "secciones": [
+      {
+        "id": "n1",
+        "seccion": "LOGIN por formulario y dashboard React",
+        "ok": 2,
+        "fail": 0
+      },
+      {
+        "id": "n2",
+        "seccion": "POS en el navegador: venta al contado con Efectivo Bs",
+        "ok": 4,
+        "fail": 0
+      },
+      {
+        "id": "n3",
+        "seccion": "POS en el navegador: venta a crédito con cliente del modal",
+        "ok": 2,
+        "fail": 0
+      },
+      {
+        "id": "n4",
+        "seccion": "Compras en el navegador: registrar una compra",
+        "ok": 2,
+        "fail": 0
+      },
+      {
+        "id": "n5",
+        "seccion": "Cierre de caja en el navegador",
+        "ok": 2,
+        "fail": 0
+      },
+      {
+        "id": "n6",
+        "seccion": "Módulo fiscal en el navegador (6 vistas + ISLR + calendario)",
+        "ok": 3,
+        "fail": 0
+      },
+      {
+        "id": "n7",
+        "seccion": "Portal SaaS en el navegador: login del operador y panel",
+        "ok": 2,
+        "fail": 0
+      },
+      {
+        "id": "n8",
+        "seccion": "Resto de pantallas del administrador (React monta sin errores)",
+        "ok": 2,
+        "fail": 0
+      }
+    ]
+  },
+  "gran_total_ok": 811,
+  "gran_total_fail": 0,
+  "num_suites": 80
+}

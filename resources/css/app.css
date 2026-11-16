@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+@theme {
+    --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+    --color-ink: #12171c;
+    --color-ink-2: #1b2229;
+    --color-ink-line: #2a333c;
+    --color-paper: #f5f6f8;
+    --color-line: #d9dee4;
+    --color-text: #161b21;
+    --color-muted: #5b6672;
+    --color-brand: #1e4fd6;
+    --color-brand-600: #1840b3;
+    --color-brand-50: #eaf0ff;
+    --color-signal: #f2a900;
+    --color-danger: #c4291f;
+    --color-ok: #14804a;
+}
+
+@layer base {
+    html { font-feature-settings: "cv11", "ss03"; }
+    body { @apply bg-paper font-sans text-text antialiased; }
+    :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 2px; }
+}
+
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Borde dentado tipo ticket, abajo */
+.ticket-edge {
+    --s: 8px;
+    mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / var(--s) 100%;
+}
+
+@keyframes print-in {
+    from { transform: translateY(-14px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+}
+.print-in { animation: print-in .7s cubic-bezier(.2,.7,.2,1) both; }
+@media (prefers-reduced-motion: reduce) { .print-in { animation: none; } }
+
+/* El ticket sale de la impresora y se detiene */
+@keyframes print-out {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+.print-out { animation: print-out 3.4s steps(80, end) .5s both; }
+@media (prefers-reduced-motion: reduce) { .print-out { animation: none; } }

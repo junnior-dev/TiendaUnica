@@ -1,0 +1,33 @@
+*.log
+.DS_Store
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+# Python: caches de bytecode de las suites (t01–t19, continuidad…)
+__pycache__/
+*.pyc
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+Homestead.json
+Homestead.yaml
+Thumbs.db
+
+# Auditoría M-7: datos de negocio y evidencias fuera del repositorio
+/dumps
+/evidencias
+/preview
+/tests/**/salida*.log

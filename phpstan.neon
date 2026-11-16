@@ -1,0 +1,19 @@
+# phpstan.neon · análisis estático (larastan v3 / phpstan 2) en nivel 6.
+#
+# Política: el baseline congela la deuda HISTÓRICA (nunca se regenera para
+# "hacer callar" errores nuevos). Lo que la CI exige es que CADA PR no añada
+# ni un error nuevo: cualquier regresión de tipos rompe el build.
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - phpstan-baseline.neon
+
+parameters:
+    level: 6
+    paths:
+        - app
+        - routes
+        - tests
+        - database
+    excludePaths:
+        - database/sql
+    # límite de memoria por CLI: --memory-limit=512M (phpstan 2 ya no lo lee del neon)
