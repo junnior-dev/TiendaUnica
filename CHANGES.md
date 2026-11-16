@@ -525,3 +525,57 @@ t19 68 · k6 1.060 checks (latencia 120 ✓ 100 % · rampa 550 ✓ 100 % · p95=
 El escenario k6 ventas quedó pendiente de re-verificar con inventario suficiente (las
 re-corridas agotaron el stock del producto 1 y el reabastecimiento por API quedó como
 tarea; sus corridas previas dieron 390/390 checks).
+
+## Suite Hostil · segunda corrida en CI (16 de noviembre de 2026)
+
+La segunda corrida (run `43927428120`) bajó los fallos de Pest de 71 a 9
+(293 pruebas pasando, 1.741 aserciones); cada fallo restante fue un agujero
+real o un supuesto caducado del propio suite. Correcciones aplicadas:
+
+- **Agujero real · el CRUD de combos estaba abierto al cajero.** El
+  middleware AccesoPorRol decide por el PRIMER segmento de la ruta y
+  `combos` es módulo del cajero ('si', porque la caja cotiza y vende kits):
+  `POST /combos`, `PUT /combos/{id}`, `PATCH /combos/{id}/estado` y
+  `DELETE /combos/{id}` cruzaban el middleware y los métodos no revisaban
+  el rol — un cajero podía crear, modificar, activar/desactivar y borrar el
+  catálogo de kits (con ids reales, no solo el id inexistente de la prueba).
+  Ahora `CombosController` guarda sus 4 escrituras con `soloAdmin()` (mismo
+  patrón de Kardex); `lista`, `cotizar` y la pantalla quedan abiertos
+  porque vender combos sí es trabajo de caja. La matriz de autorización
+  espera 403 exacto en esas 2 celdas y vuelve a cuadrar.
+- **Agujero real · POST /usuarios con campos ARRAY respondía 500.** La
+  acumulación del fuzzing lo reveló: `rol => ['SUPERUSUARIO']` y
+  `password => []` llegaban a casts `(string)` directos en
+  `UsuariosController::crear()` → warning «Array to string conversion» que
+  el handler de errores de Laravel convierte en ErrorException → 500. Los
+  campos se normalizan ahora con `is_scalar()` (lo que no es texto cae a ''
+  y lo rechaza la validación). El patrón latente queda señalado en
+  `cambiar()` y `nuevaClave()` (el fuzzing no los ejercita aún).
+- **Latente desenterrado · AislamientoMultiTenantHttp moría con TypeError.**
+  Al arreglarse el RIF del proveedor, por primera vez se ejecutaba COMPLETO
+  `prepararInquilinoB()`: los `Usuario::find()` corrían DESPUÉS de
+  `SET ROLE saas_app` con el GUC vacío → RLS esconde todas las filas →
+  `actingAs(null)`. Los modelos ahora se resuelven como superusuario ANTES
+  del SET ROLE (lo que el docblock de la función ya prometía).
+- **Supuesto caducado · SesionTenantTest contaba las ventas del negocio 2
+  como CERO.** Con Aislamiento funcionando, el negocio 2 acumula ventas
+  legítimas de BOLA en la base compartida de la corrida (su afterEach solo
+  retira estado_tenants): la aserción es ahora RELATIVA al baseline que el
+  superusuario mide antes del `SET ROLE`; la detección de fuga real sigue
+  en el `bool_and(negocio_id = X)` del bucle.
+- **Los 3 smoke de TodasLasRutas acumulan violaciones.** Con el 500 de
+  /ordenes-compra arreglado, el pase del administrador avanzó y chocó con
+  OTRO agujero aún sin identificar (un status fuera de 200/302/403/404/422
+  en alguna ruta solo-admin; el reporte «false is true» no decía cuál). Con
+  la lista acumulada, el próximo run revela la ruta y el status exactos.
+- **Baseline de PHPStan corregido.** El patrón de las 22 entradas
+  `arguments.count` llevaba una regex mal construida (`\(\)?` = apertura
+  obligatoria y cierre opcional, nunca casó) y PHPStan reporta los mensajes
+  de FUNCIONES sin paréntesis (`Function expect invoked with…`, a
+  diferencia de los métodos). El patrón correcto `expect(?:\(\))?` casa con
+  ambas variantes; el conteo de TodasLasRutas pasa de 8 a 5 dos-args por la
+  reescritura de los smoke.
+
+Queda como deuda menor documentada: la contraseña temporal de /usuarios no
+tiene máximo (bcrypt trunca a 72 bytes) y `cambiar()`/`nuevaClave()`
+conservan los casts latentes.
