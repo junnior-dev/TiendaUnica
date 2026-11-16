@@ -78,26 +78,39 @@ function verificarComponenteInertia(Illuminate\Testing\TestResponse $resp): void
 }
 
 it('TODAS las rutas GET responden sin 500 al INVITADO (302 a /login o páginas públicas)', function () {
+    // Acumulación: una aserción única al final reporta TODAS las rutas que
+    // violaron el contrato (el mensaje de expect($x, "msg")->toBeTrue() no
+    // se imprime en el log de CI; el diff de la lista, sí).
+    $fallos = [];
+
     foreach (rutasGet() as $r) {
         $uri = uriDeRuta($r);
         $resp = $this->get($uri);
         $status = $resp->status();
 
-        expect(in_array($status, [200, 302, 401, 403, 404, 422], true),
-            "GET {$uri} respondió {$status} al invitado")->toBeTrue();
-
-        if ($status === 302) {
-            expect(str_contains((string) $resp->headers->get('Location'), '/login'),
-                "GET {$uri} redirige a ".$resp->headers->get('Location').': el invitado solo debe ir a /login')->toBeTrue();
+        if (! in_array($status, [200, 302, 401, 403, 404, 422], true)) {
+            $fallos[] = "GET {$uri} respondió {$status} al invitado";
+        } elseif ($status === 302 && ! str_contains((string) $resp->headers->get('Location'), '/login')) {
+            $fallos[] = "GET {$uri} redirige a ".$resp->headers->get('Location').': el invitado solo debe ir a /login';
         }
         if ($status === 200) {
-            verificarComponenteInertia($resp);
+            try {
+                verificarComponenteInertia($resp);
+            } catch (\Throwable $e) {
+                $fallos[] = "GET {$uri} (invitado): ".$e->getMessage();
+            }
         }
     }
+
+    expect($fallos, 'rutas que violaron el contrato del invitado')->toBe([]);
 });
 
 it('TODAS las rutas GET responden sin 500 al CAJERO (y sin expulsarlo a /login)', function () {
     $this->actingAs(cajeroConClave());
+
+    // Acumulación: el diff de la única aserción final lista todas las rutas
+    // que violaron el contrato.
+    $fallos = [];
 
     foreach (rutasGet() as $r) {
         if (esRutaGuest($r)) {
@@ -107,22 +120,33 @@ it('TODAS las rutas GET responden sin 500 al CAJERO (y sin expulsarlo a /login)'
         $resp = $this->get($uri);
         $status = $resp->status();
 
-        expect(in_array($status, [200, 302, 403, 404, 422], true),
-            "GET {$uri} respondió {$status} al cajero")->toBeTrue();
-
-        if ($status === 302) {
+        if (! in_array($status, [200, 302, 403, 404, 422], true)) {
+            $fallos[] = "GET {$uri} respondió {$status} al cajero";
+        } elseif ($status === 302) {
             $destino = (string) $resp->headers->get('Location');
-            expect(str_contains($destino, '/caja') || str_contains($destino, '/portal/login'),
-                "GET {$uri} devolvió al cajero a {$destino}: su sesión no debe morir al navegar")->toBeTrue();
+            if (! str_contains($destino, '/caja') && ! str_contains($destino, '/portal/login')) {
+                $fallos[] = "GET {$uri} devolvió al cajero a {$destino}: su sesión no debe morir al navegar";
+            }
         }
         if ($status === 200) {
-            verificarComponenteInertia($resp);
+            try {
+                verificarComponenteInertia($resp);
+            } catch (\Throwable $e) {
+                $fallos[] = "GET {$uri} (cajero): ".$e->getMessage();
+            }
         }
     }
+
+    expect($fallos, 'rutas que violaron el contrato del cajero')->toBe([]);
 });
 
 it('TODAS las rutas GET responden sin 500 al ADMINISTRADOR (y sin expulsarlo a /login)', function () {
     $this->actingAs(\App\Models\Usuario::find(adminId()));
+
+    // Acumulación: el diff de la única aserción final revela la RUTA y el
+    // STATUS exactos de cualquier agujero que quede (los «false is true» de
+    // Pest no dicen cuál fue).
+    $fallos = [];
 
     foreach (rutasGet() as $r) {
         if (esRutaGuest($r)) {
@@ -132,16 +156,22 @@ it('TODAS las rutas GET responden sin 500 al ADMINISTRADOR (y sin expulsarlo a /
         $resp = $this->get($uri);
         $status = $resp->status();
 
-        expect(in_array($status, [200, 302, 403, 404, 422], true),
-            "GET {$uri} respondió {$status} al administrador")->toBeTrue();
-
-        if ($status === 302) {
+        if (! in_array($status, [200, 302, 403, 404, 422], true)) {
+            $fallos[] = "GET {$uri} respondió {$status} al administrador";
+        } elseif ($status === 302) {
             $destino = (string) $resp->headers->get('Location');
-            expect(! str_contains($destino, '/login') || str_contains($destino, '/portal/login'),
-                "GET {$uri} devolvió al administrador a {$destino}")->toBeTrue();
+            if (str_contains($destino, '/login') && ! str_contains($destino, '/portal/login')) {
+                $fallos[] = "GET {$uri} devolvió al administrador a {$destino}";
+            }
         }
         if ($status === 200) {
-            verificarComponenteInertia($resp);
+            try {
+                verificarComponenteInertia($resp);
+            } catch (\Throwable $e) {
+                $fallos[] = "GET {$uri} (administrador): ".$e->getMessage();
+            }
         }
     }
+
+    expect($fallos, 'rutas que violaron el contrato del administrador')->toBe([]);
 });
