@@ -4025,3 +4025,75 @@ parameters:
 			identifier: arguments.count
 			count: 5
 			path: tests/Feature/TodasLasRutasTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: tests/Feature/AislamientoFiltrosDashboardTest.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Usuario\:\:\$nombre_completo\.$#'
+			identifier: property.notFound
+			count: 4
+			path: tests/Feature/AislamientoFiltrosDashboardTest.php
+
+		-
+			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: tests/Feature/AislamientoFiltrosDashboardTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/AtaqueBolaIdsCruzadosTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: tests/Feature/AtaqueBolaIdsCruzadosTest.php
+
+		-
+			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
+			count: 2
+			path: tests/Feature/AtaqueBolaIdsCruzadosTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/AuditoriaRutasInertiaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/AuditoriaRutasInertiaTest.php
+
+		-
+			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
+			count: 2
+			path: tests/Feature/AuditoriaRutasInertiaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:actingAs\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/ValidacionDePropsPorPaginaTest.php
+
+		-
+			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:get\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: tests/Feature/ValidacionDePropsPorPaginaTest.php
+
+		-
+			message: '#^Function expect(?:\(\))? invoked with 2 parameters, 0\-1 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: tests/Feature/ValidacionDePropsPorPaginaTest.php

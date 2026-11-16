@@ -127,6 +127,19 @@ def admin_params() -> dict:
 
 
 def main() -> None:
+    # GUARDIA anti-desastre: este script hace DROP DATABASE de las bases del
+    # sistema contra el puerto que le indique PGPORT. En el CI eso es 5433 (un
+    # contenedor efímero postgres:17); en la máquina de desarrollo, 5432 es el
+    # SERVIDOR VIVO con la base real del negocio (tienda, usuario admin).
+    # Soltar aquí los DROP con PGPORT=5432 la destruiría. Solo se permite otro
+    # puerto con la bandera explícita --puerto-riesgo-propietario.
+    if PORT != 5433 and '--puerto-riesgo-propietario' not in sys.argv:
+        print('✗ ABORTADO: PGPORT={} — solo 5433 está permitido sin la bandera '
+              'explícita --puerto-riesgo-propietario. Este script hace DROP '
+              'DATABASE contra el puerto dado y en 5432 vive la base REAL '
+              '(«tienda» del negocio).'.format(PORT))
+        sys.exit(2)
+
     if '--solo-verificar' in sys.argv:
         for db in ('tienda', 'portal_saas'):
             c = psycopg2.connect(**admin_params(), dbname=db)

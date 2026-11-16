@@ -201,6 +201,9 @@ class VentasController extends Controller
     public function devolviblesJson(int $id)
     {
         abort_if(! $this->esAdmin(), 403, 'Solo un administrador puede emitir notas.');
+        // BOLA: una venta ajena «no existe» para este negocio (RLS la esconde);
+        // 404 limpio como en show(), no una lista vacía que insinúa el recurso.
+        abort_if((int) DB::scalar('SELECT count(*) FROM ventas WHERE id = ?', [$id]) === 0, 404, 'No encontramos esa venta.');
         return response()->json(['activo' => $this->hayDevolucion(), 'productos' => $this->devolvibles($id) ?? []]);
     }
 
