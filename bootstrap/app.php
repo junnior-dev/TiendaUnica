@@ -11,14 +11,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // IdentificarTenant PRIMERO (resuelve el negocio); LogContexto después
-        // (ya puede leer Tenant::id() y comparte contexto para TODOS los logs
-        // de la petición: request_id, negocio_id, ruta).
+        // Tienda única: IdentificarTenant se mantiene por compatibilidad pero no
+        // hace nada; LogContexto comparte contexto para TODOS los logs de la
+        // petición (request_id, negocio_id, ruta).
         $middleware->web(prepend: [\App\Http\Middleware\IdentificarTenant::class, \App\Http\Middleware\LogContexto::class]);
         $middleware->web(append: [\App\Http\Middleware\HandleInertiaRequests::class, \App\Http\Middleware\SeguridadCabeceras::class]);
-        $middleware->alias([
-            'portal_admin' => \App\Http\Middleware\PortalAdmin::class,
-        ]);
         $middleware->redirectGuestsTo('/login');
         $middleware->redirectUsersTo('/dashboard');
         // El navegador manda los reportes de CSP por POST sin sesión ni token:

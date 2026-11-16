@@ -37,13 +37,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:5,1');
     Route::get('/registro', [RegisterController::class, 'create']);
     Route::post('/registro', [RegisterController::class, 'store'])->middleware('throttle:5,1');
-    // Registro self-service del SaaS: crea el negocio del cliente con demo de 15 días.
-    Route::get('/crear-cuenta', [\App\Http\Controllers\Auth\CrearCuentaController::class, 'create']);
-    Route::post('/crear-cuenta', [\App\Http\Controllers\Auth\CrearCuentaController::class, 'store'])->middleware('throttle:10,1');
 });
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware(['throttle:auth', 'auth']);
 // Auditoría (mejora 2): throttle global del usuario autenticado (60/min) para
-// TODO el grupo privado; los login/registro/crear-cuenta ya llevan los suyos.
+// TODO el grupo privado; los login/registro ya llevan los suyos.
 Route::middleware(['throttle:auth', 'auth', \App\Http\Middleware\AccesoPorRol::class, \App\Http\Middleware\ModuloFiscal::class])->group(function () {
     Route::get('/', fn () => redirect(\App\Support\Permisos::inicio(auth()->user()->rol)));
     Route::get('/cuenta/contrasena', [\App\Http\Controllers\CuentaController::class, 'contrasena']);
@@ -290,35 +287,11 @@ Route::middleware(['throttle:auth', 'auth', \App\Http\Middleware\AccesoPorRol::c
     Route::post('/tasas/sincronizar', [TasasController::class, 'sincronizar']);
     Route::post('/tasas/manual', [TasasController::class, 'manual']);
     Route::patch('/monedas/{codigo}', [TasasController::class, 'moneda']);
-
-    // ── Suscripción de la tienda (plan, demo, pago por pago móvil/transferencia) ──
-    Route::get('/suscripcion', [\App\Http\Controllers\SuscripcionController::class, 'index']);
-    Route::post('/suscripcion/pagos', [\App\Http\Controllers\SuscripcionController::class, 'reportarPago']);
 });
 
-// ── Página pública de precios (sin login: la ve cualquiera que evalúe el SaaS) ──
-Route::get('/precios', fn () => Inertia\Inertia::render('Precios'));
-
-// ── Panel del super administrador del portal (todas las tiendas y sus pagos) ──
-// Auditoría C-1: TODO el grupo lleva portal_admin; solo el login queda fuera.
-// Los métodos de escritura además re-verifican internamente (defensa en profundidad).
-Route::get('/portal/login', [\App\Http\Controllers\Portal\PortalAdminController::class, 'login']);
-Route::post('/portal/login', [\App\Http\Controllers\Portal\PortalAdminController::class, 'autenticar'])->middleware('throttle:5,1');
-// Auditoría (mejora 2): las 4 escrituras destructivas del portal llevan un
-// throttle PROPIO (10/min) además de portal_admin: un operador autenticado
-// comprometido tampoco puede spamearlas.
-Route::middleware('portal_admin')->group(function () {
-    Route::get('/portal', [\App\Http\Controllers\Portal\PortalAdminController::class, 'index']);
-    Route::post('/portal/salir', [\App\Http\Controllers\Portal\PortalAdminController::class, 'salir']);
-    Route::post('/portal/pagos/{solicitud}/verificar', [\App\Http\Controllers\Portal\PortalAdminController::class, 'verificarPago'])->whereNumber('solicitud')->middleware('throttle:portal_escritura');
-    Route::post('/portal/tasa', [\App\Http\Controllers\Portal\PortalAdminController::class, 'publicarTasa'])->middleware('throttle:portal_escritura');
-    Route::post('/portal/tenants/{tenant}/estado', [\App\Http\Controllers\Portal\PortalAdminController::class, 'cambiarEstado'])->whereNumber('tenant')->middleware('throttle:portal_escritura');
-    Route::post('/portal/cuentas', [\App\Http\Controllers\Portal\PortalAdminController::class, 'guardarCuenta'])->middleware('throttle:portal_escritura');
-});
-
-// ── Health check de base de datos (mejora 3 · guardia A-3 completa) ──────────
-// En producción permite al orquestador validar que la app NO conecta como
-// superusuario; en local siempre responde (con superusuario=true si aplica).
+// ── Health check de base de datos ──────────────────────────────────────────
+// Tienda única: la conexión puede usar cualquier rol; se informa el usuario
+// actual y si es superusuario, pero no se aborta.
 Route::get('/health/db', function () {
     try {
         $super = (bool) Illuminate\Support\Facades\DB::selectOne(
@@ -328,9 +301,6 @@ Route::get('/health/db', function () {
         return response()->json(['db' => 'error', 'detalle' => substr($e->getMessage(), 0, 120)], 503);
     }
     $cuerpo = ['db' => 'ok', 'usuario' => Illuminate\Support\Facades\DB::selectOne('SELECT current_user')->current_user, 'superusuario' => $super];
-    if (app()->environment('production') && $super) {
-        return response()->json($cuerpo, 500);
-    }
 
     return response()->json($cuerpo);
 });

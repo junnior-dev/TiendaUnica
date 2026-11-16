@@ -2,22 +2,14 @@
 
 namespace App\Http\Middleware;
 
-use App\Support\Tenant;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Inertia\Inertia;
 
 /**
- * Cerca del plan: la parte fiscal, contable e ISLR solo se abre a las tiendas cuyo plan la incluye (ESPECIAL y la DEMO
- * de 15 días). El plan Sistema es todo lo operativo —caja, inventario, compras, cobranza, reportes— sin esa parte.
- *
- * Nada se borra: los datos fiscales se siguen guardando por debajo (IVA, IGTF, retenciones, asientos), de modo que
- * quien sube de plan lo encuentra todo al día. Lo que cambia es lo que se MUESTRA y lo que se PUEDE ABRIR.
- *
- * Este middleware es la defensa real (el menú es solo comodidad): bloquea por URL, también las rutas que cuelgan de
- * pantallas operativas (/conciliacion/fiscal, /compras/{id}/retencion…), y responde 403 a cualquier método. Va en el
- * grupo autenticado de routes/web.php. Sin fila en estado_tenants (tienda única sin portal) todo queda abierto.
+ * Cerca del plan (era del multitenant): en TIENDA ÚNICA la parte fiscal,
+ * contable e ISLR siempre está incluida, así que el middleware deja pasar
+ * todo. Se conserva (y con él PATRONES / esFiscal) por compatibilidad con
+ * rutas y pruebas que lo referencian.
  */
 class ModuloFiscal
 {
@@ -51,21 +43,8 @@ class ModuloFiscal
 
     public function handle(Request $request, Closure $next)
     {
-        if (! self::esFiscal($request->decodedPath(), $request->query()) || Tenant::fiscal()) {
-            return $next($request);
-        }
-        $mensaje = 'Esa parte del sistema va con el plan Contribuyente especial.';
-        if (! $request->isMethod('GET') || ($request->expectsJson() && ! $request->header('X-Inertia'))) {
-            return response()->json(['message' => $mensaje], 403);
-        }
-        $negocio = DB::table('negocio')->first();
-
-        return Inertia::render('Suscripcion/PlanRequerido', [
-            'plan' => Tenant::estado()['plan'] ?? null,
-            'modulo' => 'fiscal',
-            'actual' => '/'.$request->path(),
-            'negocio' => $negocio->nombre_comercial ?: ($negocio->razon_social ?? ''),
-            'usuario' => ['nombre' => $request->user()->nombre_completo ?? '', 'rol' => ucfirst(strtolower($request->user()->rol ?? 'Cajero'))],
-        ])->toResponse($request)->setStatusCode(403);
+        // Tienda única: la parte fiscal siempre está incluida (Tenant::fiscal()
+        // devuelve true), así que nunca se bloquea nada.
+        return $next($request);
     }
 }

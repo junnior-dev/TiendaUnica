@@ -2,166 +2,85 @@
 
 namespace App\Support;
 
-use Illuminate\Support\Facades\DB;
-
 /**
- * Identidad de la tienda activa en esta petición o proceso.
+ * Tienda única: el negocio siempre es 1.
  *
- * El SQL del negocio NUNCA filtra a mano: aquí se resuelve el subdominio en
- * tienda.estado_tenants y se fija el GUC app.negocio_id con set_config.
- * Row-Level Security (la guarda fn_sesion_permitida) hace el resto: una sesión
- * sin GUC no ve ni escribe nada —no cae por defecto al negocio 1— y un tenant
- * suspendido por mora tampoco.
- *
- *   Tenant::resolver($request->getHost());  // en el middleware, por petición
- *   Tenant::fijar(2);                       // en colas y comandos, por proceso
- *   Tenant::id();                           // ¿qué tienda está activa?
- *   Tenant::modulo('repuestos');            // ¿tiene el vertical activo?
+ * Se mantiene la clase por compatibilidad con el código existente
+ * que llama a Tenant::id(), Tenant::fiscal(), etc.
  */
 class Tenant
 {
-    protected static ?int $negocioId = null;
-
-    protected static ?array $estado = null;
-
-    /** Resuelve la tienda por subdominio y fija app.negocio_id para la petición. */
-    public static function resolver(string $host): int
-    {
-        $sub = static::subdominioDe($host);
-        $estado = null;
-        if ($sub !== '' && $sub !== 'www') {
-            $estado = DB::table('estado_tenants')->where('subdominio', $sub)->first();
-            if (! $estado) {
-                abort(404, 'Tienda no encontrada: el subdominio «'.$sub.'» no está registrado.');
-            }
-        } else {
-            $registradas = DB::table('estado_tenants')->orderBy('negocio_id')->get();
-            if ($registradas->count() === 1) {       // modo tienda única (compatibilidad con dev)
-                $estado = $registradas->first();
-            } elseif ($registradas->count() > 1) {   // multi: sin subdominio no se adivina
-                abort(404, 'Falta el subdominio de la tienda (plataforma multi-negocio).');
-            } else {
-                abort(503, 'Plataforma sin tiendas registradas.');
-            }
-        }
-        if (! $estado->activo) {
-            abort(403, 'Cuenta suspendida por mora. Escribe a soporte para reactivarla.');
-        }
-
-        return static::fijar((int) $estado->negocio_id, (array) $estado);
-    }
-
-    /** Fija el negocio activo (colas, comandos artisan, pruebas). */
-    public static function fijar(int $negocioId, array $estado = []): int
-    {
-        DB::statement('SELECT set_config(?, ?, false)', ['app.negocio_id', (string) $negocioId]);
-        static::$negocioId = $negocioId;
-        static::$estado = $estado !== []
-            ? static::normalizar($estado)
-            : static::normalizar((array) DB::table('estado_tenants')->where('negocio_id', $negocioId)->first());
-
-        return $negocioId;
-    }
-
     /**
-     * Quita el GUC al terminar la petición: la conexión vuelve al pool SIN
-     * identidad de tienda. El GUC es de sesión (set_config false, necesario
-     * porque Laravel trabaja en autocommit); si nadie lo limpia, en un pool
-     * de conexiones (pgBouncer en modo sesión, Octane, workers) la siguiente
-     * petición o el siguiente job heredaría el negocio de la anterior. Con
-     * esto la conexión queda neutra —y la guarda fn_sesion_permitida hace
-     * que una conexión neutra no vea ni escriba nada (fail-closed)—.
+     * En tienda única siempre devuelve 1.
      */
-    public static function limpiar(): void
+    public static function id(): int
     {
-        DB::statement("SELECT set_config('app.negocio_id', '', false)");
-        static::$negocioId = null;
-        static::$estado = null;
-    }
-
-    public static function id(): ?int
-    {
-        return static::$negocioId;
+        return 1;
     }
 
     /**
-     * Auditoría (mejora 9) · ejecuta un trabajo DENTRO de un tenant y garantiza
-     * que la conexión queda neutra pase lo que pase (excepción incluida).
-     *
-     * Es la versión reutilizable del try/finally del middleware: jobs en cola,
-     * comandos artisan y scripts NO pasan por IdentificarTenant, y un GUC de
-     * sesión sin limpiar haría que la SIGUIENTE tarea del mismo worker heredara
-     * el tenant anterior (exactamente el escenario que t17 cazó para HTTP).
-     * Devuelve lo que devuelva $trabajo().
+     * Todos los módulos activos en tienda única.
      */
-    public static function ejecutar(int $negocioId, callable $trabajo): mixed
+    public static function modulo(string $codigo): bool
     {
-        static::fijar($negocioId);
-        try {
-            return $trabajo($negocioId);
-        } finally {
-            static::limpiar();
-        }
-    }
-
-    public static function estado(): ?array
-    {
-        return static::$estado;
+        return true;
     }
 
     /**
-     * ¿Esta tienda administra las tablas GLOBALES de la plataforma (tasas de
-     * cambio, alícuotas fiscales, unidad tributaria, monedas)? Fuente:
-     * estado_tenants.modulos.editar_global (auditoría A-4). Por defecto es
-     * falsa: las tasas y parámetros fiscales los fija la plataforma y los
-     * clientes solo los leen; la tienda propia del operador (negocio 1) la
-     * trae activa. En tienda única (sin fila en estado_tenants) queda abierta,
-     * igual que fiscal(): el despliegue local no es multiinquilino.
-     */
-    public static function editarGlobal(): bool
-    {
-        return static::$estado === null || static::modulo('editar_global');
-    }
-
-    /**
-     * ¿El plan de la tienda incluye la parte fiscal, contable e ISLR? Es la ÚNICA pregunta que hacen el menú, el panel,
-     * las pantallas y el middleware ModuloFiscal. Sin fila en estado_tenants (tienda única, sin portal) no hay plan que
-     * cercar y todo queda abierto. Los datos fiscales se guardan siempre; el plan solo decide qué se muestra.
+     * Parte fiscal siempre activa en tienda única.
      */
     public static function fiscal(): bool
     {
-        return static::$estado === null || static::modulo('fiscal');
+        return true;
     }
 
-    /** ¿El vertical (módulo) está activo para esta tienda? Fuente: estado_tenants.modulos. */
-    public static function modulo(string $codigo): bool
+    /**
+     * Sin control de edición global en tienda única.
+     */
+    public static function editarGlobal(): bool
     {
-        return (bool) data_get(static::$estado, 'modulos.'.$codigo, false);
+        return true;
     }
 
-    /** De «la-cava.misitiolibre.com» a «la-cava»; vacío para localhost, IPs y el dominio base. */
-    protected static function subdominioDe(string $host): string
+    /**
+     * No hace falta fijar el GUC en tienda única.
+     * Se mantiene por compatibilidad con jobs en cola.
+     */
+    public static function fijar(int $negocioId = 1, array $estado = []): int
     {
-        $host = strtolower(preg_replace('/:\d+$/', '', $host));
-        $base = strtolower((string) config('saas.base_domain'));
-        if ($base !== '' && str_ends_with($host, '.'.$base)) {
-            return rtrim(substr($host, 0, -strlen($base)), '.');
-        }
-        if (filter_var($host, FILTER_VALIDATE_IP) || str_contains($host, 'localhost')) {
-            return '';   // desarrollo local: el middleware decide con las tiendas registradas
-        }
-        $partes = explode('.', $host);
-
-        return count($partes) > 1 ? $partes[0] : '';
+        return 1;
     }
 
-    /** El pgsql de Laravel entrega los jsonb como texto: se decodifican una sola vez. */
-    protected static function normalizar(array $estado): array
+    /**
+     * No hace falta limpiar en tienda única.
+     */
+    public static function limpiar(): void
     {
-        if (isset($estado['modulos']) && is_string($estado['modulos'])) {
-            $estado['modulos'] = json_decode($estado['modulos'], true) ?: [];
-        }
+        // Nada que limpiar
+    }
 
-        return $estado;
+    /**
+     * Resolver el tenant desde el host.
+     * En tienda única no hace nada, pero se mantiene por compatibilidad.
+     */
+    public static function resolver(string $host): int
+    {
+        return 1;
+    }
+
+    /**
+     * Ejecutar un trabajo sin cambio de contexto.
+     */
+    public static function ejecutar(int $negocioId, callable $trabajo): mixed
+    {
+        return $trabajo(1);
+    }
+
+    /**
+     * Estado del tenant (vacío en tienda única).
+     */
+    public static function estado(): ?array
+    {
+        return null;
     }
 }

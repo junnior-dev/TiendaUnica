@@ -1,50 +1,26 @@
 -- =============================================================================
 --  Archivo 41 · ENDURECIMIENTO DE SEGURIDAD (auditoría del 2026-11-15)
---  Ejecutar después del 39 (necesita 31_multitenant: estado_tenants y saas_app).
+--  Versión TIENDA ÚNICA: sin estado_tenants ni rol saas_app.
 --  Idempotente: seguro de ejecutarlo sobre una instalación existente.
 --
---  Cierra los hallazgos de la auditoría que viven en la base de datos:
---    A-1 · estado_tenants quedaba escribible por saas_app (el GRANT general del
---          31 la incluyó porque existía antes del barrido): un tenant podía
---          des-suspenderse por mora, cambiar su plan o REASIGNAR el subdominio
---          de otro negocio ante una inyección SQL.
---    A-4 · tablas globales (tasas de cambio, alícuotas fiscales, unidad
---          tributaria, monedas, conceptos ISLR, calendario SENIAT) escribibles
---          por CUALQUIER tenant: cambiaba la UT y desviaba el ISLR de todos.
---    B-5 · solicitudes_idempotentes sin negocio_id (API futura de la caja).
---
---  El diseño: esas tablas quedan de SOLO LECTURA para saas_app; las escrituras
---  legítimas pasan por los procedimientos SECURITY DEFINER de este archivo,
---  que exigen tienda.fn_puede_editar_global() (superusuario, o el tenant cuyo
---  estado_tenants.modulos traiga «editar_global»: true — por defecto, la tienda
---  de la plataforma). En producción el propagador del portal escribe
---  estado_tenants con la conexión pgsql_admin (DB_ADMIN_USERNAME).
+--  En tienda única la propia tienda administra sus tablas globales
+--  (tasas de cambio, alícuotas fiscales, unidad tributaria, monedas),
+--  así que la guardia fn_puede_editar_global() siempre devuelve true.
+--  Se conservan los procedimientos SECURITY DEFINER (sp_registrar_tasa,
+--  sp_cambiar_alicuota, sp_cancelar_alicuota, fn_islr_guardar_ut,
+--  sp_alta_moneda, sp_moneda_activa) porque Laravel los invoca y
+--  mantienen sus validaciones de negocio.
 -- =============================================================================
 
--- ── 1 · Guardia: ¿esta sesión puede escribir tablas globales? ────────────────
+-- ── 1 · Guardia: en tienda única siempre permite escribir tablas globales ─────
 CREATE OR REPLACE FUNCTION tienda.fn_puede_editar_global() RETURNS boolean
-LANGUAGE sql STABLE AS $$
-    SELECT COALESCE((SELECT rolsuper FROM pg_roles WHERE rolname = current_user), false)
-        OR COALESCE((SELECT (modulos ->> 'editar_global')::boolean
-                       FROM tienda.estado_tenants
-                      WHERE negocio_id = tienda.fn_negocio_actual()), false)
+LANGUAGE sql IMMUTABLE PARALLEL SAFE AS $$
+    SELECT true
 $$;
 COMMENT ON FUNCTION tienda.fn_puede_editar_global() IS
-'¿Puede la sesión escribir las tablas globales (tasas_cambio, parametros_fiscales, islr_ut, monedas)? Superusuario, o tenant con estado_tenants.modulos.editar_global=true.';
+'Tienda única: la tienda administra directamente sus tasas, alícuotas, UT y monedas. Siempre true.';
 
--- ── 2 · estado_tenants: SOLO el portal la escribe (A-1) ──────────────────────
-REVOKE INSERT, UPDATE, DELETE ON tienda.estado_tenants FROM saas_app;
-
--- ── 3 · Tablas globales de solo lectura para los tenants (A-4) ───────────────
-REVOKE INSERT, UPDATE, DELETE ON tienda.tasas_cambio         FROM saas_app;
-REVOKE INSERT, UPDATE, DELETE ON tienda.log_tasas_cambio     FROM saas_app;
-REVOKE INSERT, UPDATE, DELETE ON tienda.monedas              FROM saas_app;
-REVOKE INSERT, UPDATE, DELETE ON tienda.parametros_fiscales  FROM saas_app;
-REVOKE INSERT, UPDATE, DELETE ON tienda.islr_ut              FROM saas_app;
-REVOKE INSERT, UPDATE, DELETE ON tienda.islr_conceptos       FROM saas_app;
-REVOKE INSERT, UPDATE, DELETE ON tienda.calendario_obligaciones FROM saas_app;
-
--- ── 4 · sp_registrar_tasa: SECURITY DEFINER + guardia ────────────────────────
+-- ── 2 · sp_registrar_tasa: SECURITY DEFINER (guardia siempre true) ───────────
 --  Misma lógica que 02_funciones_procedimientos.sql (únicamente añade la guardia
 --  y derechos de definer: con las tablas revocadas, es la única vía de entrada).
 CREATE OR REPLACE PROCEDURE tienda.sp_registrar_tasa(
@@ -166,17 +142,3 @@ ALTER TABLE tienda.solicitudes_idempotentes
     ADD COLUMN IF NOT EXISTS negocio_id smallint REFERENCES tienda.negocio(id);
 COMMENT ON COLUMN tienda.solicitudes_idempotentes.negocio_id IS
 'Negocio que emitió la solicitud (clave de idempotencia POR negocio). Obligatorio antes de conectar la API de caja; el sello trg_sello_negocio NO aplica: tabla global.';
-
--- ── 10 · La tienda de la plataforma (negocio 1) administra las globales ──────
-UPDATE tienda.estado_tenants
-   SET modulos = COALESCE(modulos, '{}'::jsonb) || '{"editar_global": true}'::jsonb
- WHERE negocio_id = 1;
-
--- ── 11 · Asegurar EXECUTE de los procedimientos endurecidos al rol de app ────
-GRANT EXECUTE ON PROCEDURE tienda.sp_registrar_tasa(numeric, date, text, boolean, bigint, char(3), char(3)) TO saas_app;
-GRANT EXECUTE ON PROCEDURE tienda.sp_cambiar_alicuota(text, numeric, date, text, bigint) TO saas_app;
-GRANT EXECUTE ON PROCEDURE tienda.sp_cancelar_alicuota(text) TO saas_app;
-GRANT EXECUTE ON PROCEDURE tienda.sp_alta_moneda(text, text, text) TO saas_app;
-GRANT EXECUTE ON PROCEDURE tienda.sp_moneda_activa(text, boolean) TO saas_app;
-GRANT EXECUTE ON FUNCTION tienda.fn_islr_guardar_ut(date, numeric, text, bigint) TO saas_app;
-GRANT EXECUTE ON FUNCTION tienda.fn_puede_editar_global() TO saas_app;

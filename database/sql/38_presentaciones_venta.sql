@@ -233,19 +233,11 @@ BEGIN
     RETURN v_id;
 END $$;
 
--- ── Tenant: RLS, sello y permisos, igual que las demás tablas ──
+-- ── Tienda única: sello de negocio (negocio_id = 1), sin RLS ──
 DO $$
 DECLARE t text := 'producto_presentaciones';
 BEGIN
     EXECUTE format('DROP TRIGGER IF EXISTS trg_sello_negocio ON tienda.%I', t);
     EXECUTE format('CREATE TRIGGER trg_sello_negocio BEFORE INSERT ON tienda.%I FOR EACH ROW EXECUTE FUNCTION fn_sello_negocio()', t);
-    EXECUTE format('ALTER TABLE tienda.%I ENABLE ROW LEVEL SECURITY', t);
-    EXECUTE format('ALTER TABLE tienda.%I FORCE ROW LEVEL SECURITY', t);
-    EXECUTE format('DROP POLICY IF EXISTS p_tenant ON tienda.%I', t);
-    EXECUTE format($p$CREATE POLICY p_tenant ON tienda.%I
-        USING (negocio_id = fn_negocio_actual() AND (SELECT fn_sesion_permitida()))
-        WITH CHECK (negocio_id = fn_negocio_actual() AND (SELECT fn_sesion_permitida()))$p$, t);
-    IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'saas_app') THEN
-        EXECUTE format('GRANT SELECT, INSERT, UPDATE, DELETE ON tienda.%I TO saas_app', t);
-    END IF;
+    EXECUTE format('ALTER TABLE tienda.%I ALTER COLUMN negocio_id SET DEFAULT 1', t);
 END $$;

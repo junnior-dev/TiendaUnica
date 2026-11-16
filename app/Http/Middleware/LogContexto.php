@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Support\Metricas;
-use App\Support\Tenant;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -32,7 +31,7 @@ class LogContexto
 
         Log::shareContext([
             'request_id' => $idPeticion,
-            'negocio_id' => Tenant::id(),
+            'negocio_id' => 1,
             'ruta' => static::patron($request),
         ]);
 
@@ -52,7 +51,7 @@ class LogContexto
             : ($_SERVER['REQUEST_TIME_FLOAT'] ?? microtime(true));
         $ms = (int) round((microtime(true) - $inicio) * 1000);
         $ruta = static::patron($request);
-        $negocio = Tenant::id();
+        $negocio = 1;
         $usuario = auth()->id();
 
         // Métricas (contadores de caché). Jamás rompen la petición ya enviada.

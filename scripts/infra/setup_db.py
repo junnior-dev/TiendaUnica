@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Instalación completa de las bases del sistema (tienda + portal_saas) replicando
-scripts/multitenant/reinstalar_completo.sh del proyecto, con psycopg2 (no hay psql necesario).
+"""Instalación completa de la base TIENDA ÚNICA («tiendaunica», esquema tienda),
+con psycopg2 (no hace falta psql).
 Uso: python3 setup_db.py [--solo-verificar]
+     PGPORT=5432 python3 setup_db.py --puerto-riesgo-propietario   (instalador local)
 """
 import os
 import sys
@@ -13,6 +14,7 @@ import psycopg2
 SQL = str(Path(__file__).resolve().parents[2] / 'database' / 'sql')
 HOST = os.environ.get('PGHOST', '/tmp')
 PORT = int(os.environ.get('PGPORT', '5433'))
+DB = os.environ.get('PGDATABASE', 'tiendaunica')
 
 TIENDA_FILES = (
     ['01_tablas.sql', '02_funciones_procedimientos.sql', '03_triggers.sql', '04_vistas.sql', '05_datos_iniciales.sql']
@@ -24,12 +26,10 @@ TIENDA_FILES = (
         (22, 'calendario_parametrizable'), (23, 'unidades_piezas'), (24, 'encargos'), (25, 'combos'),
         (26, 'ordenes_compra'), (27, 'conteos_fisicos'), (28, 'analisis_rentabilidad'), (29, 'caja_desglose'),
         (30, 'calendario_ordinario')]]
-    + ['31_multitenant.sql', '35_provisionar.sql', '36_islr_declaracion.sql',
+    + ['31_tienda_unica.sql', '36_islr_declaracion.sql',
        '37_libro_ventas_negocio.sql', '38_presentaciones_venta.sql', '39_islr_asientos.sql',
-       '41_endurecimiento_seguridad.sql', '43_plataforma_admin.sql']
+       '41_endurecimiento_seguridad.sql']
 )
-
-PORTAL_FILES = ['33_portal.sql', '34_portal_pagos.sql', '40_ciclo_cobro.sql', '42_portal_rol.sql']
 
 # Semilla idéntica a reinstalar_completo.sh (negocio 1 demo, admin con contraseña conocida por las pruebas)
 SEED_TIENDA = r"""
@@ -51,7 +51,6 @@ CALL tienda.sp_guardar_configuracion_negocio(
     true, true, true, false, 'AUTOMATICO', 'ULTIMO', 30, 'CON_IVA',
     'Moto Piezas', '0251-1234567', 'ventas@motopiezas.com', 1);
 CALL tienda.sp_confirmar_configuracion_inicial(1);
-UPDATE tienda.estado_tenants SET subdominio = tienda.fn_subdominio_unico('Moto Piezas', 1) WHERE negocio_id = 1;
 INSERT INTO tienda.productos (negocio_id, sku, nombre, unidad, costo_usd, margen_pct, exento_iva, exonerado_iva, stock_minimo, activo)
 SELECT 1, x.sku, x.nombre, 'UND', x.costo, 30, false, false, 2, true
   FROM (VALUES ('M2-ACEITE','Aceite motor 20W-50 1L',7.0),
@@ -101,10 +100,6 @@ SELECT 1, (SELECT id FROM tienda.combos WHERE sku = 'KIT-DEMO-01'),
                      WHERE c.sku = 'KIT-DEMO-01' AND cc.producto_id = (SELECT id FROM tienda.productos WHERE sku = 'M2-FILTRO'));
 """
 
-SEED_PORTAL = r"""
-INSERT INTO portal.config (clave, valor) VALUES ('tasa_usd_ves', '36.50') ON CONFLICT (clave) DO NOTHING;
-"""
-
 
 def ejecutar(db: str, sql: str, etiqueta: str, conn_params: dict) -> None:
     conn = psycopg2.connect(**conn_params, dbname=db)
@@ -127,68 +122,58 @@ def admin_params() -> dict:
 
 
 def main() -> None:
-    # GUARDIA anti-desastre: este script hace DROP DATABASE de las bases del
-    # sistema contra el puerto que le indique PGPORT. En el CI eso es 5433 (un
-    # contenedor efímero postgres:17); en la máquina de desarrollo, 5432 es el
-    # SERVIDOR VIVO con la base real del negocio (tienda, usuario admin).
-    # Soltar aquí los DROP con PGPORT=5432 la destruiría. Solo se permite otro
-    # puerto con la bandera explícita --puerto-riesgo-propietario.
+    # GUARDIA anti-desastre: este script hace DROP DATABASE de «tiendaunica» y de
+    # los clones de prueba (tienda_e2e, tienda_fiscal, tienda_multi) contra el
+    # puerto indicado. En CI es 5433 (contenedor efímero); en la máquina de
+    # desarrollo, 5432 puede tener bases con datos reales: se exige la bandera
+    # explícita --puerto-riesgo-propietario para operar fuera de 5433.
     if PORT != 5433 and '--puerto-riesgo-propietario' not in sys.argv:
         print('✗ ABORTADO: PGPORT={} — solo 5433 está permitido sin la bandera '
               'explícita --puerto-riesgo-propietario. Este script hace DROP '
-              'DATABASE contra el puerto dado y en 5432 vive la base REAL '
-              '(«tienda» del negocio).'.format(PORT))
+              'DATABASE contra el puerto dado.'.format(PORT))
         sys.exit(2)
 
     if '--solo-verificar' in sys.argv:
-        for db in ('tienda', 'portal_saas'):
-            c = psycopg2.connect(**admin_params(), dbname=db)
-            cur = c.cursor()
-            cur.execute("SELECT count(*) FROM pg_tables WHERE schemaname = 'tienda' OR schemaname = 'portal'")
-            print(db, 'tablas:', cur.fetchone()[0])
-            cur.close()
-            c.close()
+        c = psycopg2.connect(**admin_params(), dbname=DB)
+        cur = c.cursor()
+        cur.execute("SELECT count(*) FROM pg_tables WHERE schemaname = 'tienda'")
+        print(DB, 'tablas:', cur.fetchone()[0])
+        cur.close()
+        c.close()
         return
 
     con = psycopg2.connect(**admin_params(), dbname='postgres')
     con.autocommit = True
     cur = con.cursor()
-    for db in ('tienda', 'portal_saas', 'tienda_e2e', 'tienda_fiscal', 'tienda_multi'):
+    for db in (DB, 'tienda_e2e', 'tienda_fiscal', 'tienda_multi'):
         cur.execute('SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = %s AND pid <> pg_backend_pid()', (db,))
         cur.execute(f'DROP DATABASE IF EXISTS {db}')
         print(f'  · DROP {db}')
-    for db in ('tienda', 'portal_saas'):
-        cur.execute(f'CREATE DATABASE {db}')
+    cur.execute(f'CREATE DATABASE {DB}')
     # Ajustes A NIVEL DE BASE (viajan a los clones por TEMPLATE y a los restores
     # por el dump): zona horaria fiscal (M-8) y search_path por defecto — sin
     # esto, CURRENT_DATE de la semilla sale en UTC y no coincide con fn_hoy()
     # (Caracas): las compras de las suites piden la tasa del día equivocado.
-    cur.execute("ALTER DATABASE tienda SET TIMEZONE TO 'America/Caracas'")
-    cur.execute("ALTER DATABASE tienda SET search_path TO tienda, public")
-    cur.execute("ALTER DATABASE portal_saas SET TIMEZONE TO 'America/Caracas'")
-    cur.execute("ALTER DATABASE portal_saas SET search_path TO portal, public")
+    cur.execute(f"ALTER DATABASE {DB} SET TIMEZONE TO 'America/Caracas'")
+    cur.execute(f"ALTER DATABASE {DB} SET search_path TO tienda, public")
     cur.close()
     con.close()
 
-    print('── tienda: esquema completo')
+    print(f'── {DB}: esquema completo')
     for f in TIENDA_FILES:
-        ejecutar('tienda', open(f'{SQL}/{f}').read(), f, admin_params())
-    print('── tienda: semilla (negocio 1 demo)')
-    ejecutar('tienda', SEED_TIENDA, 'semilla negocio 1', admin_params())
-    print('── portal_saas: esquema + semilla')
-    for f in PORTAL_FILES:
-        ejecutar('portal_saas', open(f'{SQL}/{f}').read(), f, admin_params())
-    ejecutar('portal_saas', SEED_PORTAL, 'semilla portal', admin_params())
+        ejecutar(DB, open(f'{SQL}/{f}').read(), f, admin_params())
+    print(f'── {DB}: semilla (negocio 1 demo)')
+    ejecutar(DB, SEED_TIENDA, 'semilla negocio 1', admin_params())
 
     # Verificación final
-    c = psycopg2.connect(**admin_params(), dbname='tienda')
+    c = psycopg2.connect(**admin_params(), dbname=DB)
     cur = c.cursor()
     cur.execute("SELECT count(*) FROM pg_tables WHERE schemaname='tienda'")
-    print('tienda tablas:', cur.fetchone()[0])
+    print(DB, 'tablas:', cur.fetchone()[0])
     cur.execute('SELECT id, razon_social, configurado_en IS NOT NULL FROM tienda.negocio ORDER BY id')
     print('negocios:', cur.fetchall())
-    cur.execute('SELECT negocio_id, subdominio, activo, plan FROM tienda.estado_tenants ORDER BY negocio_id')
-    print('estado_tenants:', cur.fetchall())
+    cur.execute("SELECT count(*) FROM pg_tables WHERE schemaname = 'tienda' AND rowsecurity IS TRUE")
+    print('tablas con RLS (debe ser 0):', cur.fetchone()[0])
     cur.execute('SELECT count(*) FROM tienda.productos')
     print('productos negocio 1:', cur.fetchone()[0])
     cur.close()

@@ -48,7 +48,6 @@ const MENU = [
         { t: 'IGTF', i: Landmark, href: '/libros-fiscales?vista=igtf', admin: true, fiscal: true },
     ] },
     { grupo: 'Administración', items: [
-        { t: 'Suscripción', i: CreditCard, href: '/suscripcion', admin: true },
         { t: 'Usuarios', i: Users, href: '/usuarios', admin: true },
         { t: 'Configuración', i: Settings, href: '/configuracion', admin: true },
     ] },
