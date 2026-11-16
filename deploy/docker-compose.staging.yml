@@ -1,0 +1,105 @@
+# Staging reproducible de ERP POS (Nivel 4 de la lista de observabilidad).
+#   php-fpm 8.3 + OPcache + nginx + pgBouncer + postgres 17 + Prometheus.
+# Súbelo:  docker compose -f deploy/docker-compose.staging.yml up -d --build
+# Ver:     deploy/LEEME_STAGING.md
+#
+# DECISIÓN: PHP-FPM clásico, NO Octane/RoadRunner. El aislamiento del tenant
+# depende de set_config(..., false) (GUC de sesión) + Tenant::limpiar() al
+# terminar cada petición — el modelo por-proceso de PHP-FPM es el que el código
+# ya garantiza; Octane exigiría re-auditar cada camino de estado.
+#
+# k6 corre contra ESTO (php artisan serve no es una referencia válida).
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: tienda
+      POSTGRES_USER: saas_app
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?define DB_PASSWORD en .env de staging}
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    volumes:
+      - db_datos:/var/lib/postgresql/data
+      # El instalador del esquema corre UNA vez: scripts 00–43 + semilla.
+      - ../database/sql:/sql:ro
+    ports:
+      - "127.0.0.1:5432:5432"   # solo para psql de mantenimiento desde el host
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U saas_app -d tienda"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  pgbouncer:
+    image: edoburu/pgbouncer:1.24.1-p2
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: tienda
+      DB_USER: saas_app
+      DB_PASSWORD: ${DB_PASSWORD:?define DB_PASSWORD en .env de staging}
+      AUTH_TYPE: scram-sha-256
+      POOL_MODE: session        # OBLIGATORIO: app.negocio_id es un GUC de sesión
+      DEFAULT_POOL_SIZE: "20"
+      MAX_CLIENT_CONN: "200"
+      SERVER_RESET_QUERY: "DISCARD ALL"
+    ports:
+      - "127.0.0.1:6432:6432"
+
+  app:
+    build:
+      context: .
+      dockerfile: deploy/php/Dockerfile
+    depends_on:
+      pgbouncer:
+        condition: service_started
+    environment:
+      APP_ENV: staging
+      APP_DEBUG: "false"
+      APP_URL: http://localhost:8080
+      DB_HOST: pgbouncer
+      DB_PORT: "5432"
+      DB_DATABASE: tienda
+      DB_USERNAME: saas_app
+      DB_PASSWORD: ${DB_PASSWORD:?define DB_PASSWORD en .env de staging}
+      CACHE_STORE: file
+      QUEUE_CONNECTION: database
+      SESSION_DRIVER: file
+      METRICS_TOKEN: ${METRICS_TOKEN:?define METRICS_TOKEN en .env de staging}
+      LOG_ACCESO: acceso
+    volumes:
+      - app_storage:/var/www/html/storage
+      - app_cache:/var/www/html/bootstrap/cache
+    # php-fpm escucha 9000 interno; nginx es la única puerta pública.
+
+  nginx:
+    image: nginx:1.27-alpine
+    depends_on:
+      - app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../public:/var/www/html/public:ro
+
+  # Prometheus scrapea /metrics (con token) y /health/* cada 30 s; las reglas
+  # de alerta N2 viven en deploy/monitoring/alertas.yml. El token de scrape va
+  # en un archivo: crea deploy/monitoring/metrics_token con el MISMO valor de
+  # METRICS_TOKEN (un solo renglón) y no lo subas a git (está en .gitignore? no:
+  # *.token no cubre «metrics_token» → usa la ruta .secrets/ o añádelo).
+  prometheus:
+    image: prom/prometheus:v3.7.0
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alertas.yml:/etc/prometheus/alertas.yml:ro
+      - ${METRICS_TOKEN_FILE:-./monitoring/metrics_token}:/run/secrets/metrics_token:ro
+    ports:
+      - "127.0.0.1:9090:9090"
+
+volumes:
+  db_datos:
+  app_storage:
+  app_cache:
