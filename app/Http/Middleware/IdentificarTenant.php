@@ -23,7 +23,7 @@ class IdentificarTenant
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->is('up')) {   // el health-check no depende de tenants
+        if ($request->is('up') || $request->is('health/*') || $request->is('metrics')) {   // health y métricas no dependen de tenants (el orquestador/Prometheus no sabe de subdominios)
             try {
                 return $next($request);
             } finally {

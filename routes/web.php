@@ -335,6 +335,73 @@ Route::get('/health/db', function () {
     return response()->json($cuerpo);
 });
 
+// ── Health checks de observabilidad (Nivel 1) ────────────────────────────────
+// El orquestador sondea /health/* sin subdominio: por eso IdentificarTenant
+// los exime del resolver de tenant (y RLS no aplica: no tocan datos de negocio).
+//
+// /health/cache · escribe, lee y borra una clave real en el store configurado.
+//   Detecta caché inaccesible (disco lleno, Redis caído) ANTES de que se
+//   perciba en la app. Devuelve también la latencia del roundtrip.
+Route::get('/health/cache', function () {
+    $inicio = microtime(true);
+    $clave = 'health:'.bin2hex(random_bytes(8));
+
+    try {
+        Illuminate\Support\Facades\Cache::put($clave, 'ok', 10);
+        $valor = Illuminate\Support\Facades\Cache::get($clave);
+        Illuminate\Support\Facades\Cache::forget($clave);
+    } catch (\Throwable $e) {
+        return response()->json(['cache' => 'error', 'detalle' => substr($e->getMessage(), 0, 120)], 503);
+    }
+
+    if ($valor !== 'ok') {
+        return response()->json(['cache' => 'error', 'detalle' => 'la clave escrita no se leyó'], 500);
+    }
+
+    return response()->json([
+        'cache' => 'ok',
+        'driver' => config('cache.default'),
+        'ms' => (int) round((microtime(true) - $inicio) * 1000),
+    ]);
+});
+
+// /health/queue · comprueba el almacén de la cola de jobs.
+//   sync  → no hay cola: «ok» directo (el trabajo corre en la misma petición).
+//   db    → cuenta jobs pendientes y antigüedad del más viejo: la señal clásica
+//           de «el worker está muerto» es la antigüedad creciendo sin bajar.
+//   redis → PING contra la conexión real de la cola.
+Route::get('/health/queue', function () {
+    $driver = (string) config('queue.default');
+
+    if ($driver === 'sync') {
+        return response()->json(['queue' => 'ok', 'driver' => $driver]);
+    }
+
+    try {
+        if ($driver === 'database') {
+            $pendientes = (int) Illuminate\Support\Facades\DB::table('jobs')->count();
+            $masViejo = Illuminate\Support\Facades\DB::table('jobs')->min('created_at');   // epoch (s)
+
+            return response()->json([
+                'queue' => 'ok',
+                'driver' => $driver,
+                'pendientes' => $pendientes,
+                'antiguedad_maxima_s' => $masViejo !== null ? max(0, time() - (int) $masViejo) : 0,
+            ]);
+        }
+
+        Illuminate\Support\Facades\Queue::connection($driver)->size();   // toca la conexión del driver
+
+        return response()->json(['queue' => 'ok', 'driver' => $driver, 'pendientes' => Illuminate\Support\Facades\Queue::connection($driver)->size()]);
+    } catch (\Throwable $e) {
+        return response()->json(['queue' => 'error', 'driver' => $driver, 'detalle' => substr($e->getMessage(), 0, 120)], 503);
+    }
+});
+
+// /metrics · exposición Prometheus (Nivel 1). Token Bearer, falla cerrado.
+// Ruta aparte del grupo web: sin sesión ni cookies; Prometheus puro.
+Route::get('/metrics', \App\Http\Controllers\MetricsController::class);
+
 // ── Reportes de violación de CSP (mejora 7) ──────────────────────────────────
 // El navegador envía aquí cada violación cuando la CSP corre en modo
 // Report-Only (staging) o enforcement (producción). Sin sesión a propósito.
