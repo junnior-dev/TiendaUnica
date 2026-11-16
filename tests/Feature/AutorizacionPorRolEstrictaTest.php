@@ -28,7 +28,7 @@ dataset('matriz_get', function (): array {
     $admin = ['dashboard', 'productos', 'kardex', 'clientes', 'proveedores', 'compras', 'ordenes-compra',
         'conteos', 'reportes', 'movimientos-caja', 'configuracion', 'usuarios', 'tasas', 'metodos-pago',
         'marcas', 'modelos', 'compatibilidad', 'categorias', 'libros-fiscales', 'retenciones-islr',
-        'declaracion-islr', 'calendario-fiscal', 'contabilidad', 'conciliacion', 'suscripcion'];
+        'declaracion-islr', 'calendario-fiscal', 'contabilidad', 'conciliacion'];
 
     /** @var list<string> $cajero Páginas del cajero (Permisos: 'si' o 'propio'). */
     $cajero = ['caja', 'ventas', 'encargos', 'combos', 'cierre-caja', 'cuentas-por-cobrar', 'cuenta/contrasena'];
@@ -62,7 +62,6 @@ dataset('matriz_escritura', [
     ['delete', '/metodos-pago/99999999', null, true],
     ['post', '/tasas/manual', [], true],
     ['post', '/configuracion/alicuota', [], true],
-    ['post', '/suscripcion/pagos', [], true],
     ['post', '/kardex/ajustar', [], true],
     ['post', '/alertas-precio/aplicar-todas', [], true],
     ['post', '/ordenes-compra', [], true],
@@ -136,30 +135,6 @@ it('el administrador nunca recibe 403 ni 405 en sus escrituras', function (strin
     expect($resp->status(), "{$metodo} {$ruta} (admin)")->not->toBe(403);
     expect($resp->status(), "{$metodo} {$ruta} (admin)")->not->toBe(405);
 })->with('matriz_escritura');
-
-it('el portal NO comparte la sesión de la tienda (solo entra el operador)', function () {
-    RateLimiter::clear(sha1('|127.0.0.1'));   // cubeta compartida con /login y /registro
-
-    // Invitado: cerrado.
-    $this->get('/portal')->assertRedirect('/portal/login');
-    $this->post('/portal/pagos/1/verificar', ['aprobar' => true])->assertRedirect('/portal/login');
-
-    // Cajero con sesión de tienda: el panel del portal TAMBIÉN está cerrado.
-    $this->actingAs(cajeroConClave());
-    $this->get('/portal')->assertRedirect('/portal/login');
-
-    // Contraseña equivocada: back con error de sesión.
-    $this->from('/portal/login')->post('/portal/login', ['password' => 'no-es-la-clave'])
-        ->assertRedirect('/portal/login')->assertSessionHasErrors('password');
-
-    // La correcta (PORTAL_ADMIN_PASSWORD): entra.
-    $this->post('/portal/login', ['password' => 'portal-demo-2026'])->assertRedirect('/portal');
-    $this->get('/portal')->assertOk();
-
-    // Y al salir vuelve a estar cerrado.
-    $this->post('/portal/salir')->assertRedirect('/portal/login');
-    $this->get('/portal')->assertRedirect('/portal/login');
-});
 
 it('la raíz envía a cada rol a SU pantalla de inicio', function () {
     $this->get('/')->assertRedirect('/login');                       // invitado

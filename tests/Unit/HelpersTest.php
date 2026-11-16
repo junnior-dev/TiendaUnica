@@ -37,16 +37,3 @@ it('el cajero puede vender y cobrar, pero no administrar', function () {
     // Sus propias cuentas (contraseña) siempre pasan.
     expect(Permisos::permitido('CAJERO', 'cuenta/contrasena'))->toBeTrue();
 });
-
-it('extrae el subdominio del host del tenant', function () {
-    $metodo = new ReflectionMethod(Tenant::class, 'subdominioDe');
-    $metodo->setAccessible(true);
-    $de = fn (string $host) => $metodo->invoke(null, $host);
-
-    expect($de('moto-piezas.misitiolibre.com'))->toBe('moto-piezas')
-        ->and($de('LA-CAVA.MISITIOLIBRE.COM'))->toBe('la-cava')
-        ->and($de('www.misitiolibre.com'))->toBe('www')
-        ->and($de('localhost'))->toBe('')
-        ->and($de('127.0.0.1'))->toBe('')
-        ->and($de('moto-piezas.misitiolibre.com:8080'))->toBe('moto-piezas');
-});

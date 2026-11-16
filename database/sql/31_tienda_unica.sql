@@ -86,7 +86,7 @@ DECLARE
         'pagos_proveedor_aplicacion','pagos_venta','periodos_contables',
         'periodos_contables_log','plan_cuentas','producto_compatibilidad','productos',
         'proveedores','retenciones_enteradas','retenciones_islr','retenciones_iva',
-        'reversiones_igtf','unidades_medida','usuarios','ventas','ventas_tasas'
+        'reversiones_igtf','solicitudes_idempotentes','unidades_medida','usuarios','ventas','ventas_tasas'
     ];
     prev_role text;
 BEGIN
@@ -159,15 +159,19 @@ DROP TABLE IF EXISTS tienda.plataforma_admin CASCADE;
 DROP TABLE IF EXISTS tienda.plataforma_roles CASCADE;
 
 -- -------------------------------------------------------------------
---  5. ELIMINAR ROL saas_app (LIMPIANDO PRIVILEGIOS PRIMERO)
+--  5. ELIMINAR ROL saas_app (SI NO TIENE DEPENDENCIAS EN OTRAS BDs)
 -- -------------------------------------------------------------------
 DO $$
 BEGIN
     IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'saas_app') THEN
         EXECUTE 'REASSIGN OWNED BY saas_app TO CURRENT_USER';
         EXECUTE 'DROP OWNED BY saas_app';
-        EXECUTE 'DROP ROLE saas_app';
-        RAISE NOTICE 'Rol saas_app y sus privilegios eliminados';
+        BEGIN
+            EXECUTE 'DROP ROLE saas_app';
+            RAISE NOTICE 'Rol saas_app y sus privilegios eliminados';
+        EXCEPTION WHEN dependent_objects_still_exist THEN
+            RAISE NOTICE 'Rol saas_app conservado porque tiene objetos/permisos en otra base de datos del servidor';
+        END;
     END IF;
 END $$;
 

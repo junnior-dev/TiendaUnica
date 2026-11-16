@@ -95,13 +95,6 @@ it('muestra las pantallas del cajero y redirige su entrada a la caja', function 
     'cuentas por cobrar' => ['/cuentas-por-cobrar', 'CuentasPorCobrar/Index', 16],
 ]);
 
-it('muestra el panel del portal solo con la sesión del operador', function () {
-    $this->get('/portal')->assertRedirect('/portal/login');
-
-    $this->withSession(['portal_admin' => 'pest']);
-    paginaInertia($this->get('/portal'), 'Portal/Index', 11);
-});
-
 it('responde JSON parcial Inertia válido con la cabecera X-Inertia', function () {
     $this->actingAs(\App\Models\Usuario::find(adminId()));
 

@@ -85,3 +85,19 @@ function cajeroConClave(): \App\Models\Usuario
 
     return $usuario;
 }
+
+/** RIF venezolano CON dígito de control válido (mismo algoritmo de fn_validar_rif). */
+function rifValidoPest(string $tipo = 'J'): string
+{
+    $cuerpo = (string) random_int(10000000, 29999999);
+    $v = ['V' => 1, 'E' => 2, 'J' => 3, 'P' => 4, 'G' => 5, 'C' => 3][$tipo];
+    $pesos = [3, 2, 7, 6, 5, 4, 3, 2];
+    $suma = $v * 4;
+    for ($i = 0; $i < 8; $i++) {
+        $suma += (int) $cuerpo[$i] * $pesos[$i];
+    }
+    $dv = 11 - ($suma % 11);
+    $dv = $dv >= 10 ? 0 : $dv;
+
+    return "{$tipo}-{$cuerpo}-{$dv}";
+}

@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\DB;
 
 it('el inventario del esquema coincide con lo congelado', function () {
     $tablas = (int) DB::selectOne("SELECT count(*) AS n FROM pg_tables WHERE schemaname='tienda'")->n;
-    expect($tablas)->toBe(80);
+    expect($tablas)->toBe(77);
 
     $vistas = (int) DB::selectOne(
         "SELECT count(*) AS n FROM pg_class c JOIN pg_namespace nc ON nc.oid = c.relnamespace
@@ -36,28 +36,26 @@ it('el inventario del esquema coincide con lo congelado', function () {
     expect($vistas)->toBe(33);
 
     $rutinas = (int) DB::selectOne("SELECT count(*) AS n FROM information_schema.routines WHERE routine_schema='tienda'")->n;
-    expect($rutinas)->toBe(226);   // 202 funciones + 24 procedimientos
+    expect($rutinas)->toBe(222);
 
     $triggers = (int) DB::selectOne(
         "SELECT count(*) AS n FROM (SELECT DISTINCT trigger_name, event_object_table
          FROM information_schema.triggers WHERE trigger_schema = 'tienda') t"
     )->n;
-    expect($triggers)->toBe(154);
+    expect($triggers)->toBe(155);
 
     $secuencias = (int) DB::selectOne("SELECT count(*) AS n FROM pg_sequences WHERE schemaname='tienda'")->n;
     expect($secuencias)->toBe(55);
 
     $indices = (int) DB::selectOne("SELECT count(*) AS n FROM pg_indexes WHERE schemaname='tienda'")->n;
-    expect($indices)->toBe(248);
+    expect($indices)->toBe(245);
 });
 
-it('toda vista lleva security_invoker y toda SECURITY DEFINER fija search_path', function () {
-    $vistasSinInvoker = (int) DB::selectOne(
-        "SELECT count(*) AS n FROM pg_class c JOIN pg_namespace nc ON nc.oid = c.relnamespace
-         WHERE nc.nspname = 'tienda' AND c.relkind = 'v'
-           AND (c.reloptions IS NULL OR NOT ('security_invoker=true' = ANY (c.reloptions)))"
+it('ninguna tabla tiene RLS activo y toda SECURITY DEFINER fija search_path', function () {
+    $tablasConRls = (int) DB::selectOne(
+        "SELECT count(*) AS n FROM pg_tables WHERE schemaname = 'tienda' AND rowsecurity IS TRUE"
     )->n;
-    expect($vistasSinInvoker)->toBe(0);
+    expect($tablasConRls)->toBe(0);
 
     $secdefSinSearchPath = (int) DB::selectOne(
         "SELECT count(*) AS n FROM pg_proc p JOIN pg_namespace nc ON nc.oid = p.pronamespace
