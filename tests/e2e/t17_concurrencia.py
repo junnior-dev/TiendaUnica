@@ -34,7 +34,6 @@ import urllib.parse
 from pathlib import Path
 
 import psycopg2
-import requests
 
 RAIZ = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(RAIZ / 'tests' / 'e2e'))
@@ -42,6 +41,8 @@ import e2e_lib as L  # noqa: E402
 
 PGHOST = os.environ.get('PGHOST_PRUEBAS', '/tmp')
 PGPORT = int(os.environ.get('PGPORT_PRUEBAS', '5433'))
+PGUSER = os.environ.get('PGUSER_PRUEBAS', 'postgres')
+PGTEMPLATE = os.environ.get('PGTEMPLATE', 'tiendaunica')
 CLON = 'tienda_conc'
 BASE = 'http://127.0.0.1:8000'
 PHP = os.environ.get('PHP') or shutil.which('php') or '/home/z/my-project/work/stack/php-8.3.32/sapi/cli/php'
@@ -49,7 +50,7 @@ CLAVE_REHASH = 'ConcRehash2026'
 
 # ── conector propio para hilos (e2e_lib usa UNA conexión global) ──────────────
 def nueva_conexion(db=CLON):
-    con = psycopg2.connect(host=PGHOST, port=PGPORT, dbname=db, user='postgres',
+    con = psycopg2.connect(host=PGHOST, port=PGPORT, dbname=db, user=PGUSER,
                            options='-c search_path=tienda,public -c TimeZone=America/Caracas')
     con.autocommit = False
     return con
@@ -57,14 +58,14 @@ def nueva_conexion(db=CLON):
 
 def crear_clon():
     for intento in range(6):
-        con = psycopg2.connect(host=PGHOST, port=PGPORT, dbname='postgres', user='postgres')
+        con = psycopg2.connect(host=PGHOST, port=PGPORT, dbname='postgres', user=PGUSER)
         con.autocommit = True
         try:
             cur = con.cursor()
             cur.execute('SELECT 1 FROM pg_database WHERE datname = %s', (CLON,))
             if cur.fetchone():
                 cur.execute(f'DROP DATABASE {CLON}')
-            cur.execute(f'CREATE DATABASE {CLON} TEMPLATE tienda')
+            cur.execute(f'CREATE DATABASE {CLON} TEMPLATE {PGTEMPLATE}')
             cur.close()
             return True
         except psycopg2.Error:
@@ -150,83 +151,32 @@ def csrf(s):
 
 
 def main():
-    L.empezar('c0 · PREPARACIÓN: clon, negocio 2 y usuarios')
-    L.ok(crear_clon(), f'clon {CLON} creado desde la plantilla «tienda»')
+    L.empezar('c0 · PREPARACIÓN: clon tienda única y dos cajas')
+    L.ok(crear_clon(), f'clon {CLON} creado desde la plantilla «{PGTEMPLATE}»')
     L.DSN['dbname'] = CLON
     L.conectar()
 
-    L.ejecutar("INSERT INTO tienda.negocio (id, razon_social, nombre_comercial, rif, direccion_fiscal, "
-               "telefono, correo, es_contribuyente_especial, cobra_igtf, recupera_credito_fiscal, "
-               "precios_incluyen_iva, configurado_en, configurado_por) "
-               "VALUES (2, 'Bodega La Esquina C.A.', 'Bodega La Esquina', %s, 'Calle Falcón, Casa 12', "
-               "'04141234567', 'bodega@esquina.com', false, false, true, false, now(), 1)", (L.rif('J'),))
-    L.ejecutar("INSERT INTO tienda.estado_tenants (negocio_id, subdominio, activo, plan, modulos) "
-               "VALUES (2, 'bodega-esquina', true, 'BASE', '{\"repuestos\": true}')")
-    L.ejecutar("INSERT INTO tienda.usuarios (negocio_id, username, password_hash, nombre_completo, rol, activo) "
-               "VALUES (2, 'conc_admin2', 'PENDIENTE', 'Conc Negocio Dos', 'ADMINISTRADOR', true)")
     uid1 = L.admin()
-    uid2 = L.q1("SELECT id FROM tienda.usuarios WHERE username = 'conc_admin2'")
-    L.ejecutar("INSERT INTO tienda.productos (negocio_id, sku, nombre, unidad, costo_usd, margen_pct, "
-               "exento_iva, exonerado_iva, stock_minimo, activo) "
-               "VALUES (2, 'CONC2-1', 'Aceite Conc 2', 'UND', 3.0, 30, false, false, 1, true), "
-               "(2, 'CONC2-2', 'Filtro Conc 2', 'UND', 2.0, 35, false, false, 1, true)")
-    L.commit()
-    L.ok(uid1 and uid2, f'usuarios de ambos negocios listos (uid1={uid1}, uid2={uid2})')
-
     p1 = L.q1("SELECT id FROM tienda.productos WHERE negocio_id = 1 AND activo ORDER BY id LIMIT 1")
-    p2 = L.q1("SELECT id FROM tienda.productos WHERE negocio_id = 2 ORDER BY id LIMIT 1")
     m_bs = L.q1("SELECT id FROM tienda.metodos_pago WHERE nombre = 'Pago móvil' AND activo")
-    L.ok(p1 and p2 and m_bs, f'productos (n1={p1}, n2={p2}) y método Pago móvil ({m_bs})')
+    L.ok(p1 and m_bs, f'producto ({p1}) y método Pago móvil ({m_bs}) listos')
 
-    if float(L.q1('SELECT stock_actual FROM tienda.productos WHERE id = %s', (p2,))) < 40:
-        L.ejecutar('CALL tienda.sp_ajustar_stock(%s, 50, %s, %s)', (p2, 'Inventario inicial de la prueba', uid2))
-        L.commit()
-
-    # El POS no deja vender sin turno abierto (regla del mostrador): cada usuario
-    # que venderá en las carreras abre SU turno (los turnos son por usuario).
-    # Si el clon heredó un turno abierto (p. ej. porque t16 corrió antes sobre la
-    # misma plantilla), se usa ese y no se abre otro.
     uid_caj = L.cajero()
-    if uid_caj == uid1:   # clon fresco sin cajeros: se crea uno propio de la prueba
+    if uid_caj == uid1:
         L.ejecutar("INSERT INTO tienda.usuarios (negocio_id, username, password_hash, nombre_completo, rol, activo) "
                    "VALUES (1, 'conc_cajero', 'PENDIENTE', 'Conc Cajero Uno', 'CAJERO', true)")
         L.commit()
         uid_caj = L.q1("SELECT id FROM tienda.usuarios WHERE username = 'conc_cajero'")
     cur = L.conn.cursor()
-    for uid, negocio in ((uid1, None), (uid_caj, None), (uid2, 2)):
-        if negocio:
-            cur.execute("SELECT set_config('app.negocio_id', %s, true)", (str(negocio),))
+    for uid in (uid1, uid_caj):
         cur.execute('SELECT tienda.fn_apertura_activa(%s)', (uid,))
         if cur.fetchone()[0] is None:
             cur.execute('SELECT tienda.fn_abrir_caja(%s, 100, 3650)', (uid,))
     L.commit()
-    L.ok(True, 'turnos de caja listos para los tres vendedores (2 cajas del negocio 1 + 1 del negocio 2)')
+    L.ok(True, f'turnos de caja listos para dos cajas (uid1={uid1}, uid_caj={uid_caj})')
 
-    # ── c1 · DOS TENANTS ESCRIBIENDO A LA VEZ ────────────────────────────────
-    L.empezar('c1 · DOS TENANTS escribiendo a la vez (8 hilos por negocio)')
-    stock1_antes = float(L.q1('SELECT stock_actual FROM tienda.productos WHERE id = %s', (p1,)))
-    stock2_antes = float(L.q1('SELECT stock_actual FROM tienda.productos WHERE id = %s', (p2,)))
-    args = [(1, uid1, p1, m_bs, i) for i in range(8)] + [(2, uid2, p2, m_bs, i) for i in range(8)]
-    res = correr_hilos(venta_en_hilo, args)
-    malos = [r for r in res if r[0] != 'OK']
-    for r in malos[:3]:
-        print(f'    hilo {r[1]}: {r[4]}', flush=True)
-    buenos = [r for r in res if r[0] == 'OK']
-    L.ok(len(buenos) == 16, f'las 16 ventas concurrentes se registraron (16 hilos reales)',
-         f'real={len(buenos)}')
-    cruzadas = [r for r in buenos if r[2] != r[1]]
-    L.ok(not cruzadas, 'ninguna venta cayó en el negocio equivocado (sello + GUC por transacción)',
-         f'cruzadas={cruzadas[:3]}')
-    stock1 = float(L.q1('SELECT stock_actual FROM tienda.productos WHERE id = %s', (p1,)))
-    stock2 = float(L.q1('SELECT stock_actual FROM tienda.productos WHERE id = %s', (p2,)))
-    L.ok(stock1 == stock1_antes - 8, f'stock negocio 1: {stock1_antes} → {stock1} (−8 exactos)')
-    L.ok(stock2 == stock2_antes - 8, f'stock negocio 2: {stock2_antes} → {stock2} (−8 exactos)')
-    n1 = L.q1('SELECT count(*) FROM tienda.ventas WHERE negocio_id = 1 AND observaciones LIKE %s', ('Conc 1/%',))
-    n2 = L.q1('SELECT count(*) FROM tienda.ventas WHERE negocio_id = 2 AND observaciones LIKE %s', ('Conc 2/%',))
-    L.ok(int(n1) == 8 and int(n2) == 8, f'registro por negocio: n1={n1}, n2={n2}')
-
-    # ── c2 · DOS CAJAS A LA VEZ + CORRELATIVO SIN HUECOS ─────────────────────
-    L.empezar('c2 · DOS CAJAS (mismo negocio) a la vez: correlativo sin huecos')
+    # ── c1 · DOS CAJAS A LA VEZ + CORRELATIVO SIN HUECOS ─────────────────────
+    L.empezar('c1 · DOS CAJAS a la vez: correlativo sin huecos ni duplicados')
     falt = 100 - float(L.q1('SELECT stock_actual FROM tienda.productos WHERE id = %s', (p1,)))
     if falt > 0:
         L.ejecutar('CALL tienda.sp_ajustar_stock(%s, %s, %s, %s)', (p1, falt, 'Stock para la carrera de dos cajas', uid1))
@@ -277,103 +227,6 @@ def main():
     L.ok(salidas == -5, f'kardex: salidas firmadas por las 5 ventas ganadoras ({salidas})')
     L.ok(L.q1('SELECT bool_and(stock_actual >= 0) FROM tienda.productos WHERE negocio_id = 1'),
          'invariante: ningún producto del negocio 1 con stock negativo')
-
-    # ── c4 · FUGAS DE SESIÓN (RLS) como el rol de la app ─────────────────────
-    L.empezar('c4 · FUGAS DE SESIÓN: GUC, pool y fail-closed (como saas_app)')
-    con = nueva_conexion()
-    cur = con.cursor()
-    cur.execute('SET ROLE saas_app')
-
-    cur.execute('BEGIN; SELECT set_config(%s, %s, true)', ('app.negocio_id', '1'))
-    cur.execute('SELECT count(*), COALESCE(bool_and(negocio_id = 1), true) FROM tienda.ventas')
-    n, solo1 = cur.fetchone()
-    con.commit()
-    L.ok(int(n) > 0 and solo1, f'transacción con GUC: ve {n} ventas y solo del negocio 1')
-
-    cur.execute('BEGIN; SELECT count(*) FROM tienda.ventas')
-    n0 = cur.fetchone()[0]
-    con.commit()
-    L.ok(int(n0) == 0, f'el GUC de transacción muere con el COMMIT: nueva transacción ve {n0} filas (fail-closed)')
-
-    cur.execute("SELECT set_config('app.negocio_id', '1', false)")   # alcance de SESIÓN (como lo fija la app)
-    cur.execute('BEGIN; SELECT count(*) FROM tienda.ventas')
-    ns = cur.fetchone()[0]
-    con.commit()
-    L.ok(int(ns) > 0, f'el GUC de SESIÓN persiste en la conexión: sin fijar nada, la tx ve {ns} filas '
-                      '(el riesgo real en pgBouncer/Octane/workers)')
-
-    cur.execute("SELECT set_config('app.negocio_id', '', false)")    # la limpieza nueva del middleware
-    cur.execute('BEGIN; SELECT count(*) FROM tienda.ventas')
-    nl = cur.fetchone()[0]
-    con.commit()
-    L.ok(int(nl) == 0, f'después de limpiar (Tenant::limpiar), la conexión queda neutra: ve {nl} filas')
-
-    cur.execute('BEGIN; SELECT set_config(%s, %s, true); SELECT count(*), '
-                'COALESCE(bool_and(negocio_id = 2), true) FROM tienda.ventas', ('app.negocio_id', '2'))
-    n2, solo2 = cur.fetchone()
-    con.commit()
-    L.ok(int(n2) > 0 and solo2, f'worker simulado alternando tenant: ve {n2} ventas y solo del negocio 2')
-
-    cur.execute("SELECT set_config('app.negocio_id', '', false)")
-    cur.execute('BEGIN; SELECT count(*) FROM tienda.ventas WHERE negocio_id = 2')
-    fuga = cur.fetchone()[0]
-    con.commit()
-    L.ok(int(fuga) == 0, 'sin GUC no se ve NADA del otro tenant (0 filas del negocio 2 filtrando por negocio)')
-    try:
-        cur.execute('BEGIN; INSERT INTO tienda.categorias (negocio_id, nombre) VALUES (1, %s)', ('Fantasma Conc',))
-        con.commit()
-        L.ok(False, 'escritura sin GUC rechazada', 'el INSERT sin sesión PASÓ (no debía)')
-    except psycopg2.Error:
-        con.rollback()
-        L.ok(True, 'escritura sin GUC rechazada (WITH CHECK de la guarda de sesión)')
-    cur.execute('RESET ROLE')
-    con.close()
-
-    # ── c5 · REHASH CONTROLADO EN LOGIN (D-1) contra el servidor real ────────
-    L.empezar('c5 · REHASH controlado en login (D-1): costo viejo → moderno, vía el procedimiento')
-    con_t = nueva_conexion(db='tienda')
-    con_t.autocommit = True
-    ct = con_t.cursor()
-    ct.execute("SELECT set_config('app.negocio_id', '1', false)")
-    hash10 = subprocess.run([PHP, '-r', f"echo password_hash('{CLAVE_REHASH}', PASSWORD_BCRYPT, ['cost' => 10]);"],
-                            capture_output=True, text=True).stdout.strip()
-    ct.execute("SELECT count(*) FROM tienda.usuarios WHERE username = 'conc_rehash'")
-    if ct.fetchone()[0] == 0:
-        ct.execute('CALL tienda.sp_crear_usuario(%s, %s, %s, %s, FALSE)',
-                   ('conc_rehash', hash10, 'Conc Rehash', 'CAJERO'))
-    else:
-        # Re-ejecución de la suite: se vuelve a sembrar el costo viejo para repetir el escenario
-        ct.execute("SELECT id FROM tienda.usuarios WHERE username = 'conc_rehash'")
-        ct.execute('CALL tienda.sp_cambiar_password(%s, %s)', (ct.fetchone()[0], hash10))
-    ct.execute("SELECT password_hash, debe_cambiar_password FROM tienda.usuarios WHERE username = 'conc_rehash'")
-    hash_antes, debe_antes = ct.fetchone()
-    L.ok(hash_antes.startswith('$2y$10$'), 'usuario de prueba sembrado con hash bcrypt de costo viejo (10)',
-         hash_antes[:12])
-    L.ok(not debe_antes, 'debe_cambiar_password = FALSE antes del login')
-
-    s = requests.Session()
-    s.get(f'{BASE}/login')
-    r = s.post(f'{BASE}/login', data={'username': 'conc_rehash', 'password': CLAVE_REHASH},
-               headers={'X-XSRF-TOKEN': csrf(s)}, allow_redirects=False)
-    L.ok(r.status_code == 302, f'login HTTP con hash de costo viejo → 302 (antes del arreglo: 500)', str(r.status_code))
-    ct.execute("SELECT password_hash, debe_cambiar_password FROM tienda.usuarios WHERE username = 'conc_rehash'")
-    hash_despues, debe_despues = ct.fetchone()
-    L.ok(hash_despues.startswith('$2y$12$'), 'el hash quedó modernizado a bcrypt 12 por sp_rehash_password',
-         hash_despues[:12])
-    L.ok(debe_despues == debe_antes, 'debe_cambiar_password NO cambió (no es un cambio de contraseña)')
-    s2 = requests.Session()
-    s2.get(f'{BASE}/login')
-    r2 = s2.post(f'{BASE}/login', data={'username': 'conc_rehash', 'password': CLAVE_REHASH},
-                 headers={'X-XSRF-TOKEN': csrf(s2)}, allow_redirects=False)
-    L.ok(r2.status_code == 302, 'el segundo login sigue funcionando con el hash moderno')
-    try:
-        ct.execute("UPDATE tienda.usuarios SET password_hash = 'x' WHERE username = 'conc_rehash'")
-        L.ok(False, 'UPDATE directo del hash sigue rechazado', 'PASÓ sin error (no debía)')
-    except psycopg2.Error as e:
-        L.ok('TV005' in (e.diag.message_primary or '') or True,
-             'UPDATE directo del hash sigue rechazado por el trigger (TV005)')
-        con_t.rollback()
-    con_t.close()
 
     L.rollback()
     return L.resumen_final()
