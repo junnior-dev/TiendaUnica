@@ -3,6 +3,14 @@
 .env
 .env.backup
 .env.production
+# Todo .env.local, .env.development, .env.* salvo los .example (que sí van al repo)
+.env.*
+!.env.example
+!.env.production.example
+# Tokens y claves privadas nunca viajan
+*.token
+*.pem
+*.key
 .phpactor.json
 .phpunit.result.cache
 # Python: caches de bytecode de las suites (t01–t19, continuidad…)

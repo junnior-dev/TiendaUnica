@@ -126,6 +126,17 @@ jobs:
       - name: Dependencias Python (setup_db usa psycopg2)
         run: pip install psycopg2-binary
 
+      # Igual que t19-regresion: sin este paso Laravel arranca sin APP_KEY
+      # (MissingAppKeyException) porque .env no viaja en el repo.
+      - name: .env de CI desde el ejemplo (puertos 5433, clave de testing)
+        run: |
+          cp .env.example .env
+          sed -i 's/^APP_KEY=$/APP_KEY=base64:QVIY3sKO1zlz74jPWiLlK8EzSyJugoEZ7kenZi357Js=/' .env
+          sed -i 's/^DB_PORT=.*/DB_PORT=5433/' .env
+          sed -i 's/^PORTAL_DB_PORT=.*/PORTAL_DB_PORT=5433/' .env
+          sed -i 's/^PORTAL_ADMIN_PASSWORD=.*/PORTAL_ADMIN_PASSWORD=portal-demo-2026/' .env
+          sed -i 's/^SAAS_BASE_DOMAIN=.*/SAAS_BASE_DOMAIN=localhost/' .env
+
       - name: Instalación limpia de las bases (scripts 00–43 + semilla)
         env:
           PGHOST: 127.0.0.1
