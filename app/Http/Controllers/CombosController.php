@@ -18,6 +18,12 @@ class CombosController extends Controller
 {
     use ContextoPagina;
 
+    /** El CRUD de combos es del administrador: la caja solo los cotiza y vende (hallazgo 2026-11-16). */
+    private function soloAdmin(): void
+    {
+        abort_if(strtoupper((string) (auth()->user()->rol ?? '')) !== 'ADMINISTRADOR', 403, 'Solo un administrador puede gestionar los combos.');
+    }
+
     public function index()
     {
         return Inertia::render('Combos/Index', [...$this->contexto(), 'combos' => $this->datos()]);
@@ -56,6 +62,7 @@ class CombosController extends Controller
     /** POST /combos {sku, nombre, precio?, descripcion?, componentes:[{producto_id, cantidad}]} */
     public function store(Request $r)
     {
+        $this->soloAdmin();
         $d = $this->validar($r);
         try {
             DB::transaction(function () use ($d) {
@@ -74,6 +81,7 @@ class CombosController extends Controller
     /** PUT /combos/{id} */
     public function update(Request $r, int $id)
     {
+        $this->soloAdmin();
         $d = $this->validar($r);
         try {
             DB::transaction(function () use ($d, $id) {
@@ -93,6 +101,7 @@ class CombosController extends Controller
     /** PATCH /combos/{id}/estado  ·  DELETE /combos/{id} */
     public function estado(Request $r, int $id)
     {
+        $this->soloAdmin();
         $on = (bool) $r->boolean('activo');
         DB::table('combos')->where('id', $id)->update(['activo' => $on]);
         return back();
@@ -100,6 +109,7 @@ class CombosController extends Controller
 
     public function destroy(int $id)
     {
+        $this->soloAdmin();
         try {
             DB::table('combos')->where('id', $id)->delete();
         } catch (QueryException $e) {
