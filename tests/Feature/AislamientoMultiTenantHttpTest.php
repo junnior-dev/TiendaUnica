@@ -82,10 +82,13 @@ function prepararInquilinoB(): array
         ]);
     }
 
-    $prid = DB::table('proveedores')->where('rif', 'J-29999992-1')->value('id');
+    // Proveedor del negocio 2: el CHECK ck_proveedores_rif exige dígito
+    // verificador válido, así que el RIF sale de rifValidoPest() (aleatorio por
+    // corrida: el re-encuentro se hace por negocio_id, no por el RIF).
+    $prid = (int) DB::table('proveedores')->where('negocio_id', 2)->value('id');
     if (! $prid) {
         $prid = DB::table('proveedores')->insertGetId([
-            'negocio_id' => 2, 'rif' => 'J-29999992-1', 'razon_social' => 'BOLA Proveedor Oculto', 'activo' => true,
+            'negocio_id' => 2, 'rif' => rifValidoPest('J'), 'razon_social' => 'BOLA Proveedor Oculto', 'activo' => true,
         ]);
     }
 
@@ -179,10 +182,10 @@ it('el inquilino A no puede MODIFICAR NI BORRAR recursos del inquilino B (y la f
     $ataques = [
         ['PUT', "/clientes/{$b['cliente']}", ['tipo' => 'V', 'documento' => '29999991', 'nombre' => 'HACKEADO POR BOLA']],
         ['PATCH', "/clientes/{$b['cliente']}/estado", ['activo' => false]],
-        ['DELETE', "/clientes/{$b['cliente']}", null],
+        ['DELETE', "/clientes/{$b['cliente']}", []],
         ['PUT', "/productos/{$b['producto']}", ['nombre' => 'HACKEADO', 'costo' => 0.01]],
         ['PUT', "/proveedores/{$b['proveedor']}", ['razon_social' => 'HACKEADO']],
-        ['DELETE', "/proveedores/{$b['proveedor']}", null],
+        ['DELETE', "/proveedores/{$b['proveedor']}", []],
         ['PATCH', "/metodos-pago/{$b['metodo']}/estado", ['activo' => false]],
         ['POST', "/ventas/{$b['venta']}/anular", ['motivo' => 'BOLA']],
     ];
@@ -190,10 +193,10 @@ it('el inquilino A no puede MODIFICAR NI BORRAR recursos del inquilino B (y la f
     foreach ($ataques as [$metodo, $ruta, $payload]) {
         $url = "http://{$b['hostA']}{$ruta}";
         $resp = match ($metodo) {
-            'PUT' => $this->put($url, $payload ?? []),
-            'PATCH' => $this->patch($url, $payload ?? []),
+            'PUT' => $this->put($url, $payload),
+            'PATCH' => $this->patch($url, $payload),
             'DELETE' => $this->delete($url),
-            default => $this->post($url, $payload ?? []),
+            default => $this->post($url, $payload),
         };
         $status = $resp->status();
         expect(in_array($status, [403, 404, 422], true),
