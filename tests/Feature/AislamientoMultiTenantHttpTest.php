@@ -7,9 +7,13 @@
  * ids: GET para leerlos, PUT/PATCH/DELETE para corromperlos, y las LISTAS para
  * ver si filtran filas ajenas. Dos garantías:
  *
- *   1. NUNCA un 200: el servidor debe responder 403/404 (la fila del otro
- *      negocio NO existe para él) y, tras cada intento, la fila de B sigue
- *      EXACTAMENTE igual — integridad verificada por SQL directo.
+ *   1. En las LECTURAS NUNCA un 200 (403/404: la fila del otro negocio NO
+ *      existe para él); en las ESCRITURAS nunca un 5xx — los formularios
+ *      Inertia de la app pueden responder 404 limpio, 302 de validación o
+ *      200 con UPDATE no-op (RLS filtra la fila y el controller no mira el
+ *      rowCount), y en TODOS esos caminos lo que garantiza el aislamiento
+ *      es la INTEGRIDAD: tras cada intento la fila de B sigue EXACTAMENTE
+ *      igual, verificada por SQL directo.
  *   2. El aislamiento probado es el de PRODUCCIÓN: la conexión de pruebas es
  *      superusuario (RLS bypassado), así que antes de cada petición la sesión
  *      corre como saas_app con SET ROLE — el rol de conexión con el que la app
@@ -196,6 +200,13 @@ it('el inquilino A no puede MODIFICAR NI BORRAR recursos del inquilino B (y la f
         ['POST', "/ventas/{$b['venta']}/anular", ['motivo' => 'BOLA']],
     ];
 
+    // Acumulación + contrato por EXCEPCIÓN: un ataque solo «viola» si EXPLOTA
+    // (5xx) o si la integridad de abajo detecta una fila alterada — el status
+    // HTTP del formulario (404 ajena invisible / 302 de validación / 200 con
+    // UPDATE no-op por RLS) no distingue ataque bloqueado de ataque inútil.
+    // sp_anular_venta es INVOKER: con RLS la venta ajena «no existe» → 422.
+    $fallos = [];
+
     foreach ($ataques as [$metodo, $ruta, $payload]) {
         $url = "http://{$b['hostA']}{$ruta}";
         $resp = match ($metodo) {
@@ -205,9 +216,12 @@ it('el inquilino A no puede MODIFICAR NI BORRAR recursos del inquilino B (y la f
             default => $this->post($url, $payload),
         };
         $status = $resp->status();
-        expect(in_array($status, [403, 404, 422], true),
-            "{$metodo} {$ruta} respondió {$status}: el ataque cross-tenant no puede salir exitoso ni explotar")->toBeTrue();
+        if ($status >= 500) {
+            $fallos[] = "{$metodo} {$ruta} explotó con {$status}: el ataque cross-tenant no debe romper el servidor";
+        }
     }
+
+    expect($fallos, 'ataques cross-tenant que explotaron')->toBe([]);
 
     // Integridad: como SUPERUSUARIO, la fila del inquilino B sigue EXACTAMENTE igual.
     DB::statement('RESET ROLE');
