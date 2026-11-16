@@ -58,7 +58,11 @@ function uriDeRuta(RutaLaravel $r): string
     return '/'.$uri;
 }
 
-/** Si la respuesta es una página Inertia, el componente declarado debe existir en disco. */
+/**
+ * Si la respuesta es una página Inertia, el componente declarado debe existir en disco.
+ *
+ * @param \Illuminate\Testing\TestResponse<\Illuminate\Http\Response> $resp
+ */
 function verificarComponenteInertia(Illuminate\Testing\TestResponse $resp): void
 {
     preg_match('/data-page="([^"]+)"/', $resp->getContent(), $m);
