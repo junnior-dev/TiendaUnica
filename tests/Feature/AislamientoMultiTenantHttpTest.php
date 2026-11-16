@@ -118,12 +118,18 @@ function prepararInquilinoB(): array
     $productoA = (int) DB::table('productos')->where('negocio_id', 1)->where('activo', true)->orderBy('id')->value('id');
     $hostA = (string) DB::table('estado_tenants')->where('negocio_id', 1)->value('subdominio');
 
+    // Los MODELOS se resuelven COMO SUPERUSUARIO (el docblock de la función lo
+    // promete): después del SET ROLE el GUC vacío hace que RLS esconda TODAS
+    // las filas y Usuario::find() devolvería null → actingAs(null) TypeError.
+    $adminA = \App\Models\Usuario::find($uidA);
+    $adminB = \App\Models\Usuario::find($uidB);
+
     DB::statement("SELECT set_config('app.negocio_id', '', false)");
     DB::statement('SET ROLE saas_app');   // de aquí en adelante: RLS como producción
 
     return [
-        'admin' => \App\Models\Usuario::find($uidA),
-        'adminB' => \App\Models\Usuario::find($uidB),
+        'admin' => $adminA,
+        'adminB' => $adminB,
         'cliente' => (int) $cid,
         'cliente_documento' => '29999991',
         'cliente_nombre' => 'BOLA Cliente Oculto',
