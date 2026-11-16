@@ -1,0 +1,29 @@
+# Prometheus del staging. Scrape cada 30 s (el .env del compose manda el
+# token real a la app; aquí el token vive en un archivo de secretos para que
+# Prometheus lo lea: credentials_file, NUNCA incrustado en este yml).
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+rule_files:
+  - /etc/prometheus/alertas.yml
+
+scrape_configs:
+  # Métricas del ERP: /metrics con token Bearer (falla cerrado sin token).
+  # La puerta HTTP del staging es nginx:80 (php-fpm no habla HTTP).
+  - job_name: erp
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets: ["nginx:80"]
+    authorization:
+      type: Bearer
+      credentials_file: /run/secrets/metrics_token
+
+  # Health de la base: sin token (JSON). 503/500 → up == 0 → alerta
+  # «health_db_caido» (2 scrapes consecutivos fallidos = 1 min a 30 s).
+  - job_name: erp-health
+    metrics_path: /health/db
+    scheme: http
+    static_configs:
+      - targets: ["nginx:80"]

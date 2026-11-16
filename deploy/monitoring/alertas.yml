@@ -1,0 +1,75 @@
+# Alertas N2 · «las que despiertan» (umbral, duración y a quién le importa).
+# Nota honesta sobre la p95: con contadores _sum/_count Prometheus solo calcula
+# PROMEDIO. Cuando el volumen lo justifique (N3), se cambian a histogramas con
+# buckets y estas reglas usan histogram_quantile() para p95 real.
+
+groups:
+  - name: latencia_caja
+    rules:
+      - alert: latencia_caja_alta
+        # Promedio de /caja/* y /pos/* por encima de 500 ms sostenido 5 min.
+        # Son los endpoints que sostienen la caja: su latencia es la del negocio.
+        expr: |
+          (
+            sum by (ruta) (rate(http_request_duration_ms_sum{ruta=~"caja.*|pos.*"}[5m]))
+            /
+            sum by (ruta) (rate(http_request_duration_ms_count{ruta=~"caja.*|pos.*"}[5m]))
+          ) > 500
+        for: 5m
+        labels:
+          severidad: alta
+        annotations:
+          summary: "Latencia alta en {{ $labels.ruta }} (avg {{ $value }} ms)"
+          description: "El promedio de la ruta supera 500 ms durante 5 min. Revisa OPcache/pgBouncer y el log de acceso (canal «acceso») para la cola de peticiones."
+
+  - name: errores
+    rules:
+      - alert: errores_5xx_alto
+        expr: |
+          (
+            sum(rate(http_requests_total{estado=~"5.."}[5m]))
+            /
+            sum(rate(http_requests_total[5m]))
+          ) > 0.01
+        for: 5m
+        labels:
+          severidad: critica
+        annotations:
+          summary: "5xx sobre el 1% durante 5 min"
+          description: "Tasa de errores del servidor por encima del 1% en 5 min. Correlaciona con los logs de la app: cada línea ya trae request_id, negocio_id y ruta."
+
+  - name: base_de_datos
+    rules:
+      - alert: conexiones_pg_altas
+        # pg_stat_activity contra el techo (max_connections). A 80% ya no hay
+        # margen para el propagador ni para mantenimiento.
+        expr: postgres_connections_pct > 80
+        for: 5m
+        labels:
+          severidad: alta
+        annotations:
+          summary: "Conexiones PostgreSQL al {{ $value }}% del techo"
+          description: "Revisa pgBouncer (pool_mode=session, pool 20) y cierres de conexiones zombis. La alerta se dispara ANTES de quedar sin conexiones."
+
+      - alert: health_db_caido
+        # /health/db responde 503 (no conecta) o 500 (superusuario en producción):
+        # dos scrapes consecutivos fallidos con intervalo de 30 s.
+        expr: up{job="erp-health"} == 0
+        for: 1m
+        labels:
+          severidad: critica
+        annotations:
+          summary: "/health/db falla 2 veces seguidas"
+          description: "La app no alcanza la base o está conectada con un rol inadecuado. Detalle en el JSON de /health/db (campo «detalle»)."
+
+  - name: scrape
+    rules:
+      - alert: metrics_inaccesible
+        # Si /metrics deja de scrapearse, cegamos: sin métricas no hay alertas.
+        expr: up{job="erp"} == 0
+        for: 2m
+        labels:
+          severidad: critica
+        annotations:
+          summary: "Prometheus no alcanza /metrics"
+          description: "¿Cambió METRICS_TOKEN? ¿Cayó nginx? Sin scrape estamos ciegos: revisar antes que cualquier otra alerta."

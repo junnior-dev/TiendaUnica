@@ -11,6 +11,9 @@
 *.token
 *.pem
 *.key
+# Staging (deploy/): .env del compose y el archivo con METRICS_TOKEN para el scrape
+deploy/.env
+deploy/monitoring/metrics_token
 .phpactor.json
 .phpunit.result.cache
 # Python: caches de bytecode de las suites (t01–t19, continuidad…)
