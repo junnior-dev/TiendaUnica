@@ -35,7 +35,8 @@ function forenseHostA(): string
 /** ¿Es una página Inertia SIN el layout del ERP (pública o transicional)? */
 function forensePaginaSinLayout(string $uri): bool
 {
-    return in_array($uri, ['/precios', '/cuenta/contrasena'], true);
+    // /portal/login: login público del portal SaaS, layout propio sin tenant.
+    return in_array($uri, ['/precios', '/cuenta/contrasena', '/portal/login'], true);
 }
 
 /**

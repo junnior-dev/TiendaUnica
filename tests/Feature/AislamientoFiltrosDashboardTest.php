@@ -102,7 +102,9 @@ it('el DASHBOARD del inquilino A trae SOLO su mundo (lente RLS, sin suma global 
         ->where('usuario.nombre', $b['admin']->nombre_completo)
         ->where('usuario.rol', 'Administrador')
         ->where('kpis.cantidad', $mundo['ventas_hoy'])
-        ->where('kpis.ventas_usd', $mundo['ventas_usd_hoy']));
+        // Comparación NUMÉRICA: el JSON serializa 0.0 como 0 (int); lo que
+        // importa es el monto, no el tipo PHP con que llega.
+        ->where('kpis.ventas_usd', fn ($v) => is_numeric($v) && abs((float) $v - $mundo['ventas_usd_hoy']) < 0.005));
 
     $json = forenseJsonDeProps($resp);
     expect($json)->toContain($mundo['nombre'])          // control: SU mundo sí está
